@@ -27,6 +27,7 @@ public class Vacinacao
     public Unidade Unidade { get; set; }
 
     [Required(ErrorMessage = "Campo Obrigatório!")]
-    [StringLength(20)]
-    public string Status { get; set; } // VACINADO // ATRASADO
+
+    
+    public bool Status { get; set; } // VACINADO // ATRASADO
 }

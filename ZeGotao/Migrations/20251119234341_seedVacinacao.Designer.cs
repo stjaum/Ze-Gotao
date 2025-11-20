@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZeGotao.Data;
 
@@ -11,9 +12,11 @@ using ZeGotao.Data;
 namespace ZeGotao.Migrations
 {
     [DbContext(typeof(ZeGotaoContext))]
-    partial class ZeGotaoContextModelSnapshot : ModelSnapshot
+    [Migration("20251119234341_seedVacinacao")]
+    partial class seedVacinacao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,8 +104,10 @@ namespace ZeGotao.Migrations
                     b.Property<int>("IdVacina")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("IdVacinacao");
 
