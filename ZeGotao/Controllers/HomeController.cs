@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using ZeGotao.Models;
+using WebApplication1.Models;
 
-namespace ZeGotao.Controllers
+namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
@@ -22,6 +22,12 @@ namespace ZeGotao.Controllers
         {
             return View();
         }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
