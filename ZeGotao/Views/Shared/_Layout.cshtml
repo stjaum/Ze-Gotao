@@ -3,47 +3,360 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ZeGotao</title>
+    <title>@ViewData["Title"] - Mais Saude</title>
+
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- Custom AMD CSS -->
+    <link rel="stylesheet" href="~/css/bootstrap.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/bootstrap-grid.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/ZeGotao.styles.css" asp-append-version="true" />
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico?v=2" />
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #1a1a1a;
+            --muted: #6c757d;
+            --nav-bg: #0d0d1d;
+            --nav-text: #e6e6e6;
+            --link: #004B8D;
+            --card-bg: #ffffff;
+            --footer-bg: #0d0d1d;
+            --accent: #091C6D;
+        }
+
+        body.dark-mode {
+            --bg: #0B0B0F;
+            --text: #E6E6E6;
+            --muted: #bdbdbd;
+            --nav-bg: #05051A;
+            --nav-text: #E6E6E6;
+            --link: #7BA7FF;
+            --card-bg: #12121A;
+            --footer-bg: #05051A;
+            --accent: #091C6D;
+        }
+
+        body.light-mode {
+            --bg: #ffffff;
+            --text: #1a1a1a;
+            --muted: #6c757d;
+            --nav-bg: #0d0d1d;
+            --nav-text: #e6e6e6;
+            --link: #004B8D;
+            --card-bg: #ffffff;
+            --footer-bg: #0d0d1d;
+            --accent: #091C6D;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding-top: 76px;
+            background: var(--bg);
+            color: var(--text);
+            transition: background .25s ease, color .25s ease;
+            font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+
+        .page-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1 0 auto;
+        }
+
+        .navbar-amd {
+            background: var(--nav-bg) !important;
+            color: var(--nav-text) !important;
+        }
+
+            .navbar-amd .navbar-brand,
+            .navbar-amd .nav-link {
+                color: var(--nav-text) !important;
+            }
+
+                .navbar-amd .nav-link:hover {
+                    color: var(--link) !important;
+                }
+
+        .footer-amd {
+            background: var(--footer-bg);
+            color: var(--nav-text);
+            padding: 1rem 0;
+        }
+
+        .section-amd,
+        .card,
+        .container,
+        .content-wrapper,
+        .bg-theme-inherit {
+            background: var(--card-bg) !important;
+            color: var(--text) !important;
+        }
+
+        a {
+            color: var(--link);
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+        .btn-primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+        }
+
+        .muted {
+            color: var(--muted) !important;
+        }
+
+        .dark-toggle-btn {
+            border: none;
+            background: transparent;
+            color: var(--nav-text);
+            font-size: 1.05rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+        }
+
+            .dark-toggle-btn:hover {
+                opacity: .85;
+            }
+
+        .card *, .container *, .section-amd * {
+            color: inherit !important;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            gap: 20px;
+        }
+
+        .btn-entrar {
+            background: linear-gradient(135deg, var(--accent), #0a2b8f);
+            color: #fff !important;
+            border: none;
+            padding: .65rem 1.35rem;
+            font-weight: 600;
+            border-radius: 12px;
+            letter-spacing: .4px;
+            transition: all .25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: .45rem;
+            box-shadow: 0 0 0 rgba(0, 70, 160, 0);
+        }
+
+        /* BOTÃO ENTRAR (Primário AMD) */
+        .btn-entrar {
+            background: linear-gradient(135deg, var(--accent), #0a2b8f);
+            color: #fff !important;
+            border: none;
+            padding: .65rem 1.35rem;
+            font-weight: 600;
+            border-radius: 12px;
+            letter-spacing: .4px;
+            transition: all .25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: .45rem;
+            box-shadow: 0 0 0 rgba(0, 70, 160, 0);
+            position: center;
+            text-decoration: none;
+        }
+
+            .btn-entrar::before {
+                content: "➡️";
+                font-size: 1.05rem;
+                transition: transform .25s ease;
+            }
+
+            .btn-entrar:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 18px rgba(0, 70, 160, 0.45);
+                background: linear-gradient(135deg, #0a2b8f, var(--accent));
+            }
+
+                .btn-entrar:hover::before {
+                    transform: translateX(3px);
+                }
+
+        /* BOTÃO CADASTRAR (Destaque + efeito “pulse”) */
+        .btn-cadastrar {
+            background: transparent;
+            color: gainsboro var(--accent) !important;
+            border: 2px solid var(--accent);
+            padding: .65rem 1.35rem;
+            font-weight: 600;
+            border-radius: 12px;
+            transition: all .25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: .45rem;
+            position: center;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+            .btn-cadastrar::before {
+                content: "🩹";
+                font-size: 1.05rem;
+                transition: transform .25s ease;
+            }
+
+            /* Efeito de brilho no hover */
+            .btn-cadastrar:hover {
+                background: var(--accent);
+                color: #fff !important;
+                box-shadow: 0 8px 22px rgba(0, 70, 160, 0.45);
+            }
+
+                .btn-cadastrar:hover::before {
+                    transform: rotate(-10deg);
+                }
+
+        /* Animação suave de pulse (tema vacinação) */
+        @@keyframes buttonPulse {
+            0%
+
+        {
+            box-shadow: 0 0 0 0 rgba(0, 130, 255, 0.0);
+        }
+
+        50% {
+            box-shadow: 0 0 18px rgba(0, 130, 255, 0.35);
+        }
+
+        100% {
+            box-shadow: 0 0 0 0 rgba(0, 130, 255, 0.0);
+        }
+
+        }
+
+        .btn-cadastrar-pulse {
+            animation: buttonPulse 2.4s infinite ease-in-out;
+        }
+
+        .center-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            gap: 20px;
+        }
+
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ZeGotao</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+    <div class="page-wrapper">
+
+        <!-- NAVBAR AMD -->
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-amd navbar-dark fixed-top">
+                <div class="container-fluid">
+                    <a class="navbar-brand fw-bold d-flex align-items-center gap-2"
+                       asp-area="" asp-controller="Home" asp-action="Index">
+
+                        <img src="~/images/mascote.png"
+                             alt="Logo"
+                             style="height:38px; width:auto; object-fit:contain;" />
+
+                        Mais Saude
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                            aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarContent">
+                        <ul class="navbar-nav ms-auto align-items-lg-center">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+
+                            <li class="nav-item ms-3">
+                                <button class="dark-toggle-btn" id="darkModeToggle" aria-pressed="false" title="Alternar tema">
+                                    <span id="themeIcon">🌓</span>
+                                    <span id="themeLabel" class="d-none d-lg-inline">Tema</span>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+            </nav>
+        </header>
+
+        <!-- MAIN -->
+        <main role="main" class="container mt-3 fade-in bg-theme-inherit" id="main-content">
             @RenderBody()
         </main>
+
+        <!-- FOOTER -->
+        <footer class="footer-amd mt-auto">
+            <div class="container text-center">
+                &copy; @DateTime.Now.Year - Mais Saude -
+                <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - ZeGotao - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/bootstrap.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        (function () {
+            const toggleBtn = document.getElementById('darkModeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+
+            function applyTheme(mode) {
+                document.body.classList.remove('dark-mode', 'light-mode');
+                if (mode === 'dark') {
+                    document.body.classList.add('dark-mode');
+                    themeIcon.textContent = '🌙';
+                    toggleBtn.setAttribute('aria-pressed','true');
+                } else {
+                    document.body.classList.add('light-mode');
+                    themeIcon.textContent = '☀️';
+                    toggleBtn.setAttribute('aria-pressed','false');
+                }
+            }
+
+            const saved = (localStorage.getItem('theme') || 'light').toLowerCase();
+            applyTheme(saved);
+
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', function () {
+                    const isDark = document.body.classList.contains('dark-mode');
+                    const next = isDark ? 'light' : 'dark';
+                    applyTheme(next);
+                    localStorage.setItem('theme', next);
+                });
+            }
+        })();
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
