@@ -1,0 +1,76 @@
+﻿@model ZeGotao.Models.Usuario
+@{
+    ViewData["Title"] = "Cadastro";
+}
+
+<div class="text-center">
+
+    <h1 class="display-4">Cadastro</h1>
+
+    <form asp-action="Cadastrar" method="post">
+
+        <!-- Nome -->
+        <div class="input-wrap float-label">
+            <input asp-for="Nome" class="input-field" placeholder=" " />
+            <label asp-for="Nome"></label>
+            <span class="input-error">@Html.ValidationMessageFor(m => m.Nome)</span>
+        </div>
+
+        <!-- Email -->
+        <div class="input-wrap float-label">
+            <input asp-for="Email" class="input-field" placeholder=" " />
+            <label asp-for="Email"></label>
+            <span class="input-error">@Html.ValidationMessageFor(m => m.Email)</span>
+        </div>
+
+        <!-- Senha -->
+        <div class="input-wrap">
+            <input asp-for="Senha" type="password" class="input-field" />
+            <small class="input-help muted">Mínimo 8 caracteres</small>
+            <span class="input-error">@Html.ValidationMessageFor(m => m.Senha)</span>
+        </div>
+
+        <!-- CPF -->
+        <div class="input-wrap float-label">
+            <input asp-for="Cpf" class="input-field" placeholder=" " />
+            <label asp-for="Cpf"></label>
+            <span class="input-error">@Html.ValidationMessageFor(m => m.Cpf)</span>
+        </div>
+
+        <!-- Telefone -->
+        <div class="input-wrap float-label">
+            <input asp-for="Telefone" class="input-field" placeholder=" " />
+            <label asp-for="Telefone"></label>
+            <span class="input-error">@Html.ValidationMessageFor(m => m.Telefone)</span>
+        </div>
+
+        <!-- Endereço -->
+        <div class="input-wrap">
+            <textarea asp-for="Endereco" class="textarea-field" placeholder="Endereço completo"></textarea>
+            <span class="input-error">@Html.ValidationMessageFor(m => m.Endereco)</span>
+        </div>
+
+        <!-- Data de nascimento -->
+        <div class="input-wrap">
+            <input asp-for="DataNascimento" type="date" class="input-field" />
+            <span class="input-error">@Html.ValidationMessageFor(m => m.DataNascimento)</span>
+        </div>
+
+        <!-- Tipo de Usuário -->
+        <div class="input-wrap">
+            <select asp-for="TipoUsuarioId" class="select-field">
+                <option value="">Selecione</option>
+                <option value="1">Comum</option>
+                <option value="2">Administrador</option>
+            </select>
+            <span class="input-error">@Html.ValidationMessageFor(m => m.TipoUsuarioId)</span>
+        </div>
+
+        <!-- Botão Cadastrar -->
+        <button type="submit" class="btn-cadastrar">Cadastrar</button>
+
+    </form>
+
+    <p>Já tem conta? <a href="/Home/Entrar">Entrar</a></p>
+
+</div>

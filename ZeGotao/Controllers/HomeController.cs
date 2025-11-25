@@ -23,11 +23,11 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        public IActionResult Login()
+        public IActionResult Entrar()
         {
             return View();
         }
-        public IActionResult Entrar()
+        public IActionResult Cadastrar()
         {
             return View();
         }
