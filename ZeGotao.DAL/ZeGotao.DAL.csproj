@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ZeGotao.DTO\ZeGotao.DTO.csproj" />
+    <ProjectReference Include="..\ZeGotao\ZeGotao.csproj" />
+  </ItemGroup>
+
 </Project>
