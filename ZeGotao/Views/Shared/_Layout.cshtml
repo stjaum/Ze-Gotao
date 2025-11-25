@@ -262,6 +262,317 @@
             gap: 20px;
         }
 
+        .input-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: .4rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* container when input has an icon on left */
+        .input-with-icon {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+            .input-with-icon .icon {
+                position: absolute;
+                left: 12px;
+                pointer-events: none;
+                font-size: 1.05rem;
+                opacity: 0.9;
+            }
+
+        /* Base input style */
+        .input-field,
+        .select-field,
+        .textarea-field {
+            width: 100%;
+            padding: .65rem .9rem;
+            padding-left: calc(.9rem + 28px); /* leave room when icon present; override if no icon */
+            border-radius: 10px;
+            border: 1px solid rgba(26,26,26,0.12);
+            background: var(--card-bg);
+            color: var(--text);
+            font-size: 0.95rem;
+            transition: border-color .18s ease, box-shadow .18s ease, transform .12s ease;
+            outline: none;
+            box-shadow: none;
+            -webkit-appearance: none;
+        }
+
+            /* If no icon, reset left padding */
+            .input-field.no-icon,
+            .select-field.no-icon,
+            .textarea-field.no-icon {
+                padding-left: .9rem;
+            }
+
+            /* Focus state */
+            .input-field:focus,
+            .select-field:focus,
+            .textarea-field:focus {
+                border-color: var(--link);
+                box-shadow: 0 6px 18px rgba(9, 132, 255, 0.12);
+                transform: translateY(-1px);
+            }
+
+            /* Hover mild lift */
+            .input-field:hover,
+            .select-field:hover,
+            .textarea-field:hover {
+                transform: translateY(-0.5px);
+            }
+
+            /* Placeholder styling */
+            .input-field::placeholder,
+            .textarea-field::placeholder {
+                color: rgba(26,26,26,0.45);
+            }
+
+            /* Disabled */
+            .input-field[disabled],
+            .select-field[disabled],
+            .textarea-field[disabled] {
+                opacity: 0.6;
+                cursor: not-allowed;
+            }
+
+            /* Error / Success states */
+            .input-field.is-invalid,
+            .select-field.is-invalid,
+            .textarea-field.is-invalid {
+                border-color: #dc3545;
+                box-shadow: 0 6px 18px rgba(220,53,69,0.08);
+            }
+
+            .input-field.is-valid,
+            .select-field.is-valid,
+            .textarea-field.is-valid {
+                border-color: #198754;
+                box-shadow: 0 6px 18px rgba(25,135,84,0.08);
+            }
+
+        /* Small helper text */
+        .input-help {
+            font-size: .85rem;
+            color: var(--muted);
+        }
+
+        /* Error text style */
+        .input-error {
+            color: #dc3545;
+            font-size: .85rem;
+        }
+
+        /* Success text style */
+        .input-success {
+            color: #198754;
+            font-size: .85rem;
+        }
+
+        /* compact / small variant */
+        .input-sm {
+            padding: .45rem .6rem;
+            font-size: .88rem;
+            border-radius: 8px;
+        }
+
+        /* large variant */
+        .input-lg {
+            padding: .9rem 1rem;
+            font-size: 1.05rem;
+            border-radius: 12px;
+        }
+
+        /* Textarea autosize basic */
+        .textarea-field {
+            min-height: 110px;
+            resize: vertical;
+            padding-left: .9rem; /* typical no icon */
+        }
+
+        /* Clear button inside input (optional) */
+        .input-clear {
+            position: absolute;
+            right: 10px;
+            cursor: pointer;
+            font-size: .95rem;
+            color: rgba(26,26,26,0.5);
+        }
+
+        /* Responsive behavior */
+        @@media (max-width: 576px) {
+            .input-field, .select-field, .textarea-field
+
+        {
+            font-size: .95rem;
+            padding-left: .85rem;
+            padding-right: .85rem;
+        }
+
+        .input-with-icon .icon {
+            left: 10px;
+        }
+
+        .input-clear {
+            right: 8px;
+        }
+
+        }
+
+        /* DARK MODE adjustments (works if you toggle body.dark-mode variables) */
+        body.dark-mode .input-field,
+        body.dark-mode .select-field,
+        body.dark-mode .textarea-field {
+            background: var(--card-bg); /* should be dark */
+            color: var(--text); /* light */
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+            body.dark-mode .input-field::placeholder,
+            body.dark-mode .textarea-field::placeholder {
+                color: rgba(230,230,230,0.35);
+            }
+
+        /* Fancy animated label (floating label) */
+        .float-label {
+            position: relative;
+        }
+
+            .float-label input,
+            .float-label textarea {
+                padding-top: 1.25rem;
+                padding-bottom: .45rem;
+            }
+
+            .float-label label {
+                position: absolute;
+                left: 12px;
+                top: 10px;
+                font-size: .9rem;
+                color: rgba(26,26,26,0.6);
+                pointer-events: none;
+                transition: transform .12s ease, font-size .12s ease, top .12s ease, color .12s ease;
+            }
+
+            .float-label input:focus + label,
+            .float-label input:not(:placeholder-shown) + label,
+            .float-label textarea:focus + label,
+            .float-label textarea:not(:placeholder-shown) + label {
+                transform: translateY(-8px);
+                font-size: .78rem;
+                color: var(--link);
+            }
+
+        /* Accessibility: focus-visible */
+        .input-field:focus-visible,
+        .select-field:focus-visible,
+        .textarea-field:focus-visible {
+            outline: 2px solid transparent;
+            box-shadow: 0 0 0 3px rgba(9,132,255,0.12);
+        }
+
+        /* Quick utility if you want "ghost" style for search */
+        .input-ghost {
+            background: transparent;
+            border: 1px dashed rgba(26,26,26,0.08);
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 380px;
+            margin: 50px auto;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        /* --- Floating Label Inputs --- */
+        .input-wrap {
+            width: 100%;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 10px;
+            font-size: 1rem;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            transition: 0.2s;
+            background: #fff;
+        }
+
+            .input-field:focus {
+                border-color: #1a73e8;
+                outline: none;
+            }
+
+        .float-label label {
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            color: #666;
+            transition: 0.2s;
+            pointer-events: none;
+        }
+
+        .float-label input:focus + label,
+        .float-label input:not(:placeholder-shown) + label {
+            top: -8px;
+            font-size: 0.8rem;
+            background: white;
+            padding: 0 4px;
+            color: #1a73e8;
+        }
+
+        /* --- Botão --- */
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background: #1a73e8;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+            .btn-login:hover {
+                background: #1259b1;
+            }
+
+        /* --- Link auxiliar --- */
+        .helper-text {
+            margin-top: 20px;
+        }
+
+        .link {
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+            .link:hover {
+                text-decoration: underline;
+            }
+
+        /* --- Mensagens de Erro --- */
+        .input-error {
+            color: red;
+            font-size: 0.8rem;
+        }
+
     </style>
 </head>
 <body>
