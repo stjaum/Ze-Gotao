@@ -1,17 +1,32 @@
-﻿<div class="container-cadastrar">
-	<h1 class="titulo-cadastrar">Entrar</h1>
+﻿@{
+    ViewData["Title"] = "Entrar";
+}
 
+<div class="container mt-4 cadastrar-wrapper">
+    <h2 class="text-center mb-4">Entrar</h2>
 
-    <form asp-action="EntrarPost" asp-controller="Usuarios" method="post" class="form-cadastrar">
-        <input type="email" name="email" placeholder="Email" class="input-cadastrar" required />
+    @if (ViewData["Erro"] != null)
+    {
+        <div class="alert alert-danger">@ViewData["Erro"]</div>
+    }
 
-        <input type="password" name="senha" placeholder="Senha" class="input-cadastrar" required />
+    <form asp-controller="Usuarios" asp-action="EntrarPost" method="post" class="cadastrar-form">
+        @Html.AntiForgeryToken()
 
-        <button type="submit" class="btn-cadastrar">Entrar</button>
+        <div class="input-wrap float-label">
+            <input name="email" type="email" class="input-field" placeholder=" " required />
+            <label>E-mail</label>
+        </div>
 
-        @if (ViewData["Erro"] != null)
-        {
-            <p class="erro">@ViewData["Erro"]</p>
-        }
+        <div class="input-wrap float-label">
+            <input name="senha" type="password" class="input-field" placeholder=" " required />
+            <label>Senha</label>
+        </div>
+
+        <button type="submit" class="btn-cadastrar w-100 mt-3">Entrar</button>
     </form>
+
+    <p class="text-center mt-3">
+        Não tem conta? <a asp-controller="Usuario" asp-action="Cadastrar">Criar conta</a>
+    </p>
 </div>
