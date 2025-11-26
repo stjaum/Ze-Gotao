@@ -1,0 +1,17 @@
+﻿<div class="container-cadastrar">
+	<h1 class="titulo-cadastrar">Entrar</h1>
+
+
+    <form asp-action="EntrarPost" asp-controller="Usuarios" method="post" class="form-cadastrar">
+        <input type="email" name="email" placeholder="Email" class="input-cadastrar" required />
+
+        <input type="password" name="senha" placeholder="Senha" class="input-cadastrar" required />
+
+        <button type="submit" class="btn-cadastrar">Entrar</button>
+
+        @if (ViewData["Erro"] != null)
+        {
+            <p class="erro">@ViewData["Erro"]</p>
+        }
+    </form>
+</div>

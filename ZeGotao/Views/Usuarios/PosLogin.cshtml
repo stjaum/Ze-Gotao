@@ -1,0 +1,55 @@
+﻿@model ZeGotao.Models.Usuario
+<style>
+    body {
+        font-family: Arial;
+        background: #f2f2f2;
+        margin: 0;
+    }
+
+    .drawer-btn {
+        background: #091C6D;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin: 20px;
+    }
+
+    .drawer {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        top: 0;
+        right: 0;
+        background-color: #fff;
+        overflow-x: hidden;
+        transition: 0.4s;
+        padding-top: 60px;
+        box-shadow: -3px 0 10px rgba(0,0,0,0.2);
+    }
+
+    .drawer.open {
+        width: 300px;
+    }
+
+    .drawer-content {
+        padding: 20px;
+    }
+</style>
+
+<button class="drawer-btn" onclick="openDrawer()">Abrir Perfil</button>
+
+<div id="drawer" class="drawer">
+    <div class="drawer-content">
+        <h2>Dados do Usuário</h2>
+        <p><b>Nome:</b> @Model.Nome</p>
+        <p><b>Email:</b> @Model.Email</p>
+    </div>
+</div>
+
+<script>
+    function openDrawer() {
+        document.getElementById("drawer").classList.toggle("open");
+    }
+</script>

@@ -18,6 +18,38 @@ namespace ZeGotao.Controllers
         {
             _context = context;
         }
+        [HttpPost]
+        public async Task<IActionResult> EntrarPost(string email, string senha)
+        {
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(senha))
+            {
+                ViewData["Erro"] = "Preencha todos os campos.";
+                return View("Entrar");
+            }
+
+            // Busca no banco
+            var user = await _context.Usuario
+                .FirstOrDefaultAsync(u => u.Email == email && u.Senha == senha);
+
+            if (user == null)
+            {
+                ViewData["Erro"] = "Email ou senha inválidos!";
+                return View("Entrar");
+            }
+
+            // Guarda o ID logado temporariamente
+            HttpContext.Session.SetInt32("UserId", user.IdUsuario);
+
+            return RedirectToAction("PosLogin", "Usuarios");
+        }
+        public IActionResult Cadastrar()
+        {
+            return View(new Usuario());
+        }
+        public IActionResult Entrar()
+        {
+            return View(new Usuario());
+        }
 
         // GET: Usuarios
         public async Task<IActionResult> Index()

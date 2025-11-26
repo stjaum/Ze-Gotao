@@ -25,14 +25,6 @@ public class HomeController : Controller
     {
         return View();
     }
-    public IActionResult Entrar()
-    {
-        return View(new Usuario());
-    }
-    public IActionResult Cadastrar()
-    {
-        return View(new Usuario());
-    }
 
     [HttpPost]
     public async Task<IActionResult> Entrar(Usuario usuario)
