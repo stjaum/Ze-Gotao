@@ -140,7 +140,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "Principal";
             Text = "Form1";
-            Load += this.Principal_Load;
+
             ResumeLayout(false);
         }
 
