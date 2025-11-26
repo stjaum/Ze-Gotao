@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ZeGotao.DAL\ZeGotao.DAL.csproj" />
     <ProjectReference Include="..\ZeGotao.DTO\ZeGotao.DTO.csproj" />
+    <ProjectReference Include="..\ZeGotao\ZeGotao.csproj" />
   </ItemGroup>
 
 </Project>

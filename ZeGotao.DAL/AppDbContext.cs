@@ -9,7 +9,7 @@ namespace ZeGotao.DAL.Context
             : base(options) { }
 
         public DbSet<UsuarioDTO> Usuario { get; set; } = default;
-        public DbSet<AdministradorDTO> Administrador { get; set; } = default;
+        
     }
 }
 
