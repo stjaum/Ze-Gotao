@@ -1,0 +1,71 @@
+﻿@model ZeGotao.Models.Usuario
+@{
+    ViewData["Title"] = "Perfil";
+}
+
+<div class="container mt-4">
+    <h2>Bem-vindo, @Model.Nome</h2>
+
+    <p>Você está logado com o e-mail: <strong>@Model.Email</strong></p>
+
+    <button class="drawer-btn" onclick="toggleDrawer()">Abrir Perfil</button>
+
+    <div id="drawer" class="drawer" aria-hidden="true">
+        <div class="drawer-content">
+            <button class="drawer-close" onclick="toggleDrawer()">Fechar ✖</button>
+            <h3>Dados do Usuário</h3>
+            <p><b>Nome:</b> @Model.Nome</p>
+            <p><b>Email:</b> @Model.Email</p>
+            <p><b>CPF:</b> @Model.Cpf</p>
+            <p><b>Telefone:</b> @Model.Telefone</p>
+            <p><b>Endereço:</b> @Model.Endereco</p>
+            <p><b>Data Nasc.:</b> @Model.DataNascimento.ToString("yyyy-MM-dd")</p>
+            <a class="btn-cadastrar mt-2" asp-controller="Usuarios" asp-action="Logout">Sair</a>
+        </div>
+    </div>
+</div>
+<style>
+    .drawer {
+        position: fixed;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 0;
+        background: var(--card-bg, white);
+        overflow-x: hidden;
+        transition: width .35s ease;
+        box-shadow: -6px 0 20px rgba(0,0,0,0.12);
+        z-index: 1050;
+    }
+
+        .drawer.open {
+            width: 320px;
+        }
+
+    .drawer-content {
+        padding: 20px;
+    }
+
+    .drawer-btn {
+        background: var(--accent, #091C6D);
+        color: #fff;
+        padding: 10px 16px;
+        border-radius: 8px;
+        border: none;
+    }
+
+    .drawer-close {
+        background: transparent;
+        border: none;
+        float: right;
+        font-size: 1rem;
+    }
+</style>
+
+<script>
+    function toggleDrawer(){
+        const d = document.getElementById('drawer');
+        d.classList.toggle('open');
+        d.setAttribute('aria-hidden', !d.classList.contains('open'));
+    }
+</script>

@@ -509,7 +509,7 @@
             border: 2px solid #ccc;
             border-radius: 8px;
             transition: 0.2s;
-            background: #fff;
+            background: transparent;
         }
 
             .input-field:focus {
@@ -528,16 +528,17 @@
 
         .float-label input:focus + label,
         .float-label input:not(:placeholder-shown) + label {
-            top: -8px;
+            top: -10px;
             font-size: 0.8rem;
-            background: white;
+            background: transparent;
+            ;
             padding: 0 4px;
             color: #1a73e8;
         }
 
         /* --- Botão --- */
         .btn-login {
-            width: 100%;
+            width: 25%;
             padding: 12px;
             background: #1a73e8;
             color: #fff;
