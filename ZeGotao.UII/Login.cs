@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Collections.Specialized.BitVector32;
 
 namespace ZeGotao.UII
 {
@@ -35,20 +34,7 @@ namespace ZeGotao.UII
 
         private void btnEntrar_Click(object sender, EventArgs e)
         {
-            try
-            {
-                var usuario = usuarioBLL.Login(txtUsuario.Text, txtSenha.Text);
-                Session.UsuarioLogado = usuario;
-                mdEntrar.Show($"Bem vindo(a) {Session.UsuarioLogado.Nome}");
-
-                frmMain principal = new();
-                principal.Show();
-                Hide();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Erro: {ex.Message}");
-            }
+           
         }
     }
 }

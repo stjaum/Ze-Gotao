@@ -138,7 +138,7 @@
             // 
             // pictureBox2
             // 
-            pictureBox2.Location = new Point(71, 158);
+            pictureBox2.Location = new Point(111, 94);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(100, 50);
             pictureBox2.TabIndex = 3;
