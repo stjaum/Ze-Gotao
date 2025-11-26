@@ -1,72 +1,86 @@
 ﻿@model ZeGotao.Models.Usuario
-
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Cadastrar";
 }
 
-<h1>Create</h1>
+<div class="container mt-4 cadastrar-wrapper">
 
-<h4>Usuario</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Senha" class="control-label"></label>
-                <input asp-for="Senha" class="form-control" />
-                <span asp-validation-for="Senha" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cpf" class="control-label"></label>
-                <input asp-for="Cpf" class="form-control" />
-                <span asp-validation-for="Cpf" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telefone" class="control-label"></label>
-                <input asp-for="Telefone" class="form-control" />
-                <span asp-validation-for="Telefone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Endereco" class="control-label"></label>
-                <input asp-for="Endereco" class="form-control" />
-                <span asp-validation-for="Endereco" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DataNascimento" class="control-label"></label>
-                <input asp-for="DataNascimento" class="form-control" />
-                <span asp-validation-for="DataNascimento" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TipoUsuarioId" class="control-label"></label>
-                <select asp-for="TipoUsuarioId" class ="form-control" asp-items="ViewBag.TipoUsuarioId"></select>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Ativo" /> @Html.DisplayNameFor(model => model.Ativo)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+    <h2 class="text-center mb-4">Criar Conta</h2>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+    @* MENSAGENS *@
+    @if (ViewData["MsgErro"] != null)
+    {
+        <div class="alert alert-danger">@ViewData["MsgErro"]</div>
+    }
+    @if (TempData["MsgSucesso"] != null)
+    {
+        <div class="alert alert-success">@TempData["MsgSucesso"]</div>
+    }
+
+    @* FORM MESCLADO — mantém visual do Cadastrar, funcional como Create *@
+    <form asp-controller="Usuario" asp-action="Cadastrar" method="post" class="cadastrar-form">
+
+        <!-- Nome -->
+        <div class="input-wrap float-label">
+            <input asp-for="Nome" class="input-field" placeholder=" " />
+            <label for="Nome">Nome completo</label>
+            <span asp-validation-for="Nome" class="text-danger"></span>
+        </div>
+
+        <!-- Email -->
+        <div class="input-wrap float-label">
+            <input asp-for="Email" class="input-field" placeholder=" " />
+            <label for="Email">Email</label>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <!-- Senha -->
+        <div class="input-wrap float-label">
+            <input asp-for="Senha" type="password" class="input-field" placeholder=" " />
+            <label for="Senha">Senha</label>
+            <span asp-validation-for="Senha" class="text-danger"></span>
+        </div>
+
+        <!-- CPF -->
+        <div class="input-wrap float-label">
+            <input asp-for="Cpf" class="input-field" placeholder=" " />
+            <label for="Cpf">CPF</label>
+            <span asp-validation-for="Cpf" class="text-danger"></span>
+        </div>
+
+        <!-- Telefone -->
+        <div class="input-wrap float-label">
+            <input asp-for="Telefone" class="input-field" placeholder=" " />
+            <label for="Telefone">Telefone</label>
+            <span asp-validation-for="Telefone" class="text-danger"></span>
+        </div>
+
+        <!-- Endereço -->
+        <div class="input-wrap float-label">
+            <input asp-for="Endereco" class="input-field" placeholder=" " />
+            <label for="Endereco">Endereço</label>
+            <span asp-validation-for="Endereco" class="text-danger"></span>
+        </div>
+
+        <!-- Data de Nascimento -->
+        <div class="input-wrap float-label">
+            <input asp-for="DataNascimento" type="date" class="input-field" placeholder=" " />
+            <label for="DataNascimento">Data de Nascimento</label>
+            <span asp-validation-for="DataNascimento" class="text-danger"></span>
+        </div>
+        <!-- TipoUsuarioId (se quiser ocultar, deixe hidden) -->
+        <input type="hidden" asp-for="TipoUsuarioId" value="1" />
+
+        <!-- Ativo -->
+        <input type="hidden" asp-for="Ativo" value="true" />
+
+        <button class="btn-cadastrar w-100 mt-3">Cadastrar</button>
+    </form>
+    <p class="text-center mt-3">
+        Já tem conta? <a asp-controller="Home" asp-action="Entrar">Entrar</a>
+    </p>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <partial name="_ValidationScriptsPartial" />
 }

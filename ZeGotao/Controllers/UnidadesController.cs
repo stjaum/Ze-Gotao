@@ -17,7 +17,6 @@ namespace ZeGotao.Controllers
         {
             _context = context;
         }
-
         // GET: Unidades
         public async Task<IActionResult> Index()
         {
