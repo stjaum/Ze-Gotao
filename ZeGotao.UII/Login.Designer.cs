@@ -71,6 +71,7 @@
             btnEntrar.Size = new Size(226, 51);
             btnEntrar.TabIndex = 0;
             btnEntrar.Text = "Entrar";
+            btnEntrar.Click += btnEntrar_Click;
             // 
             // txtEmail
             // 
