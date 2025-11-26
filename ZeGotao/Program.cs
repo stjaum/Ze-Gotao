@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using ZeGotao.Data;
+using ZeGotao.Core.Data;
 var builder = WebApplication.CreateBuilder(args);
 // sessão
 builder.Services.AddDistributedMemoryCache();
