@@ -5,13 +5,13 @@ VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeGotao", "ZeGotao\ZeGotao.csproj", "{3EDFEA8C-9516-4849-9EFF-1F0C9F294749}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeGotao.UI", "ZeGotao.UI\ZeGotao.UI.csproj", "{40C7DD8E-AB69-4153-967A-5F3C3D835260}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeGotao.DTO", "ZeGotao.DTO\ZeGotao.DTO.csproj", "{ED7E6638-3DC9-410F-9D9E-2CDE5CDFADBB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeGotao.DAL", "ZeGotao.DAL\ZeGotao.DAL.csproj", "{F354D8F6-11BB-4399-A5A7-1F942C828EEB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeGotao.BLL", "ZeGotao.BLL\ZeGotao.BLL.csproj", "{16DD982C-3CF3-4AA5-A1F8-09116FB3967D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeGotao.UII", "ZeGotao.UII\ZeGotao.UII.csproj", "{0C23E48D-4B37-464A-B2E7-54FE34E564D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,6 @@ Global
 		{3EDFEA8C-9516-4849-9EFF-1F0C9F294749}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EDFEA8C-9516-4849-9EFF-1F0C9F294749}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EDFEA8C-9516-4849-9EFF-1F0C9F294749}.Release|Any CPU.Build.0 = Release|Any CPU
-		{40C7DD8E-AB69-4153-967A-5F3C3D835260}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{40C7DD8E-AB69-4153-967A-5F3C3D835260}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{40C7DD8E-AB69-4153-967A-5F3C3D835260}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{40C7DD8E-AB69-4153-967A-5F3C3D835260}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ED7E6638-3DC9-410F-9D9E-2CDE5CDFADBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ED7E6638-3DC9-410F-9D9E-2CDE5CDFADBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED7E6638-3DC9-410F-9D9E-2CDE5CDFADBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{16DD982C-3CF3-4AA5-A1F8-09116FB3967D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16DD982C-3CF3-4AA5-A1F8-09116FB3967D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16DD982C-3CF3-4AA5-A1F8-09116FB3967D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C23E48D-4B37-464A-B2E7-54FE34E564D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C23E48D-4B37-464A-B2E7-54FE34E564D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C23E48D-4B37-464A-B2E7-54FE34E564D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C23E48D-4B37-464A-B2E7-54FE34E564D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
