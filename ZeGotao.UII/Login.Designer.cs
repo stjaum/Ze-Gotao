@@ -38,118 +38,108 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(components);
-            guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
-            pictureBox1 = new PictureBox();
-            guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
-            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
+            btnEntrar = new Guna.UI2.WinForms.Guna2Button();
+            txtEmail = new Guna.UI2.WinForms.Guna2TextBox();
+            txtSenha = new Guna.UI2.WinForms.Guna2TextBox();
+            btnCadastrar = new Guna.UI2.WinForms.Guna2Button();
             pictureBox2 = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // guna2BorderlessForm1
             // 
+            guna2BorderlessForm1.BorderRadius = 20;
             guna2BorderlessForm1.ContainerControl = this;
             guna2BorderlessForm1.DockIndicatorTransparencyValue = 0.6D;
             guna2BorderlessForm1.TransparentWhileDrag = true;
             // 
-            // guna2Button1
+            // btnEntrar
             // 
-            guna2Button1.BackColor = Color.FromArgb(0, 53, 122);
-            guna2Button1.BorderRadius = 10;
-            guna2Button1.CustomizableEdges = customizableEdges7;
-            guna2Button1.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button1.FillColor = Color.FromArgb(62, 218, 216);
-            guna2Button1.Font = new Font("Britannic Bold", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2Button1.ForeColor = SystemColors.ButtonFace;
-            guna2Button1.Location = new Point(311, 313);
-            guna2Button1.Name = "guna2Button1";
-            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            guna2Button1.Size = new Size(226, 51);
-            guna2Button1.TabIndex = 0;
-            guna2Button1.Text = "guna2Button1";
+            btnEntrar.BackColor = Color.FromArgb(0, 53, 122);
+            btnEntrar.BorderRadius = 10;
+            btnEntrar.CustomizableEdges = customizableEdges7;
+            btnEntrar.DisabledState.BorderColor = Color.DarkGray;
+            btnEntrar.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnEntrar.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnEntrar.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnEntrar.FillColor = Color.FromArgb(62, 218, 216);
+            btnEntrar.Font = new Font("Britannic Bold", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnEntrar.ForeColor = SystemColors.ButtonFace;
+            btnEntrar.Location = new Point(344, 289);
+            btnEntrar.Name = "btnEntrar";
+            btnEntrar.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            btnEntrar.Size = new Size(226, 51);
+            btnEntrar.TabIndex = 0;
+            btnEntrar.Text = "Entrar";
             // 
-            // guna2TextBox1
+            // txtEmail
             // 
-            guna2TextBox1.BackColor = Color.FromArgb(0, 53, 122);
-            guna2TextBox1.BorderRadius = 10;
-            guna2TextBox1.CustomizableEdges = customizableEdges3;
-            guna2TextBox1.DefaultText = "";
-            guna2TextBox1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            guna2TextBox1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            guna2TextBox1.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Font = new Font("Book Antiqua", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Location = new Point(311, 151);
-            guna2TextBox1.Name = "guna2TextBox1";
-            guna2TextBox1.PlaceholderText = "";
-            guna2TextBox1.SelectedText = "";
-            guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2TextBox1.Size = new Size(226, 51);
-            guna2TextBox1.TabIndex = 1;
+            txtEmail.BackColor = Color.FromArgb(0, 53, 122);
+            txtEmail.BorderRadius = 10;
+            txtEmail.CustomizableEdges = customizableEdges3;
+            txtEmail.DefaultText = "Email";
+            txtEmail.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtEmail.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtEmail.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtEmail.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtEmail.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtEmail.Font = new Font("Book Antiqua", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtEmail.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtEmail.Location = new Point(344, 136);
+            txtEmail.Name = "txtEmail";
+            txtEmail.PlaceholderText = "";
+            txtEmail.SelectedText = "";
+            txtEmail.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            txtEmail.Size = new Size(226, 51);
+            txtEmail.TabIndex = 1;
+            txtEmail.TextChanged += Email;
             // 
-            // pictureBox1
+            // txtSenha
             // 
-            pictureBox1.Image = Properties.Resources.Azul_e_Branco_Apresentação_de_Mapa_Mental;
-            pictureBox1.Location = new Point(-43, -28);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(1313, 598);
-            pictureBox1.TabIndex = 2;
-            pictureBox1.TabStop = false;
+            txtSenha.BackColor = Color.FromArgb(0, 53, 122);
+            txtSenha.BorderRadius = 10;
+            txtSenha.CustomizableEdges = customizableEdges1;
+            txtSenha.DefaultText = "Senha";
+            txtSenha.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtSenha.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtSenha.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtSenha.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtSenha.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtSenha.Font = new Font("Book Antiqua", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtSenha.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtSenha.Location = new Point(344, 206);
+            txtSenha.Name = "txtSenha";
+            txtSenha.PlaceholderText = "";
+            txtSenha.SelectedText = "";
+            txtSenha.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            txtSenha.Size = new Size(226, 51);
+            txtSenha.TabIndex = 1;
+            txtSenha.TextChanged += Senha;
             // 
-            // guna2TextBox2
+            // btnCadastrar
             // 
-            guna2TextBox2.BackColor = Color.FromArgb(0, 53, 122);
-            guna2TextBox2.BorderRadius = 10;
-            guna2TextBox2.CustomizableEdges = customizableEdges1;
-            guna2TextBox2.DefaultText = "";
-            guna2TextBox2.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            guna2TextBox2.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            guna2TextBox2.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox2.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox2.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox2.Font = new Font("Book Antiqua", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2TextBox2.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox2.Location = new Point(311, 231);
-            guna2TextBox2.Name = "guna2TextBox2";
-            guna2TextBox2.PlaceholderText = "";
-            guna2TextBox2.SelectedText = "";
-            guna2TextBox2.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2TextBox2.Size = new Size(226, 51);
-            guna2TextBox2.TabIndex = 1;
-            // 
-            // guna2Button2
-            // 
-            guna2Button2.BackColor = Color.FromArgb(0, 53, 122);
-            guna2Button2.BorderRadius = 10;
-            guna2Button2.CustomizableEdges = customizableEdges5;
-            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button2.FillColor = Color.FromArgb(62, 218, 96);
-            guna2Button2.Font = new Font("Britannic Bold", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2Button2.ForeColor = Color.White;
-            guna2Button2.Location = new Point(311, 382);
-            guna2Button2.Name = "guna2Button2";
-            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2Button2.Size = new Size(226, 51);
-            guna2Button2.TabIndex = 0;
-            guna2Button2.Text = "guna2Button1";
+            btnCadastrar.BackColor = Color.FromArgb(0, 53, 122);
+            btnCadastrar.BorderRadius = 10;
+            btnCadastrar.CustomizableEdges = customizableEdges5;
+            btnCadastrar.DisabledState.BorderColor = Color.DarkGray;
+            btnCadastrar.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnCadastrar.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnCadastrar.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnCadastrar.FillColor = Color.FromArgb(62, 218, 96);
+            btnCadastrar.Font = new Font("Britannic Bold", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnCadastrar.ForeColor = Color.White;
+            btnCadastrar.Location = new Point(344, 365);
+            btnCadastrar.Name = "btnCadastrar";
+            btnCadastrar.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            btnCadastrar.Size = new Size(226, 51);
+            btnCadastrar.TabIndex = 0;
+            btnCadastrar.Text = "Cadastrar";
             // 
             // pictureBox2
             // 
-            pictureBox2.Image = Properties.Resources.Azul_e_Branco_Apresentação_de_Mapa_Mental__1_;
-            pictureBox2.Location = new Point(371, 208);
+            pictureBox2.Location = new Point(71, 158);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(181, 252);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.Size = new Size(100, 50);
             pictureBox2.TabIndex = 3;
             pictureBox2.TabStop = false;
             // 
@@ -157,17 +147,16 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(0, 53, 122);
             ClientSize = new Size(595, 462);
             Controls.Add(pictureBox2);
-            Controls.Add(guna2TextBox2);
-            Controls.Add(guna2TextBox1);
-            Controls.Add(guna2Button2);
-            Controls.Add(guna2Button1);
-            Controls.Add(pictureBox1);
+            Controls.Add(txtSenha);
+            Controls.Add(txtEmail);
+            Controls.Add(btnCadastrar);
+            Controls.Add(btnEntrar);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Login";
             Text = "Login";
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
@@ -175,11 +164,10 @@
         #endregion
 
         private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm1;
+        private Guna.UI2.WinForms.Guna2TextBox txtSenha;
+        private Guna.UI2.WinForms.Guna2TextBox txtEmail;
+        private Guna.UI2.WinForms.Guna2Button btnCadastrar;
+        private Guna.UI2.WinForms.Guna2Button btnEntrar;
         private PictureBox pictureBox2;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox2;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
-        private Guna.UI2.WinForms.Guna2Button guna2Button2;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
-        private PictureBox pictureBox1;
     }
 }

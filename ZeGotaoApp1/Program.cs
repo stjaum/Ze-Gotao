@@ -1,4 +1,4 @@
-namespace ZeGotao.UII
+namespace ZeGotaoApp1
 {
     internal static class Program
     {
@@ -11,7 +11,7 @@ namespace ZeGotao.UII
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Principal());
+            Application.Run(new Form1());
         }
     }
 }

@@ -10,24 +10,14 @@ using System.Windows.Forms;
 
 namespace ZeGotao.UII
 {
-    public partial class Login : Form
+    public partial class Principal : Form
     {
-        public Login()
+        public Principal()
         {
             InitializeComponent();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Email(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Senha(object sender, EventArgs e)
+        private void guna2Button7_Click(object sender, EventArgs e)
         {
 
         }
