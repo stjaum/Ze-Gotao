@@ -65,7 +65,7 @@
             btnEntrar.FillColor = Color.FromArgb(62, 218, 216);
             btnEntrar.Font = new Font("Britannic Bold", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnEntrar.ForeColor = SystemColors.ButtonFace;
-            btnEntrar.Location = new Point(344, 289);
+            btnEntrar.Location = new Point(344, 295);
             btnEntrar.Name = "btnEntrar";
             btnEntrar.ShadowDecoration.CustomizableEdges = customizableEdges8;
             btnEntrar.Size = new Size(226, 51);
@@ -108,7 +108,7 @@
             txtSenha.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtSenha.Font = new Font("Book Antiqua", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtSenha.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtSenha.Location = new Point(344, 206);
+            txtSenha.Location = new Point(344, 220);
             txtSenha.Name = "txtSenha";
             txtSenha.PlaceholderText = "";
             txtSenha.SelectedText = "";
@@ -138,9 +138,11 @@
             // 
             // pictureBox2
             // 
-            pictureBox2.Location = new Point(111, 94);
+            pictureBox2.Image = Properties.Resources.mascote;
+            pictureBox2.Location = new Point(76, 32);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(100, 50);
+            pictureBox2.Size = new Size(170, 210);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 3;
             pictureBox2.TabStop = false;
             // 
@@ -150,11 +152,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(0, 53, 122);
             ClientSize = new Size(595, 462);
-            Controls.Add(pictureBox2);
             Controls.Add(txtSenha);
             Controls.Add(txtEmail);
             Controls.Add(btnCadastrar);
             Controls.Add(btnEntrar);
+            Controls.Add(pictureBox2);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Login";
             Text = "Login";
