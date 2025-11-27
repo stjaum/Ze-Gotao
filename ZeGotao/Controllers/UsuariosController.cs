@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ZeGotao.Data;     // ajuste namespace se diferente
+using ZeGotao.Core.Data;     // ajuste namespace se diferente
 using ZeGotao.Models;
 using Microsoft.AspNetCore.Http;
 using System;
