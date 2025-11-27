@@ -124,4 +124,7 @@
   <data name="Azul e Branco Apresentação de Mapa Mental (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Azul e Branco Apresentação de Mapa Mental (1).jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ChatGPT Image 26 de nov. de 2025, 21_22_58" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ChatGPT Image 26 de nov. de 2025, 21_22_58.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
