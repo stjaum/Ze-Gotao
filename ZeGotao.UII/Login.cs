@@ -9,17 +9,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System;
 using System.Windows.Forms;
-using ZeGotao.DAL;
-using ZeGotao.Domain;
+using ZeGotao.Core;
+using ZeGotao.Core.Data;
+
 
 namespace ZeGotao.UII
 {
     public partial class Login : Form
     {
+        private readonly ZeGotaoContext _db;
+
         public Login()
         {
             InitializeComponent();
-            _usuarioDal = new UsuarioDAL();
+            _db = DbFactory.CreateDbContext();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
