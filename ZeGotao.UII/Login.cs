@@ -7,6 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System;
+using System.Windows.Forms;
+using ZeGotao.DAL;
+using ZeGotao.Domain;
 
 namespace ZeGotao.UII
 {
@@ -15,6 +19,7 @@ namespace ZeGotao.UII
         public Login()
         {
             InitializeComponent();
+            _usuarioDal = new UsuarioDAL();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -34,7 +39,12 @@ namespace ZeGotao.UII
 
         private void btnEntrar_Click(object sender, EventArgs e)
         {
-           
+
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(components);
             btnEntrar = new Guna.UI2.WinForms.Guna2Button();
             txtEmail = new Guna.UI2.WinForms.Guna2TextBox();
@@ -57,7 +57,7 @@
             // 
             btnEntrar.BackColor = Color.FromArgb(0, 53, 122);
             btnEntrar.BorderRadius = 10;
-            btnEntrar.CustomizableEdges = customizableEdges7;
+            btnEntrar.CustomizableEdges = customizableEdges31;
             btnEntrar.DisabledState.BorderColor = Color.DarkGray;
             btnEntrar.DisabledState.CustomBorderColor = Color.DarkGray;
             btnEntrar.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -67,7 +67,7 @@
             btnEntrar.ForeColor = SystemColors.ButtonFace;
             btnEntrar.Location = new Point(344, 295);
             btnEntrar.Name = "btnEntrar";
-            btnEntrar.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            btnEntrar.ShadowDecoration.CustomizableEdges = customizableEdges32;
             btnEntrar.Size = new Size(226, 51);
             btnEntrar.TabIndex = 0;
             btnEntrar.Text = "Entrar";
@@ -77,7 +77,7 @@
             // 
             txtEmail.BackColor = Color.FromArgb(0, 53, 122);
             txtEmail.BorderRadius = 10;
-            txtEmail.CustomizableEdges = customizableEdges3;
+            txtEmail.CustomizableEdges = customizableEdges27;
             txtEmail.DefaultText = "Email";
             txtEmail.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtEmail.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -90,7 +90,7 @@
             txtEmail.Name = "txtEmail";
             txtEmail.PlaceholderText = "";
             txtEmail.SelectedText = "";
-            txtEmail.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            txtEmail.ShadowDecoration.CustomizableEdges = customizableEdges28;
             txtEmail.Size = new Size(226, 51);
             txtEmail.TabIndex = 1;
             txtEmail.TextChanged += Email;
@@ -99,7 +99,7 @@
             // 
             txtSenha.BackColor = Color.FromArgb(0, 53, 122);
             txtSenha.BorderRadius = 10;
-            txtSenha.CustomizableEdges = customizableEdges1;
+            txtSenha.CustomizableEdges = customizableEdges25;
             txtSenha.DefaultText = "Senha";
             txtSenha.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtSenha.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -112,7 +112,7 @@
             txtSenha.Name = "txtSenha";
             txtSenha.PlaceholderText = "";
             txtSenha.SelectedText = "";
-            txtSenha.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            txtSenha.ShadowDecoration.CustomizableEdges = customizableEdges26;
             txtSenha.Size = new Size(226, 51);
             txtSenha.TabIndex = 1;
             txtSenha.TextChanged += Senha;
@@ -121,7 +121,7 @@
             // 
             btnCadastrar.BackColor = Color.FromArgb(0, 53, 122);
             btnCadastrar.BorderRadius = 10;
-            btnCadastrar.CustomizableEdges = customizableEdges5;
+            btnCadastrar.CustomizableEdges = customizableEdges29;
             btnCadastrar.DisabledState.BorderColor = Color.DarkGray;
             btnCadastrar.DisabledState.CustomBorderColor = Color.DarkGray;
             btnCadastrar.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -131,7 +131,7 @@
             btnCadastrar.ForeColor = Color.White;
             btnCadastrar.Location = new Point(344, 365);
             btnCadastrar.Name = "btnCadastrar";
-            btnCadastrar.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            btnCadastrar.ShadowDecoration.CustomizableEdges = customizableEdges30;
             btnCadastrar.Size = new Size(226, 51);
             btnCadastrar.TabIndex = 0;
             btnCadastrar.Text = "Cadastrar";
@@ -139,7 +139,7 @@
             // pictureBox2
             // 
             pictureBox2.Image = Properties.Resources.mascote;
-            pictureBox2.Location = new Point(76, 32);
+            pictureBox2.Location = new Point(80, 136);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(170, 210);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -160,6 +160,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "Login";
             Text = "Login";
+            Load += Login_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
