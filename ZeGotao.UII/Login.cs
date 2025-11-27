@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System;
-using System.Windows.Forms;
+﻿using ZeGotao.BLL;
 using ZeGotao.DAL;
-using ZeGotao.Domain;
+using ZeGotao.Models;
 
 namespace ZeGotao.UII
 {
@@ -19,7 +9,7 @@ namespace ZeGotao.UII
         public Login()
         {
             InitializeComponent();
-            _usuarioDal = new UsuarioDAL();
+            usuarioDTO = new UsuarioDAL();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -39,7 +29,7 @@ namespace ZeGotao.UII
 
         private void btnEntrar_Click(object sender, EventArgs e)
         {
-
+          
         }
 
         private void Login_Load(object sender, EventArgs e)

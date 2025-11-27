@@ -48,7 +48,7 @@
 		</xsd:element>
 	</xsd:schema>
 
-<<<<<<< HEAD
+
     mimetype: application/x-microsoft.net.object.bytearray.base64
     value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
@@ -152,4 +152,4 @@
 	</data>
 
 </root>
->>>>>>> 2b21fe24ca95df2abc4df5806242db464fc5dc7b
+

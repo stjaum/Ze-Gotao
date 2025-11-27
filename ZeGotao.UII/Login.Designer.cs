@@ -134,24 +134,9 @@
             btnCadastrar.TabIndex = 0;
             btnCadastrar.Text = "Cadastrar";
             // 
-<<<<<<< HEAD
-=======
-            // pictureBox2
-            // 
 
-            pictureBox2.Location = new Point(101, 111);
 
-            pictureBox2.Image = Properties.Resources.mascote;
-            pictureBox2.Location = new Point(76, 32);
-
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(170, 210);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 3;
-            pictureBox2.TabStop = false;
-            // 
->>>>>>> 2b21fe24ca95df2abc4df5806242db464fc5dc7b
-            // Login
+             // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
