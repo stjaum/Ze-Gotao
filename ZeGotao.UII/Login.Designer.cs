@@ -138,12 +138,12 @@
             // 
             // pictureBox2
             // 
-<<<<<<< HEAD
+
             pictureBox2.Location = new Point(101, 111);
-=======
+
             pictureBox2.Image = Properties.Resources.mascote;
             pictureBox2.Location = new Point(76, 32);
->>>>>>> 4f813a0c906162bb6e869f60d9f8bc66ab46e5eb
+
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(170, 210);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;

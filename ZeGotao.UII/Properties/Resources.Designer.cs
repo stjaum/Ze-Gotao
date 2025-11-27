@@ -83,15 +83,19 @@ namespace ZeGotao.UII.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-<<<<<<< HEAD
         internal static System.Drawing.Bitmap ChatGPT_Image_26_de_nov__de_2025__21_22_58 {
             get {
                 object obj = ResourceManager.GetObject("ChatGPT Image 26 de nov. de 2025, 21_22_58", resourceCulture);
-=======
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap mascote {
             get {
                 object obj = ResourceManager.GetObject("mascote", resourceCulture);
->>>>>>> 4f813a0c906162bb6e869f60d9f8bc66ab46e5eb
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
