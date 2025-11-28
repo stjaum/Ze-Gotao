@@ -2,7 +2,7 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using ZeGotao.Data;
+using ZeGotao.Core.Data;
 using ZeGotao.Models;
 
 public class HomeController : Controller

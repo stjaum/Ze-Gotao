@@ -1,4 +1,4 @@
-﻿namespace ZeGotao.UII
+﻿namespace ZeGotaoApp1
 {
     partial class Form1
     {

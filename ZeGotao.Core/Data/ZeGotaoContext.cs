@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ZeGotao.Models;
 
-namespace ZeGotao.Data
+namespace ZeGotao.Core.Data
 {
     public class ZeGotaoContext : DbContext
     {

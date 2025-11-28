@@ -1,4 +1,4 @@
-namespace ZeGotao.UII
+namespace ZeGotaoApp1.Desktop
 {
     internal static class Program
     {

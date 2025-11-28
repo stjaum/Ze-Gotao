@@ -12,11 +12,7 @@ namespace ZeGotao.DAL
             set => JsonDatabase.Salvar("Usuarios.json", value);
         }
 
-        public static List<AdministradorDTO> Administradores
-        {
-            get => JsonDatabase.Ler<AdministradorDTO>("Administradores.json");
-            set => JsonDatabase.Salvar("Administradores.json", value);
-        }
+  
 
     }
 }
