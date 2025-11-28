@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ZeGotao.Data;
+using ZeGotao.Core.Data;
 using ZeGotao.Models;
-using Microsoft.AspNetCore.Http;
 
 namespace ZeGotao.Controllers
 {

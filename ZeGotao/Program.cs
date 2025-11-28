@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ZeGotao.Data;
+
+using ZeGotao.Core.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
