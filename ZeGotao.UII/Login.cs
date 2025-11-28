@@ -68,9 +68,10 @@ namespace ZeGotao.UII
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     // Exemplo — abra o form principal
-                    var main = new Principal(usuario);
+                    Principal principal = new Principal();
+                    principal.ShowDialog();
                     this.Hide();
-                    main.ShowDialog();
+
                     this.Show();
                 }
             }
@@ -87,6 +88,12 @@ namespace ZeGotao.UII
 
         private void Login_Load(object sender, EventArgs e)
         {
+
+        }
+
+        private void btnCadastrar_Click(object sender, EventArgs e)
+        {
+
 
         }
     }
