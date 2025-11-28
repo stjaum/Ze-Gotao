@@ -1,8 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using ZeGotao.Core.Data;
+using ZeGotao.Data;
+
 var builder = WebApplication.CreateBuilder(args);
-// sessão
+
+// =========================================================
+// CONFIGURAÇÃO DE SESSÃO
+// =========================================================
 builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddSession(options =>
@@ -11,19 +14,28 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
-builder.Services.AddDbContext<ZeGotaoContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ZeGotaoContext") ?? throw new InvalidOperationException("Connection string 'ZeGotaoContext' not found.")));
 
-// Add services to the container.
+
+builder.Services.AddDbContext<ZeGotaoContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("ZeGotaoContext")
+        ?? throw new InvalidOperationException("Connection string 'ZeGotaoContext' not found.")
+    )
+);
+
+// =========================================================
+// MVC
+// =========================================================
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// =========================================================
+// PIPELINE
+// =========================================================
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -32,24 +44,16 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+// Sessão deve vir ANTES de autenticação/autorização
+app.UseSession();
+
+// Se tiver autenticação, manter essas linhas (não remove):
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}"
+);
 
 app.Run();
-builder.Services.AddSession();
-app.UseSession();
-app.UseStaticFiles();
-app.UseRouting();
-
-// sessão -> deve vir antes de autenticação/autorização que dependa dela
-app.UseSession();
-
-app.UseAuthentication(); // se existir
-app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
