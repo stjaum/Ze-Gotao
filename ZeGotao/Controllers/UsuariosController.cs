@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ZeGotao.Data;     // ajuste namespace se diferente
+using ZeGotao.Data;
 using ZeGotao.Models;
 using Microsoft.AspNetCore.Http;
-using System;
 
 namespace ZeGotao.Controllers
 {
@@ -16,14 +15,18 @@ namespace ZeGotao.Controllers
             _context = context;
         }
 
-        // GET: Usuarios/Entrar
+        // ============================================================
+        // GET: Tela de Login
+        // ============================================================
         [HttpGet]
         public IActionResult Entrar()
         {
-            return View();
+            return View("Entrar"); // usa a view correta do seu projeto
         }
 
-        // POST: Usuarios/EntrarPost
+        // ============================================================
+        // POST: Login
+        // ============================================================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EntrarPost(string email, string senha)
@@ -34,8 +37,7 @@ namespace ZeGotao.Controllers
                 return View("Entrar");
             }
 
-            // Ajuste para o DbSet/Model do seu projeto: pode ser _context.Usuario ou _context.Usuarios
-            var user = await _context.Usuario // OU _context.Usuarios conforme seu AppDbContext
+            var user = await _context.Usuario
                 .FirstOrDefaultAsync(u => u.Email == email && u.Senha == senha);
 
             if (user == null)
@@ -44,14 +46,16 @@ namespace ZeGotao.Controllers
                 return View("Entrar");
             }
 
-            // Salva dados na sessão (precisa de app.UseSession())
-            HttpContext.Session.SetInt32("IdUsuario", user.IdUsuario); // ajuste propriedade do Id se necessário
+            // SESSÃO (funciona apenas se app.UseSession() estiver configurado)
+            HttpContext.Session.SetInt32("IdUsuario", user.IdUsuario);
             HttpContext.Session.SetString("NomeUsuario", user.Nome);
 
-            return RedirectToAction("PosLogin", "Usuarios");
+            return RedirectToAction("PosLogin");
         }
 
-        // GET: Usuarios/PosLogin
+        // ============================================================
+        // GET: Tela pós Login
+        // ============================================================
         [HttpGet]
         public async Task<IActionResult> PosLogin()
         {
@@ -59,7 +63,6 @@ namespace ZeGotao.Controllers
             if (id == null)
                 return RedirectToAction("Entrar");
 
-            // buscar novamente para ter dados atualizados
             var user = await _context.Usuario.FindAsync(id.Value);
             if (user == null)
             {
@@ -67,10 +70,49 @@ namespace ZeGotao.Controllers
                 return RedirectToAction("Entrar");
             }
 
-            return View(user);
+            return View("PosLogin", user);
         }
 
-        // Opcional: Logout
+        // ============================================================
+        // GET: Tela de Cadastro
+        // ============================================================
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View("Create"); // mantém o CSS da sua view original
+        }
+
+        // ============================================================
+        // POST: Cadastro
+        // ============================================================
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Usuario usuario)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Create", usuario);
+            }
+
+            _context.Add(usuario);
+            await _context.SaveChangesAsync();
+
+            TempData["MsgSucesso"] = "Cadastro realizado com sucesso!";
+            return RedirectToAction("Entrar");
+        }
+
+
+        // ============================================================
+        // GET: Listar Usuários
+        // ============================================================
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Usuario.ToListAsync());
+        }
+
+        // ============================================================
+        // Logout
+        // ============================================================
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
