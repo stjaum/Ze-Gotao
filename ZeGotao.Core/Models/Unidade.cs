@@ -2,6 +2,8 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
+namespace ZeGotao.Models;
+
 [Table("Unidade")]
 
 public class Unidade

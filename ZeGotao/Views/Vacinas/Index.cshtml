@@ -1,47 +1,37 @@
-﻿@model IEnumerable<Vacinas>
-
+﻿@model IEnumerable<ZeGotao.Models.Vacinas>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Vacinas";
 }
 
-<h1>Index</h1>
+<div class="container mt-4 cadastrar-wrapper">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NomeVacina)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DescricaoVacina)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FaixaEtaria)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomeVacina)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DescricaoVacina)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FaixaEtaria)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdVacina">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdVacina">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdVacina">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <h2 class="text-center mb-4">Vacinas Cadastradas</h2>
+
+    <div class="text-end mb-3">
+        <a class="btn-cadastrar" asp-action="Create">Cadastrar Nova Vacina</a>
+    </div>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Faixa Etária</th>
+                <th class="text-center">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.NomeVacina</td>
+                    <td>@item.FaixaEtaria</td>
+                    <td class="text-center">
+                        <a asp-action="Details" asp-route-id="@item.IdVacina">Detalhes</a> |
+                        <a asp-action="Edit" asp-route-id="@item.IdVacina">Editar</a> |
+                        <a asp-action="Delete" asp-route-id="@item.IdVacina">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

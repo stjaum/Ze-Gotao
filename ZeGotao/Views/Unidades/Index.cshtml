@@ -1,47 +1,46 @@
-﻿@model IEnumerable<Unidade>
+﻿@model IEnumerable<ZeGotao.Models.Unidade>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Unidades";
 }
 
-<h1>Index</h1>
+<div class="container mt-4 cadastrar-wrapper">
+    <h2 class="text-center mb-4">Unidades Cadastradas</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NomeUnidade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Endereco)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telefone)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomeUnidade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Endereco)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefone)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdUnidade">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdUnidade">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdUnidade">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="text-end mb-3">
+        <a asp-action="Create" class="btn btn-primary">Nova Unidade</a>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <p class="text-center">Nenhuma unidade cadastrada.</p>
+    }
+    else
+    {
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Endereço</th>
+                    <th>Telefone</th>
+                    <th style="width:150px;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.NomeUnidade</td>
+                        <td>@item.Endereco</td>
+                        <td>@item.Telefone</td>
+                        <td class="text-center">
+                            <a asp-action="Details" asp-route-id="@item.IdUnidade" class="btn btn-sm btn-info">Detalhes</a>
+                            <a asp-action="Edit" asp-route-id="@item.IdUnidade" class="btn btn-sm btn-warning">Editar</a>
+                            <a asp-action="Delete" asp-route-id="@item.IdUnidade" class="btn btn-sm btn-danger">Excluir</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
