@@ -14,18 +14,12 @@ namespace ZeGotao.Controllers
             _context = context;
         }
 
-        // ============================================================
-        // GET: Tela de Login
-        // ============================================================
         [HttpGet]
         public IActionResult Entrar()
         {
-            return View("Entrar"); // usa a view correta do seu projeto
+            return View("Entrar");
         }
 
-        // ============================================================
-        // POST: Login
-        // ============================================================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EntrarPost(string email, string senha)
@@ -45,24 +39,24 @@ namespace ZeGotao.Controllers
                 return View("Entrar");
             }
 
-            // SESSÃO (funciona apenas se app.UseSession() estiver configurado)
             HttpContext.Session.SetInt32("IdUsuario", user.IdUsuario);
             HttpContext.Session.SetString("NomeUsuario", user.Nome);
+            HttpContext.Session.SetString("EmailUsuario", user.Email);
+            HttpContext.Session.SetInt32("TipoUsuarioId", user.TipoUsuarioId);
 
             return RedirectToAction("PosLogin");
         }
 
-        // ============================================================
-        // GET: Tela pós Login
-        // ============================================================
         [HttpGet]
         public async Task<IActionResult> PosLogin()
         {
             var id = HttpContext.Session.GetInt32("IdUsuario");
+
             if (id == null)
                 return RedirectToAction("Entrar");
 
             var user = await _context.Usuario.FindAsync(id.Value);
+
             if (user == null)
             {
                 HttpContext.Session.Clear();
@@ -72,26 +66,18 @@ namespace ZeGotao.Controllers
             return View("PosLogin", user);
         }
 
-        // ============================================================
-        // GET: Tela de Cadastro
-        // ============================================================
         [HttpGet]
         public IActionResult Create()
         {
-            return View("Create"); // mantém o CSS da sua view original
+            return View("Create");
         }
 
-        // ============================================================
-        // POST: Cadastro
-        // ============================================================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Usuario usuario)
         {
             if (!ModelState.IsValid)
-            {
                 return View("Create", usuario);
-            }
 
             _context.Add(usuario);
             await _context.SaveChangesAsync();
@@ -100,18 +86,51 @@ namespace ZeGotao.Controllers
             return RedirectToAction("Entrar");
         }
 
-
-        // ============================================================
-        // GET: Listar Usuários
-        // ============================================================
         public async Task<IActionResult> Index()
         {
             return View(await _context.Usuario.ToListAsync());
         }
 
         // ============================================================
-        // Logout
+        // GET: Editar Usuário
         // ============================================================
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var user = await _context.Usuario.FindAsync(id);
+
+            if (user == null)
+                return NotFound();
+
+            return View(user);
+        }
+
+        // ============================================================
+        // POST: Editar Usuário
+        // ============================================================
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Usuario usuario)
+        {
+            if (id != usuario.IdUsuario)
+                return NotFound();
+
+            if (!ModelState.IsValid)
+                return View(usuario);
+
+            _context.Update(usuario);
+            await _context.SaveChangesAsync();
+
+            HttpContext.Session.SetString("NomeUsuario", usuario.Nome);
+            HttpContext.Session.SetString("EmailUsuario", usuario.Email);
+
+            TempData["MsgSucesso"] = "Dados atualizados com sucesso!";
+            return RedirectToAction("PosLogin");
+        }
+
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();

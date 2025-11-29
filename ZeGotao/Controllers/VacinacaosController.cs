@@ -41,9 +41,21 @@ namespace ZeGotao.Controllers
 
         //    return View(Details); // <- AQUI ESTÁ A CORREÇÃO
         //}
-        public IActionResult Vacinacao()
+        public async Task<IActionResult> Details(int? id)
         {
-            return View("Details"); // mantém o CSS da sua view original
+            if (id == null)
+                return NotFound();
+
+            var vacinacao = await _context.Vacinacao
+                .Include(v => v.Unidade)
+                .Include(v => v.Usuario)
+                .Include(v => v.Vacina)
+                .FirstOrDefaultAsync(m => m.IdVacinacao == id);
+
+            if (vacinacao == null)
+                return NotFound();
+
+            return View(vacinacao);
         }
 
         // GET: Vacinacaos/Create
