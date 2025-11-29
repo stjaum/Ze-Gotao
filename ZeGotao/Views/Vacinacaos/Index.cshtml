@@ -2,52 +2,52 @@
 
 @{
     ViewData["Title"] = "Index";
+    int tipoUsuario = Context.Session.GetInt32("TipoUsuarioId") ?? 0;
 }
 
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    @if (tipoUsuario == 1)   // supondo Administrador = 1
+    {
+        <a asp-action="Create">Create New</a>
+    }
 </p>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Usuario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Vacina)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Unidade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
+            <th>@Html.DisplayNameFor(model => model.Usuario)</th>
+            <th>@Html.DisplayNameFor(model => model.Vacina)</th>
+            <th>@Html.DisplayNameFor(model => model.Unidade)</th>
+            <th>@Html.DisplayNameFor(model => model.Status)</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Usuario.Cpf)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vacina.DescricaoVacina)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Unidade.Endereco)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdVacinacao">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdVacinacao">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdVacinacao">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Usuario.Cpf)</td>
+                <td>@Html.DisplayFor(modelItem => item.Vacina.DescricaoVacina)</td>
+                <td>@Html.DisplayFor(modelItem => item.Unidade.Endereco)</td>
+                <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                <td>
+                    @if (Context.Session.GetInt32("TipoUsuarioId") == 1) // ADMIN
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.IdVacinacao">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.IdVacinacao">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.IdVacinacao">Delete</a>
+ 
+         
+                    }
+                    else
+                    {
+                        <a asp-action="Details" asp-route-id="@item.IdVacinacao">Details</a>
+                    }
+
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

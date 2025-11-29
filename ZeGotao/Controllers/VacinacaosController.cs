@@ -17,7 +17,6 @@ namespace ZeGotao.Controllers
         {
             _context = context;
         }
-
         // GET: Vacinacaos
         public async Task<IActionResult> Index()
         {
@@ -26,22 +25,35 @@ namespace ZeGotao.Controllers
         }
 
         // GET: Vacinacaos/Details/5
+        //public async Task<IActionResult> Details(int? id)
+        //{
+        //    if (id == null)
+        //        return NotFound();
+
+        //    var vacinacao = await _context.Vacinacao
+        //        .Include(v => v.Unidade)
+        //        .Include(v => v.Usuario)
+        //        .Include(v => v.Vacina)
+        //        .FirstOrDefaultAsync(m => m.IdVacinacao == id);
+
+        //    if (vacinacao == null)
+        //        return NotFound();
+
+        //    return View(Details); // <- AQUI ESTÁ A CORREÇÃO
+        //}
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
             var vacinacao = await _context.Vacinacao
                 .Include(v => v.Unidade)
                 .Include(v => v.Usuario)
                 .Include(v => v.Vacina)
                 .FirstOrDefaultAsync(m => m.IdVacinacao == id);
+
             if (vacinacao == null)
-            {
                 return NotFound();
-            }
 
             return View(vacinacao);
         }

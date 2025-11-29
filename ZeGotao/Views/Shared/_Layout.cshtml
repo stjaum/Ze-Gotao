@@ -575,6 +575,55 @@
             font-size: 0.8rem;
         }
 
+        .drawer {
+            position: fixed;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            background: var(--card-bg, white);
+            overflow-x: hidden;
+            transition: width .35s ease;
+            box-shadow: -6px 0 20px rgba(0,0,0,0.12);
+            z-index: 1050;
+        }
+
+            .drawer.open {
+                width: 320px;
+            }
+
+        .drawer-content {
+            padding: 20px;
+        }
+
+        .drawer-close {
+            background: transparent;
+            border: none;
+            float: right;
+            font-size: 1rem;
+        }
+
+        .drawer-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-editar {
+            background: #4CAF50;
+            color: #fff !important;
+            padding: 10px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            transition: 0.2s;
+        }
+
+            .btn-editar:hover {
+                opacity: 0.85;
+            }
+
     </style>
 </head>
 <body>
@@ -600,23 +649,32 @@
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarContent">
-                        <ul class="navbar-nav ms-auto align-items-lg-center">
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
+                        <ul class="navbar-nav ms-auto">
 
-                            <li class="nav-item ms-3">
-                                <button class="dark-toggle-btn" id="darkModeToggle" aria-pressed="false" title="Alternar tema">
-                                    <span id="themeIcon">🌓</span>
-                                    <span id="themeLabel" class="d-none d-lg-inline">Tema</span>
-                                </button>
-                            </li>
+                            @if (Context.Session.GetInt32("IdUsuario") != null)
+                            {
+                                <!-- Usuário logado -->
+                                <li class="nav-item">
+                                    <button class="nav-link btn btn-link" onclick="toggleDrawer()">
+                                        @Context.Session.GetString("NomeUsuario")
+                                    </button>
+                                </li>
+
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-danger" asp-controller="Usuarios" asp-action="Logout">Sair</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <!-- Visitante -->
+                                <li class="nav-item">
+                                    <a class="btn-entrar" asp-controller="Usuarios" asp-action="Entrar">Entrar</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="btn-cadastrar" asp-controller="Usuarios" asp-action="Create">Cadastrar</a>
+                                </li>
+                            }
                         </ul>
                     </div>
                 </div>
@@ -643,6 +701,44 @@
     <script src="~/js/bootstrap.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+    <!-- Drawer de Perfil -->
+    <div id="drawer" class="drawer" aria-hidden="true">
+        <div class="drawer-content">
+
+            <button class="drawer-close" onclick="toggleDrawer()">Fechar ✖</button>
+
+            <h3>Perfil</h3>
+
+            @if (Context.Session.GetInt32("IdUsuario") != null)
+            {
+                <p><b>Nome:</b> @Context.Session.GetString("NomeUsuario")</p>
+                <p><b>Email:</b> @Context.Session.GetString("EmailUsuario")</p>
+
+                <div class="drawer-actions mt-3">
+                    <a class="btn-editar"
+                       asp-controller="Usuarios"
+                       asp-action="Edit"
+                       asp-route-id="@Context.Session.GetInt32("IdUsuario")">
+                        Editar
+                    </a>
+
+                    <a class="btn-cadastrar"
+                       asp-controller="Usuarios"
+                       asp-action="Logout">
+                        Sair
+                    </a>
+                </div>
+            }
+            else
+            {
+                <p>Você não está logado.</p>
+            }
+
+        </div>
+    </div>
     <script>
         (function () {
             const toggleBtn = document.getElementById('darkModeToggle');
@@ -673,8 +769,11 @@
                 });
             }
         })();
+        function toggleDrawer() {
+            const d = document.getElementById('drawer');
+            d.classList.toggle('open');
+            d.setAttribute('aria-hidden', !d.classList.contains('open'));
+        }
     </script>
-
-    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

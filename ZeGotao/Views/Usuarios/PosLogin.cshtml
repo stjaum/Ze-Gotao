@@ -14,16 +14,24 @@
         <div class="drawer-content">
             <button class="drawer-close" onclick="toggleDrawer()">Fechar ✖</button>
             <h3>Dados do Usuário</h3>
+
             <p><b>Nome:</b> @Model.Nome</p>
             <p><b>Email:</b> @Model.Email</p>
             <p><b>CPF:</b> @Model.Cpf</p>
             <p><b>Telefone:</b> @Model.Telefone</p>
             <p><b>Endereço:</b> @Model.Endereco</p>
             <p><b>Data Nasc.:</b> @Model.DataNascimento.ToString("yyyy-MM-dd")</p>
-            <a class="btn-cadastrar mt-2" asp-controller="Usuarios" asp-action="Logout">Sair</a>
+
+            <p>
+                <b>Tipo de Usuário:</b>
+                @(Model.TipoUsuarioId == 1 ? "Administrador" : "Usuário")
+            </p>
+
+            <a class="btn-cadastrar mt-2 w-100" asp-controller="Usuarios" asp-action="Logout">Sair</a>
         </div>
     </div>
 </div>
+
 <style>
     .drawer {
         position: fixed;
@@ -31,11 +39,12 @@
         top: 0;
         height: 100%;
         width: 0;
-        background: var(--card-bg, white);
+        background: var(--card-bg, #fff);
         overflow-x: hidden;
         transition: width .35s ease;
         box-shadow: -6px 0 20px rgba(0,0,0,0.12);
         z-index: 1050;
+        color: var(--text-color, #000);
     }
 
         .drawer.open {
@@ -43,27 +52,40 @@
         }
 
     .drawer-content {
-        padding: 20px;
+        padding: 22px;
+        height: 100%;
     }
 
     .drawer-btn {
         background: var(--accent, #091C6D);
         color: #fff;
-        padding: 10px 16px;
-        border-radius: 8px;
+        padding: 12px 18px;
+        border-radius: 10px;
         border: none;
+        transition: .2s;
     }
+
+        .drawer-btn:hover {
+            filter: brightness(0.9);
+            transform: scale(1.02);
+        }
 
     .drawer-close {
         background: transparent;
         border: none;
         float: right;
-        font-size: 1rem;
+        font-size: 1.2rem;
+        color: var(--text-color, #000);
+        cursor: pointer;
+    }
+
+    .drawer p, .drawer h3 {
+        color: var(--text-color, #000);
     }
 </style>
 
 <script>
-    function toggleDrawer(){
+    function toggleDrawer() {
         const d = document.getElementById('drawer');
         d.classList.toggle('open');
         d.setAttribute('aria-hidden', !d.classList.contains('open'));
