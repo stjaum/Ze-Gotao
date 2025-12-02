@@ -1,84 +1,123 @@
 ﻿@model ZeGotao.Models.Usuario
 @{
-	ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create";
 }
 
 <div class="container mt-4 cadastrar-wrapper">
 
-	<h2 class="text-center mb-4">Criar Conta</h2>
+    <h2 class="text-center mb-4">Criar Conta</h2>
 
-	@* MENSAGENS *@
-	@if (ViewData["MsgErro"] != null)
-	{
-		<div class="alert alert-danger">@ViewData["MsgErro"]</div>
-	}
-	@if (TempData["MsgSucesso"] != null)
-	{
-		<div class="alert alert-success">@TempData["MsgSucesso"]</div>
-	}
+    @* MENSAGENS *@
+    @if (ViewData["MsgErro"] != null)
+    {
+        <div class="alert alert-danger">@ViewData["MsgErro"]</div>
+    }
+    @if (TempData["MsgSucesso"] != null)
+    {
+        <div class="alert alert-success">@TempData["MsgSucesso"]</div>
+    }
 
-	<form asp-controller="Usuarios" asp-action="Create" method="post" class="cadastrar-form">
-		<!-- Nome -->
-		<div class="input-wrap float-label">
-			<input asp-for="Nome" class="input-field" placeholder=" " />
-			<label for="Nome">Nome completo</label>
-			<span asp-validation-for="Nome" class="text-danger"></span>
-		</div>
+    <form asp-controller="Usuarios" asp-action="Create" method="post" class="cadastrar-form">
+        <!-- Nome -->
+        <div class="input-wrap float-label">
+            <input asp-for="Nome" class="input-field" placeholder=" " />
+            <label for="Nome">Nome completo</label>
+            <span asp-validation-for="Nome" class="text-danger"></span>
+        </div>
 
-		<!-- Email -->
-		<div class="input-wrap float-label">
-			<input asp-for="Email" class="input-field" placeholder=" " />
-			<label for="Email">Email</label>
-			<span asp-validation-for="Email" class="text-danger"></span>
-		</div>
+        <!-- Email -->
+        <div class="input-wrap float-label">
+            <input asp-for="Email" class="input-field" placeholder=" " />
+            <label for="Email">Email</label>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
 
-		<!-- Senha -->
-		<div class="input-wrap float-label">
-			<input asp-for="Senha" type="password" class="input-field" placeholder=" " />
-			<label for="Senha">Senha</label>
-			<span asp-validation-for="Senha" class="text-danger"></span>
-		</div>
+        <!-- Senha -->
+        <div class="input-wrap float-label">
+            <input asp-for="Senha" type="password" class="input-field" placeholder=" " />
+            <label for="Senha">Senha</label>
+            <span asp-validation-for="Senha" class="text-danger"></span>
+        </div>
 
-		<!-- CPF -->
-		<div class="input-wrap float-label">
-			<input asp-for="Cpf" class="input-field" placeholder=" " />
-			<label for="Cpf">CPF</label>
-			<span asp-validation-for="Cpf" class="text-danger"></span>
-		</div>
+        <!-- CPF -->
+        <div class="input-wrap float-label">
+            <input asp-for="Cpf" class="input-field" placeholder=" " />
+            <label for="Cpf">CPF</label>
+            <span asp-validation-for="Cpf" class="text-danger"></span>
+        </div>
 
-		<!-- Telefone -->
-		<div class="input-wrap float-label">
-			<input asp-for="Telefone" class="input-field" placeholder=" " />
-			<label for="Telefone">Telefone</label>
-			<span asp-validation-for="Telefone" class="text-danger"></span>
-		</div>
+        <!-- Telefone -->
+        <div class="input-wrap float-label">
+            <input asp-for="Telefone" class="input-field" placeholder=" " />
+            <label for="Telefone">Telefone</label>
+            <span asp-validation-for="Telefone" class="text-danger"></span>
+        </div>
 
-		<!-- Endereço -->
-		<div class="input-wrap float-label">
-			<input asp-for="Endereco" class="input-field" placeholder=" " />
-			<label for="Endereco">Endereço</label>
-			<span asp-validation-for="Endereco" class="text-danger"></span>
-		</div>
+        <!-- Endereço -->
+        <div class="input-wrap float-label">
+            <input asp-for="Endereco" class="input-field" placeholder=" " />
+            <label for="Endereco">Endereço</label>
+            <span asp-validation-for="Endereco" class="text-danger"></span>
+        </div>
 
-		<!-- Data de Nascimento -->
-		<div class="input-wrap float-label">
-			<input asp-for="DataNascimento" type="date" class="input-field" placeholder=" " />
-			<label for="DataNascimento">Data de Nascimento</label>
-			<span asp-validation-for="DataNascimento" class="text-danger"></span>
-		</div>
-		<!-- TipoUsuarioId (se quiser ocultar, deixe hidden) -->
-		<input type="hidden" asp-for="TipoUsuarioId" value="1" />
+        <!-- Data de Nascimento -->
+        <div class="input-wrap float-label">
+            <input asp-for="DataNascimento" type="date" class="input-field" placeholder=" " />
+            <label for="DataNascimento">Data de Nascimento</label>
+            <span asp-validation-for="DataNascimento" class="text-danger"></span>
+        </div>
 
-		<!-- Ativo -->
-		<input type="hidden" asp-for="Ativo" value="true" />
+        <!-- TipoUsuarioId -->
+        <input type="hidden" asp-for="TipoUsuarioId" value="1" />
 
-		<button class="btn-cadastrar w-100 mt-3">Cadastrar</button>
-	</form>
-	<p class="text-center mt-3">
-		Já tem conta? <a asp-controller="Home" asp-action="Entrar">Entrar</a>
-	</p>
+        <!-- Ativo -->
+        <input type="hidden" asp-for="Ativo" value="true" />
+
+        <button class="btn-cadastrar w-100 mt-3">Cadastrar</button>
+    </form>
+
+    <p class="text-center mt-3">
+        Já tem conta? <a asp-controller="Home" asp-action="Entrar">Entrar</a>
+    </p>
 </div>
 
+<!-- MODAL DE SUCESSO -->
+<div class="modal fade" id="modalCadastroSucesso" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-success shadow-lg">
+
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title">Cadastro concluído!</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body text-center">
+                <p class="lead">Seu usuário foi cadastrado com sucesso.</p>
+                <p>Agora você pode acessar sua conta.</p>
+            </div>
+
+            <div class="modal-footer">
+                <a asp-controller="Usuarios" asp-action="Entrar" class="btn btn-primary w-100">
+                    Ir para Login
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
 @section Scripts {
-	<partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var cadastroOk = '@TempData["CadastroOk"]';
+
+            if (cadastroOk === 'True') {
+                var modal = new bootstrap.Modal(document.getElementById('modalCadastroSucesso'));
+                modal.show();
+            }
+        });
+    </script>
 }

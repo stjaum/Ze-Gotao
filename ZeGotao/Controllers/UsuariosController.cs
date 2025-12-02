@@ -14,6 +14,9 @@ namespace ZeGotao.Controllers
             _context = context;
         }
 
+        // ============================================================
+        // LOGIN
+        // ============================================================
         [HttpGet]
         public IActionResult Entrar()
         {
@@ -47,6 +50,9 @@ namespace ZeGotao.Controllers
             return RedirectToAction("PosLogin");
         }
 
+        // ============================================================
+        // PÓS LOGIN
+        // ============================================================
         [HttpGet]
         public async Task<IActionResult> PosLogin()
         {
@@ -66,6 +72,9 @@ namespace ZeGotao.Controllers
             return View("PosLogin", user);
         }
 
+        // ============================================================
+        // CADASTRAR
+        // ============================================================
         [HttpGet]
         public IActionResult Create()
         {
@@ -82,17 +91,23 @@ namespace ZeGotao.Controllers
             _context.Add(usuario);
             await _context.SaveChangesAsync();
 
-            TempData["MsgSucesso"] = "Cadastro realizado com sucesso!";
-            return RedirectToAction("Entrar");
+            // 🔥 Esta linha ativa o modal
+            TempData["CadastroOk"] = true;
+
+            // 🔥 Mantém o usuário na tela de Create para abrir o modal
+            return RedirectToAction("Create");
         }
 
+        // ============================================================
+        // LISTAR
+        // ============================================================
         public async Task<IActionResult> Index()
         {
             return View(await _context.Usuario.ToListAsync());
         }
 
         // ============================================================
-        // GET: Editar Usuário
+        // EDITAR
         // ============================================================
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
@@ -108,9 +123,6 @@ namespace ZeGotao.Controllers
             return View(user);
         }
 
-        // ============================================================
-        // POST: Editar Usuário
-        // ============================================================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Usuario usuario)
@@ -131,6 +143,9 @@ namespace ZeGotao.Controllers
             return RedirectToAction("PosLogin");
         }
 
+        // ============================================================
+        // LOGOUT
+        // ============================================================
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
