@@ -1,0 +1,240 @@
+﻿.navbar-amd {
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(12px);
+}
+
+    /* NAVBAR SCROLL */
+    .navbar-amd.scrolled {
+        background: rgba(0, 0, 0, 0.85);
+        padding: 0.45rem 1rem;
+        backdrop-filter: blur(18px);
+    }
+
+    /* LINKS E LOGO */
+    .navbar-amd .navbar-brand,
+    .navbar-amd .nav-link {
+        color: var(--nav-text) !important;
+        font-weight: 500;
+        padding: 0.7rem 1rem;
+        transition: color .20s ease, transform .20s ease, opacity .20s ease;
+    }
+
+        /* HOVER LINKS */
+        .navbar-amd .nav-link:hover {
+            color: var(--link) !important;
+            transform: translateY(-2px);
+        }
+
+        .navbar-amd .navbar-brand:hover {
+            opacity: 0.85;
+            transform: translateY(-1px);
+        }
+
+/* ===================================================================
+   BOTÃO DARK MODE
+=================================================================== */
+.dark-toggle-btn {
+    border: none;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--nav-text);
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 6px 14px;
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    transition: background .25s ease, transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+}
+
+    /* HOVER */
+    .dark-toggle-btn:hover {
+        background: rgba(255, 255, 255, 0.18);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    }
+
+    /* CLICK */
+    .dark-toggle-btn:active {
+        transform: scale(0.92);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+    }
+.content-card {
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 22px;
+    padding: 2rem;
+    margin-top: 6rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .25);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -3; /* vídeo no fundo */
+}
+
+#video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.45); /* escurece o vídeo */
+    z-index: -2;
+}
+.btn-entrar,
+.btn-cadastrar {
+    display: inline-block;
+    padding: 10px 26px;
+    border-radius: 18px;
+    font-weight: 600;
+    text-decoration: none !important;
+    cursor: pointer;
+    transition: .28s ease;
+    /* GLASS igual ao card */
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    /* TEXTO depende do modo */
+    color: var(--nav-text) !important;
+}
+
+/* Glow leve com a cor original */
+.btn-entrar {
+    box-shadow: 0 0 10px rgba(10, 132, 255, 0.35);
+}
+
+.btn-cadastrar {
+    margin-left: 12px;
+    box-shadow: 0 0 10px rgba(0, 200, 83, 0.35);
+}
+
+    /* HOVER GLASS */
+    .btn-entrar:hover,
+    .btn-cadastrar:hover {
+        transform: translateY(-3px);
+        background: rgba(255, 255, 255, 0.18);
+        border-color: rgba(255, 255, 255, 0.32);
+        filter: brightness(1.12);
+    }
+.btn-wrapper {
+    text-align: center;
+    margin-top: 1.8rem;
+}
+body.dark-mode {
+    --nav-text: #e8e8e8;
+    --link: #4da3ff;
+    color: #f1f1f1;
+    background: #0b0e12;
+}
+
+    /* NAVBAR no modo escuro */
+    body.dark-mode .navbar-amd {
+        background: rgba(0, 0, 0, 0.60) !important;
+    }
+
+        body.dark-mode .navbar-amd.scrolled {
+            background: rgba(0, 0, 0, 0.90) !important;
+        }
+
+    /* BOTÃO DARK MODE */
+    body.dark-mode .dark-toggle-btn {
+        background: rgba(255,255,255,0.15);
+        color: #fff;
+    }
+
+    /* BOTÕES DE ENTRAR E CADASTRAR MODO DARK */
+    body.dark-mode .btn-entrar {
+        background: #1a6eff;
+    }
+
+    body.dark-mode .btn-cadastrar {
+        background: #00b64a;
+    }
+
+    /* CARD COM TEXTO TRANSPARENTE NO DARK */
+    body.dark-mode .content-card {
+        background: rgba(0, 0, 0, 0.40);
+        color: #f0f0f0;
+        border: 1px solid rgba(255, 255, 255, 0.20);
+    }
+body:not(.dark-mode) #bg-video {
+    filter: invert(1);
+}
+    body:not(.dark-mode) h1,
+    body:not(.dark-mode) h2,
+    body:not(.dark-mode) h3,
+    body:not(.dark-mode) h4,
+    body:not(.dark-mode) h5,
+    body:not(.dark-mode) h6,
+    body:not(.dark-mode) p,
+    body:not(.dark-mode) a,
+    body:not(.dark-mode) span,
+    body:not(.dark-mode) label,
+    body:not(.dark-mode) li {
+        text-shadow: var(--text-glow);
+    }
+body:not(.dark-mode) {
+    --text-glow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+.input-wrap {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1.6rem;
+}
+
+/* INPUT GLASS */
+.input-field {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 16px;
+    font-size: 1rem;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: var(--nav-text);
+    outline: none;
+    transition: .25s ease;
+}
+
+    /* HOVER */
+    .input-field:hover {
+        background: rgba(255, 255, 255, 0.16);
+        border-color: rgba(255, 255, 255, 0.30);
+    }
+
+    /* FOCUS */
+    .input-field:focus {
+        background: rgba(255, 255, 255, 0.22);
+        border-color: rgba(255, 255, 255, 0.45);
+        box-shadow: 0 0 12px rgba(255, 255, 255, 0.22);
+    }
+
+/* LABEL FLOAT */
+.float-label label {
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+    font-size: 0.95rem;
+    color: var(--nav-text);
+    pointer-events: none;
+    opacity: 0.75;
+    transition: .22s ease;
+}
+
+/* LABEL QUANDO DIGITA OU FOCADO */
+.float-label .input-field:focus + label,
+.float-label .input-field:not(:placeholder-shown) + label {
+    top: 6px;
+    font-size: 0.75rem;
+    opacity: 0.95;
+}
