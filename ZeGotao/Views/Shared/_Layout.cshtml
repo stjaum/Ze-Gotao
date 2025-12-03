@@ -1,779 +1,146 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Mais Saude</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - Mais Saúde</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
-    <!-- Custom AMD CSS -->
-    <link rel="stylesheet" href="~/css/bootstrap.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/bootstrap-grid.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/css/Layout.css" />
+
     <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
-    <style>
-        :root {
-            --bg: #ffffff;
-            --text: #1a1a1a;
-            --muted: #6c757d;
-            --nav-bg: #0d0d1d;
-            --nav-text: #e6e6e6;
-            --link: #004B8D;
-            --card-bg: #ffffff;
-            --footer-bg: #0d0d1d;
-            --accent: #091C6D;
-        }
-
-        body.dark-mode {
-            --bg: #0B0B0F;
-            --text: #E6E6E6;
-            --muted: #bdbdbd;
-            --nav-bg: #05051A;
-            --nav-text: #E6E6E6;
-            --link: #7BA7FF;
-            --card-bg: #12121A;
-            --footer-bg: #05051A;
-            --accent: #091C6D;
-        }
-
-        body.light-mode {
-            --bg: #ffffff;
-            --text: #1a1a1a;
-            --muted: #6c757d;
-            --nav-bg: #0d0d1d;
-            --nav-text: #e6e6e6;
-            --link: #004B8D;
-            --card-bg: #ffffff;
-            --footer-bg: #0d0d1d;
-            --accent: #091C6D;
-        }
-
-        html, body {
-            height: 100%;
-        }
-
-        body {
-            margin: 0;
-            padding-top: 76px;
-            background: var(--bg);
-            color: var(--text);
-            transition: background .25s ease, color .25s ease;
-            font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-        }
-
-        .page-wrapper {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        main {
-            flex: 1 0 auto;
-        }
-
-        .navbar-amd {
-            background: var(--nav-bg) !important;
-            color: var(--nav-text) !important;
-        }
-
-            .navbar-amd .navbar-brand,
-            .navbar-amd .nav-link {
-                color: var(--nav-text) !important;
-            }
-
-                .navbar-amd .nav-link:hover {
-                    color: var(--link) !important;
-                }
-
-        .footer-amd {
-            background: var(--footer-bg);
-            color: var(--nav-text);
-            padding: 1rem 0;
-        }
-
-        .section-amd,
-        .card,
-        .container,
-        .content-wrapper,
-        .bg-theme-inherit {
-            background: var(--card-bg) !important;
-            color: var(--text) !important;
-        }
-
-        a {
-            color: var(--link);
-        }
-
-            a:hover {
-                text-decoration: underline;
-            }
-
-        .btn-primary {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: #fff;
-        }
-
-        .muted {
-            color: var(--muted) !important;
-        }
-
-        .dark-toggle-btn {
-            border: none;
-            background: transparent;
-            color: var(--nav-text);
-            font-size: 1.05rem;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: .35rem;
-        }
-
-            .dark-toggle-btn:hover {
-                opacity: .85;
-            }
-
-        .card *, .container *, .section-amd * {
-            color: inherit !important;
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 80vh;
-            gap: 20px;
-        }
-
-        .btn-entrar {
-            background: linear-gradient(135deg, var(--accent), #0a2b8f);
-            color: #fff !important;
-            border: none;
-            padding: .65rem 1.35rem;
-            font-weight: 600;
-            border-radius: 12px;
-            letter-spacing: .4px;
-            transition: all .25s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: .45rem;
-            box-shadow: 0 0 0 rgba(0, 70, 160, 0);
-            text-decoration: none;
-        }
-
-        /* BOTÃO ENTRAR (Primário AMD) */
-        .btn-entrar {
-            background: linear-gradient(135deg, var(--accent), #0a2b8f);
-            color: #fff !important;
-            border: none;
-            padding: .65rem 1.35rem;
-            font-weight: 600;
-            border-radius: 12px;
-            letter-spacing: .4px;
-            transition: all .25s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: .45rem;
-            box-shadow: 0 0 0 rgba(0, 70, 160, 0);
-            position: center;
-            text-decoration: none;
-        }
-
-            .btn-entrar::before {
-                content: "➡️";
-                font-size: 1.05rem;
-                transition: transform .25s ease;
-            }
-
-            .btn-entrar:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 6px 18px rgba(0, 70, 160, 0.45);
-                background: linear-gradient(135deg, #0a2b8f, var(--accent));
-            }
-
-                .btn-entrar:hover::before {
-                    transform: translateX(3px);
-                }
-
-        /* BOTÃO CADASTRAR (Destaque + efeito “pulse”) */
-        .btn-cadastrar {
-            background: transparent;
-            color: gainsboro var(--accent) !important;
-            border: 2px solid var(--accent);
-            padding: .65rem 1.35rem;
-            font-weight: 600;
-            border-radius: 12px;
-            transition: all .25s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: .45rem;
-            position: center;
-            overflow: hidden;
-            text-decoration: none;
-        }
-
-            .btn-cadastrar::before {
-                content: "🩹";
-                font-size: 1.05rem;
-                transition: transform .25s ease;
-                text-decoration: none;
-            }
-
-            /* Efeito de brilho no hover */
-            .btn-cadastrar:hover {
-                background: var(--accent);
-                color: #fff !important;
-                box-shadow: 0 8px 22px rgba(0, 70, 160, 0.45);
-                text-decoration: none;
-            }
-
-                .btn-cadastrar:hover::before {
-                    transform: rotate(-10deg);
-                }
-
-        /* Animação suave de pulse (tema vacinação) */
-        @@keyframes buttonPulse {
-            0%
-
-        {
-            box-shadow: 0 0 0 0 rgba(0, 130, 255, 0.0);
-        }
-
-        50% {
-            box-shadow: 0 0 18px rgba(0, 130, 255, 0.35);
-        }
-
-        100% {
-            box-shadow: 0 0 0 0 rgba(0, 130, 255, 0.0);
-        }
-
-        }
-
-        .btn-cadastrar-pulse {
-            animation: buttonPulse 2.4s infinite ease-in-out;
-        }
-
-        .center-screen {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 80vh;
-            gap: 20px;
-        }
-
-        .input-wrap {
-            display: flex;
-            flex-direction: column;
-            gap: .4rem;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        /* container when input has an icon on left */
-        .input-with-icon {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-            .input-with-icon .icon {
-                position: absolute;
-                left: 12px;
-                pointer-events: none;
-                font-size: 1.05rem;
-                opacity: 0.9;
-            }
-
-        /* Base input style */
-        .input-field,
-        .select-field,
-        .textarea-field {
-            width: 100%;
-            padding: .65rem .9rem;
-            padding-left: calc(.9rem + 28px); /* leave room when icon present; override if no icon */
-            border-radius: 10px;
-            border: 1px solid rgba(26,26,26,0.12);
-            background: var(--card-bg);
-            color: var(--text);
-            font-size: 0.95rem;
-            transition: border-color .18s ease, box-shadow .18s ease, transform .12s ease;
-            outline: none;
-            box-shadow: none;
-            -webkit-appearance: none;
-        }
-
-            /* If no icon, reset left padding */
-            .input-field.no-icon,
-            .select-field.no-icon,
-            .textarea-field.no-icon {
-                padding-left: .9rem;
-            }
-
-            /* Focus state */
-            .input-field:focus,
-            .select-field:focus,
-            .textarea-field:focus {
-                border-color: var(--link);
-                box-shadow: 0 6px 18px rgba(9, 132, 255, 0.12);
-                transform: translateY(-1px);
-            }
-
-            /* Hover mild lift */
-            .input-field:hover,
-            .select-field:hover,
-            .textarea-field:hover {
-                transform: translateY(-0.5px);
-            }
-
-            /* Placeholder styling */
-            .input-field::placeholder,
-            .textarea-field::placeholder {
-                color: rgba(26,26,26,0.45);
-            }
-
-            /* Disabled */
-            .input-field[disabled],
-            .select-field[disabled],
-            .textarea-field[disabled] {
-                opacity: 0.6;
-                cursor: not-allowed;
-            }
-
-            /* Error / Success states */
-            .input-field.is-invalid,
-            .select-field.is-invalid,
-            .textarea-field.is-invalid {
-                border-color: #dc3545;
-                box-shadow: 0 6px 18px rgba(220,53,69,0.08);
-            }
-
-            .input-field.is-valid,
-            .select-field.is-valid,
-            .textarea-field.is-valid {
-                border-color: #198754;
-                box-shadow: 0 6px 18px rgba(25,135,84,0.08);
-            }
-
-        /* Small helper text */
-        .input-help {
-            font-size: .85rem;
-            color: var(--muted);
-        }
-
-        /* Error text style */
-        .input-error {
-            color: #dc3545;
-            font-size: .85rem;
-        }
-
-        /* Success text style */
-        .input-success {
-            color: #198754;
-            font-size: .85rem;
-        }
-
-        /* compact / small variant */
-        .input-sm {
-            padding: .45rem .6rem;
-            font-size: .88rem;
-            border-radius: 8px;
-        }
-
-        /* large variant */
-        .input-lg {
-            padding: .9rem 1rem;
-            font-size: 1.05rem;
-            border-radius: 12px;
-        }
-
-        /* Textarea autosize basic */
-        .textarea-field {
-            min-height: 110px;
-            resize: vertical;
-            padding-left: .9rem; /* typical no icon */
-        }
-
-        /* Clear button inside input (optional) */
-        .input-clear {
-            position: absolute;
-            right: 10px;
-            cursor: pointer;
-            font-size: .95rem;
-            color: rgba(26,26,26,0.5);
-        }
-
-        /* Responsive behavior */
-        @@media (max-width: 576px) {
-            .input-field, .select-field, .textarea-field
-
-        {
-            font-size: .95rem;
-            padding-left: .85rem;
-            padding-right: .85rem;
-        }
-
-        .input-with-icon .icon {
-            left: 10px;
-        }
-
-        .input-clear {
-            right: 8px;
-        }
-
-        }
-
-        /* DARK MODE adjustments (works if you toggle body.dark-mode variables) */
-        body.dark-mode .input-field,
-        body.dark-mode .select-field,
-        body.dark-mode .textarea-field {
-            background: var(--card-bg); /* should be dark */
-            color: var(--text); /* light */
-            border: 1px solid rgba(255,255,255,0.06);
-        }
-
-            body.dark-mode .input-field::placeholder,
-            body.dark-mode .textarea-field::placeholder {
-                color: rgba(230,230,230,0.35);
-            }
-
-        /* Fancy animated label (floating label) */
-        .float-label {
-            position: relative;
-        }
-
-            .float-label input,
-            .float-label textarea {
-                padding-top: 1.25rem;
-                padding-bottom: .45rem;
-            }
-
-            .float-label label {
-                position: absolute;
-                left: 12px;
-                top: 10px;
-                font-size: .9rem;
-                color: rgba(26,26,26,0.6);
-                pointer-events: none;
-                transition: transform .12s ease, font-size .12s ease, top .12s ease, color .12s ease;
-            }
-
-            .float-label input:focus + label,
-            .float-label input:not(:placeholder-shown) + label,
-            .float-label textarea:focus + label,
-            .float-label textarea:not(:placeholder-shown) + label {
-                transform: translateY(-8px);
-                font-size: .78rem;
-                color: var(--link);
-            }
-
-        /* Accessibility: focus-visible */
-        .input-field:focus-visible,
-        .select-field:focus-visible,
-        .textarea-field:focus-visible {
-            outline: 2px solid transparent;
-            box-shadow: 0 0 0 3px rgba(9,132,255,0.12);
-        }
-
-        /* Quick utility if you want "ghost" style for search */
-        .input-ghost {
-            background: transparent;
-            border: 1px dashed rgba(26,26,26,0.08);
-        }
-
-        .login-container {
-            width: 100%;
-            max-width: 380px;
-            margin: 50px auto;
-            padding: 25px;
-            text-align: center;
-        }
-
-        .title {
-            font-size: 2rem;
-            margin-bottom: 25px;
-            font-weight: bold;
-        }
-
-        /* --- Floating Label Inputs --- */
-        .input-wrap {
-            width: 100%;
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .input-field {
-            width: 100%;
-            padding: 12px 10px;
-            font-size: 1rem;
-            border: 2px solid #ccc;
-            border-radius: 8px;
-            transition: 0.2s;
-            background: transparent;
-        }
-
-            .input-field:focus {
-                border-color: #1a73e8;
-                outline: none;
-            }
-
-        .float-label label {
-            position: absolute;
-            left: 12px;
-            top: 12px;
-            color: #666;
-            transition: 0.2s;
-            pointer-events: none;
-        }
-
-        .float-label input:focus + label,
-        .float-label input:not(:placeholder-shown) + label {
-            top: -10px;
-            font-size: 0.8rem;
-            background: transparent;
-            ;
-            padding: 0 4px;
-            color: #1a73e8;
-        }
-
-        /* --- Botão --- */
-        .btn-login {
-            width: 25%;
-            padding: 12px;
-            background: #1a73e8;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-            .btn-login:hover {
-                background: #1259b1;
-            }
-
-        /* --- Link auxiliar --- */
-        .helper-text {
-            margin-top: 20px;
-        }
-
-        .link {
-            color: #1a73e8;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-            .link:hover {
-                text-decoration: underline;
-            }
-
-        /* --- Mensagens de Erro --- */
-        .input-error {
-            color: red;
-            font-size: 0.8rem;
-        }
-
-        .drawer {
-            position: fixed;
-            right: 0;
-            top: 0;
-            height: 100%;
-            width: 0;
-            background: var(--card-bg, white);
-            overflow-x: hidden;
-            transition: width .35s ease;
-            box-shadow: -6px 0 20px rgba(0,0,0,0.12);
-            z-index: 1050;
-        }
-
-            .drawer.open {
-                width: 320px;
-            }
-
-        .drawer-content {
-            padding: 20px;
-        }
-
-        .drawer-close {
-            background: transparent;
-            border: none;
-            float: right;
-            font-size: 1rem;
-        }
-
-        .drawer-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .btn-editar {
-            background: #4CAF50;
-            color: #fff !important;
-            padding: 10px 14px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            transition: 0.2s;
-        }
-
-            .btn-editar:hover {
-                opacity: 0.85;
-            }
-
-    </style>
 </head>
 <body>
+
+    <!-- 🌌 VÍDEO DE FUNDO -->
+    <video autoplay muted loop id="bg-video">
+        <source src="~/videos/Back.mp4" type="video/mp4" />
+    </video>
+
+    <!-- Overlay escuro -->
+    <div id="video-overlay"></div>
+
+    <!-- WRAPPER GERAL -->
     <div class="page-wrapper">
 
-        <!-- NAVBAR AMD -->
+        <!-- ======================== NAVBAR ======================== -->
         <header>
-            <nav class="navbar navbar-expand-lg navbar-amd navbar-dark fixed-top">
+            <nav class="navbar navbar-expand-lg navbar-amd fixed-top">
                 <div class="container-fluid">
-                    <a class="navbar-brand fw-bold d-flex align-items-center gap-2"
-                       asp-area="" asp-controller="Home" asp-action="Index">
 
+                    <a class="navbar-brand" asp-controller="Home" asp-action="Index">
                         <img src="~/images/mascote.png"
                              alt="Logo"
-                             style="height:38px; width:auto; object-fit:contain;" />
-
-                        Mais Saude
+                             style="height:50px; width:auto; object-fit:contain;" /> Mais Saúde
                     </a>
 
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-                            aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarNav">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <div class="collapse navbar-collapse" id="navbarContent">
+                    <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-auto">
 
-                            @if (Context.Session.GetInt32("IdUsuario") != null)
-                            {
-                                <!-- Usuário logado -->
-                                <li class="nav-item">
-                                    <button class="nav-link btn btn-link" onclick="toggleDrawer()">
-                                        @Context.Session.GetString("NomeUsuario")
-                                    </button>
-                                </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Home" asp-action="Index">Início</a>
+                            </li>
 
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Consulta" asp-action="Index">Consultas</a>
+                            </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link text-danger" asp-controller="Usuarios" asp-action="Logout">Sair</a>
-                                </li>
-                            }
-                            else
-                            {
-                                <!-- Visitante -->
-                                <li class="nav-item">
-                                    <a class="btn-entrar" asp-controller="Usuarios" asp-action="Entrar">Entrar</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="btn-cadastrar" asp-controller="Usuarios" asp-action="Create">Cadastrar</a>
-                                </li>
-                            }
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Usuario" asp-action="Index">Usuários</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <button id="darkModeToggle" class="dark-toggle-btn">
+                                    <i class="fa-solid fa-moon"></i>
+                                </button>
+                            </li>
+
                         </ul>
                     </div>
                 </div>
             </nav>
         </header>
 
-        <!-- MAIN -->
-        <main role="main" class="container mt-3 fade-in bg-theme-inherit" id="main-content">
-            @RenderBody()
+        <!-- ======================== CONTEÚDO ======================== -->
+        <main role="main" class="container mt-5 fade-in" id="main-content">
+            <div class="content-card">
+                @RenderBody()
+            </div>
         </main>
 
-        <!-- FOOTER -->
-        <footer class="footer-amd mt-auto">
-            <div class="container text-center">
-                &copy; @DateTime.Now.Year - Mais Saude -
-                <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </div>
+        <!-- ======================== FOOTER ======================== -->
+        <footer class="footer-amd text-center py-3">
+            <p class="mb-0">© @DateTime.Now.Year - Mais Saúde | Todos os direitos reservados</p>
         </footer>
-    </div>
 
-    <!-- Scripts -->
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    </div> <!-- /page-wrapper -->
+    <!-- Bootstrap JS -->
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/bootstrap.js" asp-append-version="true"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
 
-
-
-    @await RenderSectionAsync("Scripts", required: false)
-    <!-- Drawer de Perfil -->
-    <div id="drawer" class="drawer" aria-hidden="true">
-        <div class="drawer-content">
-
-            <button class="drawer-close" onclick="toggleDrawer()">Fechar ✖</button>
-
-            <h3>Perfil</h3>
-
-            @if (Context.Session.GetInt32("IdUsuario") != null)
-            {
-                <p><b>Nome:</b> @Context.Session.GetString("NomeUsuario")</p>
-                <p><b>Email:</b> @Context.Session.GetString("EmailUsuario")</p>
-
-                <div class="drawer-actions mt-3">
-                    <a class="btn-editar"
-                       asp-controller="Usuarios"
-                       asp-action="Edit"
-                       asp-route-id="@Context.Session.GetInt32("IdUsuario")">
-                        Editar
-                    </a>
-
-                    <a class="btn-cadastrar"
-                       asp-controller="Usuarios"
-                       asp-action="Logout">
-                        Sair
-                    </a>
-                </div>
-            }
-            else
-            {
-                <p>Você não está logado.</p>
-            }
-
-        </div>
-    </div>
+    <!-- Script do Dark Mode -->
     <script>
-        (function () {
-            const toggleBtn = document.getElementById('darkModeToggle');
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggle = document.getElementById('darkModeToggle');
             const themeIcon = document.getElementById('themeIcon');
+            const root = document.documentElement; // <html>
+            const body = document.body;
 
-            function applyTheme(mode) {
-                document.body.classList.remove('dark-mode', 'light-mode');
-                if (mode === 'dark') {
-                    document.body.classList.add('dark-mode');
-                    themeIcon.textContent = '🌙';
-                    toggleBtn.setAttribute('aria-pressed','true');
+            // Leitura da preferência salva ou do sistema
+            const saved = localStorage.getItem('theme'); // 'dark' | 'light' | null
+            const systemPref = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            const initial = saved || systemPref || 'light';
+
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    body.classList.add('dark-mode');
+                    root.setAttribute('data-theme', 'dark');
+                    if (themeIcon) themeIcon.textContent = '🌙';
+                    if (toggle) toggle.setAttribute('aria-pressed', 'true');
+                    localStorage.setItem('theme', 'dark');
                 } else {
-                    document.body.classList.add('light-mode');
-                    themeIcon.textContent = '☀️';
-                    toggleBtn.setAttribute('aria-pressed','false');
+                    body.classList.remove('dark-mode');
+                    root.removeAttribute('data-theme');
+                    if (themeIcon) themeIcon.textContent = '☀️';
+                    if (toggle) toggle.setAttribute('aria-pressed', 'false');
+                    localStorage.setItem('theme', 'light');
                 }
             }
 
-            const saved = (localStorage.getItem('theme') || 'light').toLowerCase();
-            applyTheme(saved);
+            // Aplica o inicial
+            applyTheme(initial);
 
-            if (toggleBtn) {
-                toggleBtn.addEventListener('click', function () {
-                    const isDark = document.body.classList.contains('dark-mode');
-                    const next = isDark ? 'light' : 'dark';
-                    applyTheme(next);
-                    localStorage.setItem('theme', next);
+            // Evento do botão (se existir)
+            if (toggle) {
+                toggle.addEventListener('click', function (e) {
+                    const isDark = body.classList.contains('dark-mode');
+                    applyTheme(isDark ? 'light' : 'dark');
                 });
             }
-        })();
-        function toggleDrawer() {
-            const d = document.getElementById('drawer');
-            d.classList.toggle('open');
-            d.setAttribute('aria-hidden', !d.classList.contains('open'));
-        }
+
+            // Navbar - mudar ao scroll (mantido)
+            window.addEventListener('scroll', function () {
+                const nav = document.querySelector('.navbar-amd');
+                if (!nav) return;
+                if (window.scrollY > 80) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+        });
     </script>
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
