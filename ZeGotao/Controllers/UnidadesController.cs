@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ZeGotao.Core.Data;
+using ZeGotao.Models;
 
 namespace ZeGotao.Controllers
 {

@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+namespace ZeGotao.Models;
+
 [Table("Vacinas")]
 
 public class Vacinas

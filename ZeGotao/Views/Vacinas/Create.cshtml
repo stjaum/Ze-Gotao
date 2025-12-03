@@ -1,43 +1,54 @@
-﻿@model Vacinas
-
+﻿@model ZeGotao.Models.Vacinas
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Cadastrar Vacina";
 }
 
-<h1>Create</h1>
+<div class="container mt-4 cadastrar-wrapper">
 
-<h4>Vacinas</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="NomeVacina" class="control-label"></label>
-                <input asp-for="NomeVacina" class="form-control" />
-                <span asp-validation-for="NomeVacina" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DescricaoVacina" class="control-label"></label>
-                <input asp-for="DescricaoVacina" class="form-control" />
-                <span asp-validation-for="DescricaoVacina" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FaixaEtaria" class="control-label"></label>
-                <input asp-for="FaixaEtaria" class="form-control" />
-                <span asp-validation-for="FaixaEtaria" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+    <h2 class="text-center mb-4">Cadastrar Vacina</h2>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+    @* MENSAGENS *@
+    @if (ViewData["MsgErro"] != null)
+    {
+        <div class="alert alert-danger">@ViewData["MsgErro"]</div>
+    }
+    @if (TempData["MsgSucesso"] != null)
+    {
+        <div class="alert alert-success">@TempData["MsgSucesso"]</div>
+    }
+
+    <form asp-controller="Vacinas" asp-action="Create" method="post" class="cadastrar-form">
+
+        <!-- Nome da Vacina -->
+        <div class="input-wrap float-label">
+            <input asp-for="NomeVacina" class="input-field" placeholder=" " />
+            <label for="NomeVacina">Nome da vacina</label>
+            <span asp-validation-for="NomeVacina" class="text-danger"></span>
+        </div>
+
+        <!-- Descrição da Vacina -->
+        <div class="input-wrap float-label">
+            <textarea asp-for="DescricaoVacina" class="input-field" placeholder=" " style="height: 120px;"></textarea>
+            <label for="DescricaoVacina">Descrição da vacina</label>
+            <span asp-validation-for="DescricaoVacina" class="text-danger"></span>
+        </div>
+
+        <!-- Faixa Etária -->
+        <div class="input-wrap float-label">
+            <input asp-for="FaixaEtaria" class="input-field" placeholder=" " />
+            <label for="FaixaEtaria">Faixa etária</label>
+            <span asp-validation-for="FaixaEtaria" class="text-danger"></span>
+        </div>
+
+        <button class="btn-cadastrar w-100 mt-3">Cadastrar</button>
+
+    </form>
+
+    <p class="text-center mt-3">
+        <a asp-controller="Vacinas" asp-action="Index">Voltar</a>
+    </p>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <partial name="_ValidationScriptsPartial" />
 }

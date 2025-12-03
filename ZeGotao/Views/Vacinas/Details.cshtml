@@ -1,36 +1,22 @@
-﻿@model Vacinas
-
+﻿@model ZeGotao.Models.Vacinas
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes da Vacina";
 }
 
-<h1>Details</h1>
+<div class="container mt-4 cadastrar-wrapper">
 
-<div>
-    <h4>Vacinas</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NomeVacina)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NomeVacina)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DescricaoVacina)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DescricaoVacina)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FaixaEtaria)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FaixaEtaria)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdVacina">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <h2 class="text-center mb-4">Detalhes da Vacina</h2>
+
+    <div class="card p-4">
+
+        <p><strong>Nome:</strong> @Model.NomeVacina</p>
+        <p><strong>Descrição:</strong> @Model.DescricaoVacina</p>
+        <p><strong>Faixa Etária:</strong> @Model.FaixaEtaria</p>
+
+        <div class="mt-3">
+            <a class="btn-cadastrar" asp-action="Edit" asp-route-id="@Model.IdVacina">Editar</a>
+            <a class="btn btn-secondary ms-2" asp-action="Index">Voltar</a>
+        </div>
+    </div>
+
 </div>
