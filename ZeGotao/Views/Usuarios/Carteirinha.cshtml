@@ -1,0 +1,40 @@
+﻿@model ZeGotao.ViewModels.CarteirinhaViewModel
+
+<div class="container mt-4">
+    <h2 class="mb-4">Carteirinha de Vacinação</h2>
+
+    <div class="card p-3 mb-4">
+        <h4>@Model.NomeUsuario</h4>
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Vacina</th>
+                <th>Status</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Itens)
+            {
+                <tr>
+                    <td>@item.NomeVacina</td>
+                    <td>
+                        @if (item.Tomou)
+                        {
+                            <span class="text-success fw-bold">✔ Tomada</span>
+                        }
+                        else
+                        {
+                            <span class="text-danger fw-bold">✘ Pendente</span>
+                        }
+                    </td>
+                    <td>
+                        @item.Tomou ? "✔" : "-"
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

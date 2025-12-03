@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ZeGotao.Core.Data;
 using ZeGotao.Models;
+using ZeGotao.ViewModels;
 
 namespace ZeGotao.Controllers
 {
@@ -91,10 +92,8 @@ namespace ZeGotao.Controllers
             _context.Add(usuario);
             await _context.SaveChangesAsync();
 
-            // 🔥 Esta linha ativa o modal
             TempData["CadastroOk"] = true;
 
-            // 🔥 Mantém o usuário na tela de Create para abrir o modal
             return RedirectToAction("Create");
         }
 
@@ -142,6 +141,51 @@ namespace ZeGotao.Controllers
             TempData["MsgSucesso"] = "Dados atualizados com sucesso!";
             return RedirectToAction("PosLogin");
         }
+
+        // ============================================================
+        // CARTEIRINHA DE VACINAÇÃO (VERSÃO SIMPLES)
+        // ============================================================
+        // ============================================================
+        // CARTEIRINHA DE VACINAÇÃO (CORRIGIDA E FUNCIONAL)
+        // ============================================================
+        [HttpGet]
+        public async Task<IActionResult> Carteirinha()
+        {
+            var id = HttpContext.Session.GetInt32("IdUsuario");
+
+            if (id == null)
+                return RedirectToAction("Entrar");
+
+            // Carrega o usuário
+            var usuario = await _context.Usuario
+                .FirstOrDefaultAsync(u => u.IdUsuario == id.Value);
+
+            if (usuario == null)
+                return RedirectToAction("Entrar");
+
+            // Carrega as vacinações do usuário
+            var vacinacoes = await _context.Vacinacao
+                .Include(v => v.Vacina)
+                .Where(v => v.IdUsuario == id.Value)
+                .ToListAsync();
+
+            // Mapeia para o ViewModel
+            var vm = new CarteirinhaViewModel
+            {
+                NomeUsuario = usuario.Nome,
+                Itens = vacinacoes
+                    .Select(v => new CarteirinhaItemViewModel
+                    {
+                        NomeVacina = v.Vacina.NomeVacina,
+                        Tomou = true,
+                        DataTomou = DateTime.MinValue
+                    })
+                    .ToList()
+            };
+
+            return View("Carteirinha", vm);
+        }
+
 
         // ============================================================
         // LOGOUT
