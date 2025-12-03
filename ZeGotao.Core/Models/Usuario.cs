@@ -55,8 +55,5 @@ namespace ZeGotao.Models
 
         [Display(Name = "Ativo")]
         public bool Ativo { get; set; }
-
-        [Required]
-        public int IdVacina { get; set; }
     }
 }
