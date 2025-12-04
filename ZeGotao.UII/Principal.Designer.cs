@@ -1,5 +1,6 @@
 ﻿namespace ZeGotao.UII
 {
+
     partial class Principal
     {
         /// <summary>
@@ -60,9 +61,9 @@
             webView2.BackColor = SystemColors.Desktop;
             webView2.CreationProperties = null;
             webView2.DefaultBackgroundColor = Color.White;
-            webView2.Location = new Point(2, -1);
+            webView2.Location = new Point(12, 12);
             webView2.Name = "webView2";
-            webView2.Size = new Size(661, 453);
+            webView2.Size = new Size(1176, 553);
             webView2.TabIndex = 13;
             webView2.ZoomFactor = 1D;
             webView2.Click += webView2_Click;
@@ -78,7 +79,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Desktop;
-            ClientSize = new Size(664, 454);
+            ClientSize = new Size(1200, 577);
             Controls.Add(webView2);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.None;
@@ -96,5 +97,38 @@
         private Label label1;
         private Microsoft.Web.WebView2.WinForms.WebView2 webView2;
         private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm2;
+
+        private Panel loadingOverlay;
+
+        private void CriarLoadingOverlay()
+        {
+            loadingOverlay = new Panel
+            {
+                Dock = DockStyle.Fill,
+                BackColor = Color.FromArgb(120, 0, 0, 0), // fundo translúcido escuro
+                Visible = true
+            };
+
+            var label = new Label
+            {
+                Text = "Carregando...",
+                AutoSize = true,
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI", 14, FontStyle.Bold),
+                BackColor = Color.Transparent
+            };
+
+            loadingOverlay.Controls.Add(label);
+
+            // centraliza
+            loadingOverlay.Resize += (s, e) =>
+            {
+                label.Left = (loadingOverlay.Width - label.Width) / 2;
+                label.Top = (loadingOverlay.Height - label.Height) / 2;
+            };
+
+            this.Controls.Add(loadingOverlay);
+            loadingOverlay.BringToFront();
+        }
     }
 }

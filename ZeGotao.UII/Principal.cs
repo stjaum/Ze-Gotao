@@ -14,6 +14,23 @@ namespace ZeGotao.UII
 {
     public partial class Principal : Form
     {
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            try
+            {
+                if (server != null && !server.HasExited)
+                {
+                    server.Kill(true);   // Encerra o processo e subprocessos
+                    server.Dispose();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Erro ao matar servidor: " + ex.Message);
+            }
+        }
         private Process? server;
 
         public Principal()
@@ -25,27 +42,57 @@ namespace ZeGotao.UII
         {
 
         }
+        private async Task<bool> EsperarBackendAsync()
+        {
+            using (var client = new HttpClient())
+            {
+                for (int i = 0; i < 30; i++) // tenta por até 30x (30s)
+                {
+                    try
+                    {
+                        var resp = await client.GetAsync("http://localhost:5029");
+                        if (resp.IsSuccessStatusCode)
+                            return true; // servidor está online
+                    }
+                    catch { }
+
+                    await Task.Delay(1000); // espera 1s e tenta de novo
+                }
+            }
+
+            return false; // se passou dos 30s, falhou
+        }
+
         private async void Principal_Load(object sender, EventArgs e)
         {
-            // Inicia o backend ASP.NET automaticamente
+            CriarLoadingOverlay(); // ← mostra o loading em cima do WebView2
+
+            // iniciar projeto dotnet (mantém seu código)
             server = Process.Start(new ProcessStartInfo
             {
                 FileName = "dotnet",
                 Arguments = "run --project \"C:\\Users\\joao.vvsilva21\\source\\repos\\Ze-Gotao\\ZeGotao\\ZeGotao.csproj\"",
                 UseShellExecute = false,
-                CreateNoWindow = true,         // Não cria janela
-                WindowStyle = ProcessWindowStyle.Hidden, // Garante que fique invisível
-                RedirectStandardOutput = true, // (opcional) permite ler logs se quiser
-                RedirectStandardError = true
+                CreateNoWindow = true,
+                WindowStyle = ProcessWindowStyle.Hidden
             });
 
             await webView2.EnsureCoreWebView2Async(null);
 
-            // Tempo para o servidor ASP.NET iniciar
-            await Task.Delay(8000);
+            // espera o backend realmente ficar pronto
+            bool ok = await EsperarBackendAsync();
 
-            // Certifique-se que essa URL é a mesma do launchSettings.json
-            webView2.Source = new Uri("http://localhost:5029");
+            if (ok)
+            {
+                webView2.Source = new Uri("http://localhost:5029");
+            }
+            else
+            {
+                MessageBox.Show("Falha ao iniciar o servidor.");
+            }
+
+            // esconde o overlay
+            loadingOverlay.Visible = false;
         }
 
 

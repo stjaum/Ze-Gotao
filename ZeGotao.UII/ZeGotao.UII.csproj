@@ -9,6 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="loading.cs" />
+    <Compile Remove="loading.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="loading.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Guna.UI2.WinForms" Version="2.0.4.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.11" />
