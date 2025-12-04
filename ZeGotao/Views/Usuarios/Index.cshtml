@@ -1,83 +1,94 @@
 ﻿@model IEnumerable<ZeGotao.Models.Usuario>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Usuários";
 }
+<link rel="stylesheet" href="~/css/UsuariosIndex.css" />
 
-<h1>Index</h1>
+<h1>Usuários</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Cadastrar Novo</a>
 </p>
-<table class="table">
+
+<table class="table table-dark table-hover rounded-3 overflow-hidden">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Senha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cpf)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telefone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Endereco)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataNascimento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TipoUsuario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ativo)
-            </th>
-            <th></th>
+            <th>@Html.DisplayNameFor(m => m.Nome)</th>
+            <th>@Html.DisplayNameFor(m => m.Email)</th>
+            <th>@Html.DisplayNameFor(m => m.Senha)</th>
+            <th>@Html.DisplayNameFor(m => m.Cpf)</th>
+            <th>@Html.DisplayNameFor(m => m.Telefone)</th>
+            <th>@Html.DisplayNameFor(m => m.Endereco)</th>
+            <th>@Html.DisplayNameFor(m => m.DataNascimento)</th>
+            <th>@Html.DisplayNameFor(m => m.TipoUsuario.DescricaoTipoUsuario)</th>
+            <th>@Html.DisplayNameFor(m => m.Ativo)</th>
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Senha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cpf)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Endereco)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataNascimento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoUsuario.DescricaoTipoUsuario)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ativo)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdUsuario">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdUsuario">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdUsuario">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Nome</td>
+                <td>@item.Email</td>
+                <td>@item.Senha</td>
+                <td>@item.Cpf</td>
+                <td>@item.Telefone</td>
+                <td>@item.Endereco</td>
+                <td>@item.DataNascimento.ToShortDateString()</td>
+                <td>@item.TipoUsuario?.DescricaoTipoUsuario</td>
+                <td>@item.Ativo</td>
+                <td>
+                    <a asp-action="Edit"
+                       asp-route-id="@item.IdUsuario"
+                       class="btn-glass btn-edit">Editar</a>
+
+                    <a asp-action="Details"
+                       asp-route-id="@item.IdUsuario"
+                       class="btn-glass btn-infox">Detalhes</a>
+
+                    <a asp-action="Delete"
+                       asp-route-id="@item.IdUsuario"
+                       class="btn-glass btn-del">Excluir</a>
+
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<!-- ===========================
+        MODAL DE SUCESSO
+=========================== -->
+<div class="modal fade" id="successModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title">Sucesso</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                O usuário foi atualizado com sucesso!
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-success" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const showSuccess = "@TempData["UsuarioEditado"]";
+
+            if (showSuccess === "true") {
+                var modal = new bootstrap.Modal(document.getElementById("successModal"));
+                modal.show();
+            }
+        });
+    </script>
+}

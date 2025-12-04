@@ -1,0 +1,281 @@
+﻿/* ============================================
+   ESTILO PARA A PÁGINA DE LISTAGEM DE USUÁRIOS
+   Combina com o tema glass/dark/dark-mode global
+   Sem interferir no modal
+   ============================================ */
+
+/* Container geral */
+h1 {
+    color: var(--nav-text);
+    text-shadow: 0 0 6px rgba(255,255,255,0.4);
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Botão "Cadastrar Novo" */
+.btn-primary {
+    background: rgba(0, 123, 255, 0.25);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 8px 18px;
+    font-weight: 600;
+    border-radius: 14px;
+    transition: .25s ease;
+}
+
+    .btn-primary:hover {
+        background: rgba(0, 123, 255, 0.45);
+        border-color: rgba(255,255,255,0.45);
+        transform: translateY(-2px);
+    }
+
+/* ============================================
+   TABELA GLASS
+   ============================================ */
+
+table.table {
+    background: rgba(255,255,255,0.08) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.18);
+}
+
+    table.table thead th {
+        background: rgba(0,0,0,0.45) !important;
+        color: var(--nav-text);
+        font-weight: 600;
+        padding: 14px 10px;
+        text-shadow: 0 0 6px rgba(0,0,0,0.6);
+    }
+
+    table.table tbody tr:hover {
+        background: rgba(255,255,255,0.12) !important;
+        transition: 0.25s;
+    }
+
+    /* Texto da tabela */
+    table.table td {
+        color: var(--nav-text);
+        padding: 12px 10px;
+    }
+
+/* ============================================
+   BOTÕES (Editar / Detalhes / Excluir)
+   ============================================ */
+
+.btn-warning,
+.btn-info,
+.btn-danger {
+    border-radius: 12px;
+    padding: 6px 12px;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.18);
+    transition: .25s ease;
+}
+
+    .btn-warning:hover,
+    .btn-info:hover,
+    .btn-danger:hover {
+        transform: translateY(-2px);
+        filter: brightness(1.15);
+    }
+
+/* ============================================
+   MODAL (estilo glass + compatível com dark-mode)
+   ============================================ */
+
+.modal-content {
+    background: rgba(255,255,255,0.12) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    border-radius: 18px !important;
+    color: var(--nav-text);
+    border: 1px solid rgba(255,255,255,0.25) !important;
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(255,255,255,0.22) !important;
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(255,255,255,0.22) !important;
+}
+
+/* Fundo do modal */
+.modal-backdrop {
+    background-color: rgba(0,0,0,0.72) !important;
+    backdrop-filter: blur(4px) !important;
+}
+
+/* Títulos e textos */
+.modal-title {
+    color: #fff !important;
+    text-shadow: 0 0 8px rgba(0,0,0,0.5);
+}
+
+/* Botão do modal */
+.modal .btn-success {
+    background: rgba(0, 180, 70, 0.65) !important;
+    border: 1px solid rgba(255,255,255,0.25) !important;
+    color: white !important;
+    font-weight: 600;
+}
+
+    .modal .btn-success:hover {
+        background: rgba(0, 200, 80, 0.85) !important;
+        transform: translateY(-2px);
+    }
+
+/* ============================================
+   DARK MODE (seu sistema usa variáveis — manter assim)
+   ============================================ */
+
+body.dark-mode table.table {
+    background: rgba(0,0,0,0.35) !important;
+    border-color: rgba(255,255,255,0.18);
+}
+
+    body.dark-mode table.table thead th {
+        background: rgba(255,255,255,0.06) !important;
+    }
+
+body.dark-mode .modal-content {
+    background: rgba(0,0,0,0.60) !important;
+    border-color: rgba(255,255,255,0.25);
+}
+/* ============================================
+   BOTÕES GLASS PARA A LISTAGEM
+   ============================================ */
+
+.btn-glass {
+    padding: 6px 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--nav-text) !important;
+    transition: .25s ease;
+}
+
+    /* Hover geral */
+    .btn-glass:hover {
+        background: rgba(255,255,255,0.18);
+        transform: translateY(-2px);
+        border-color: rgba(255,255,255,0.38);
+        filter: brightness(1.15);
+    }
+
+/* Editar */
+.btn-edit {
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.30);
+    text-decoration: none;
+}
+
+/* Detalhes */
+.btn-infox {
+    box-shadow: 0 0 10px rgba(13, 202, 240, 0.30);
+    text-decoration: none;
+}
+
+/* Excluir */
+.btn-del {
+    box-shadow: 0 0 10px rgba(220, 53, 69, 0.35);
+    text-decoration: none;
+}
+
+/* Modo escuro */
+body.dark-mode .btn-glass {
+    background: rgba(0,0,0,0.25);
+    color: #fff !important;
+    border-color: rgba(255,255,255,0.25);
+}
+/* Espaçamento entre botões da tabela */
+.table .btn-glass {
+    margin-right: 6px;
+}
+
+/* Remove o último espaço para a última coluna */
+.table td:last-child .btn-glass:last-child {
+    margin-right: 0;
+}
+
+/* (Opcional) Deixa os botões mais equilibrados */
+.btn-glass {
+    padding: 8px 16px;
+    min-width: 85px;
+    text-align: center;
+}
+/* Container das ações da tabela */
+.table td:last-child {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; /* Espaço ENTRE botões (horizontal e vertical) */
+}
+
+/* Botões glass */
+.btn-glass {
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: var(--nav-text) !important;
+    transition: .25s ease;
+}
+
+    /* Hover */
+    .btn-glass:hover {
+        background: rgba(255, 255, 255, 0.18);
+        transform: translateY(-2px);
+    }
+
+/* Cores individuais */
+.btn-edit {
+    box-shadow: 0 0 8px rgba(255, 196, 0, 0.35);
+}
+
+.table tbody tr {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    transition: .25s ease;
+}
+
+    /* Texto de todas as colunas */
+    .table tbody tr td {
+        color: var(--nav-text) !important;
+        padding: 14px 12px;
+        font-size: 0.95rem;
+        vertical-align: middle;
+        text-shadow: 0 0 6px rgba(255, 255, 255, 0.18);
+    }
+
+    /* Efeito ao passar o mouse */
+    .table tbody tr:hover {
+        background: rgba(255, 255, 255, 0.14);
+        border-color: rgba(255, 255, 255, 0.25);
+        transform: scale(1.01);
+    }
+
+    /* Para destacar o TipoUsuario */
+    .table tbody tr td:nth-child(8) {
+        font-weight: 600;
+        color: #4da3ff !important; /* leve destaque */
+    }
+
+    /* Campo Ativo (booleano) mais destacado */
+    .table tbody tr td:nth-child(9) {
+        font-weight: 600;
+    }
+
+    /* RESPONDER SEM AFETAR OS BOTÕES */
+    .table tbody tr td a {
+        text-shadow: none !important;
+    }

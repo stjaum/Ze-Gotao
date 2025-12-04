@@ -238,3 +238,52 @@ body:not(.dark-mode) {
     font-size: 0.75rem;
     opacity: 0.95;
 }
+/* ============================================================
+   FIX PARA MODAL - GARANTE QUE ELE FICA ACIMA DO VÍDEO E OVERLAY
+   ============================================================ */
+
+/* Layering correto */
+#bg-video {
+    z-index: -3 !important;
+}
+
+#video-overlay {
+    z-index: -2 !important;
+}
+
+/* Garante que o conteúdo normal fique acima */
+.page-wrapper {
+    position: relative;
+    z-index: 1 !important;
+}
+
+/* Força o modal e seu fundo a ficarem no topo máximo */
+.modal-backdrop {
+    z-index: 1050 !important;
+    background-color: rgba(0,0,0,0.65) !important; /* fundo escuro correto */
+}
+
+.modal {
+    z-index: 1060 !important;
+}
+
+/* Caso Glass/Blur esteja interferindo em TODOS os elementos */
+.modal-backdrop,
+.modal-content {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+/* Força o modal a ficar acima de QUALQUER elemento que use vídeo, blur ou overlay */
+.modal-backdrop {
+    z-index: 10000 !important;
+}
+
+.modal {
+    z-index: 11000 !important;
+}
+
+/* Remove stacking context causado por blur/filtros */
+* {
+    transform: none !important;
+    perspective: none !important;
+}

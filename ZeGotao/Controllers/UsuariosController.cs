@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ZeGotao.Core.Data;
 using ZeGotao.Models;
@@ -52,7 +53,7 @@ namespace ZeGotao.Controllers
         }
 
         // ============================================================
-        // PÓS LOGIN
+        // POS LOGIN
         // ============================================================
         [HttpGet]
         public async Task<IActionResult> PosLogin()
@@ -102,8 +103,13 @@ namespace ZeGotao.Controllers
         // ============================================================
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Usuario.ToListAsync());
+            var usuarios = _context.Usuario
+                .Include(u => u.TipoUsuario)
+                .ToList();
+
+            return View(usuarios);
         }
+
 
         // ============================================================
         // EDITAR
@@ -119,6 +125,13 @@ namespace ZeGotao.Controllers
             if (user == null)
                 return NotFound();
 
+            ViewBag.TipoUsuarioId = new SelectList(
+                await _context.TipoUsuario.ToListAsync(),
+                "IdTipoUsuario",
+                "DescricaoTipoUsuario",
+                user.TipoUsuarioId
+            );
+
             return View(user);
         }
 
@@ -129,24 +142,24 @@ namespace ZeGotao.Controllers
             if (id != usuario.IdUsuario)
                 return NotFound();
 
-            if (!ModelState.IsValid)
-                return View(usuario);
+            if (ModelState.IsValid)
+            {
+                _context.Update(usuario);
+                await _context.SaveChangesAsync();
 
-            _context.Update(usuario);
-            await _context.SaveChangesAsync();
+                TempData["UsuarioEditado"] = "true"; // dispara o modal
 
-            HttpContext.Session.SetString("NomeUsuario", usuario.Nome);
-            HttpContext.Session.SetString("EmailUsuario", usuario.Email);
+                return RedirectToAction(nameof(Index));
+            }
 
-            TempData["MsgSucesso"] = "Dados atualizados com sucesso!";
-            return RedirectToAction("PosLogin");
+            return View(usuario);
         }
 
+
+
+
         // ============================================================
-        // CARTEIRINHA DE VACINAÇÃO (VERSÃO SIMPLES)
-        // ============================================================
-        // ============================================================
-        // CARTEIRINHA DE VACINAÇÃO (CORRIGIDA E FUNCIONAL)
+        // CARTEIRINHA DE VACINAÇÃO
         // ============================================================
         [HttpGet]
         public async Task<IActionResult> Carteirinha()
@@ -156,20 +169,17 @@ namespace ZeGotao.Controllers
             if (id == null)
                 return RedirectToAction("Entrar");
 
-            // Carrega o usuário
             var usuario = await _context.Usuario
                 .FirstOrDefaultAsync(u => u.IdUsuario == id.Value);
 
             if (usuario == null)
                 return RedirectToAction("Entrar");
 
-            // Carrega as vacinações do usuário
             var vacinacoes = await _context.Vacinacao
                 .Include(v => v.Vacina)
                 .Where(v => v.IdUsuario == id.Value)
                 .ToListAsync();
 
-            // Mapeia para o ViewModel
             var vm = new CarteirinhaViewModel
             {
                 NomeUsuario = usuario.Nome,
@@ -185,7 +195,6 @@ namespace ZeGotao.Controllers
 
             return View("Carteirinha", vm);
         }
-
 
         // ============================================================
         // LOGOUT
