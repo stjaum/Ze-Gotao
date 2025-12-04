@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ZeGotao.Core.Data;
 using ZeGotao.Models;
+using ZeGotao.ViewModels;
 
 namespace ZeGotao.Controllers
 {
@@ -51,7 +53,7 @@ namespace ZeGotao.Controllers
         }
 
         // ============================================================
-        // PÓS LOGIN
+        // POS LOGIN
         // ============================================================
         [HttpGet]
         public async Task<IActionResult> PosLogin()
@@ -91,10 +93,8 @@ namespace ZeGotao.Controllers
             _context.Add(usuario);
             await _context.SaveChangesAsync();
 
-            // 🔥 Esta linha ativa o modal
             TempData["CadastroOk"] = true;
 
-            // 🔥 Mantém o usuário na tela de Create para abrir o modal
             return RedirectToAction("Create");
         }
 
@@ -103,8 +103,13 @@ namespace ZeGotao.Controllers
         // ============================================================
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Usuario.ToListAsync());
+            var usuarios = _context.Usuario
+                .Include(u => u.TipoUsuario)
+                .ToList();
+
+            return View(usuarios);
         }
+
 
         // ============================================================
         // EDITAR
@@ -120,6 +125,13 @@ namespace ZeGotao.Controllers
             if (user == null)
                 return NotFound();
 
+            ViewBag.TipoUsuarioId = new SelectList(
+                await _context.TipoUsuario.ToListAsync(),
+                "IdTipoUsuario",
+                "DescricaoTipoUsuario",
+                user.TipoUsuarioId
+            );
+
             return View(user);
         }
 
@@ -130,17 +142,58 @@ namespace ZeGotao.Controllers
             if (id != usuario.IdUsuario)
                 return NotFound();
 
-            if (!ModelState.IsValid)
-                return View(usuario);
+            if (ModelState.IsValid)
+            {
+                _context.Update(usuario);
+                await _context.SaveChangesAsync();
 
-            _context.Update(usuario);
-            await _context.SaveChangesAsync();
+                TempData["UsuarioEditado"] = "true"; // dispara o modal
 
-            HttpContext.Session.SetString("NomeUsuario", usuario.Nome);
-            HttpContext.Session.SetString("EmailUsuario", usuario.Email);
+                return RedirectToAction(nameof(Index));
+            }
 
-            TempData["MsgSucesso"] = "Dados atualizados com sucesso!";
-            return RedirectToAction("PosLogin");
+            return View(usuario);
+        }
+
+
+
+
+        // ============================================================
+        // CARTEIRINHA DE VACINAÇÃO
+        // ============================================================
+        [HttpGet]
+        public async Task<IActionResult> Carteirinha()
+        {
+            var id = HttpContext.Session.GetInt32("IdUsuario");
+
+            if (id == null)
+                return RedirectToAction("Entrar");
+
+            var usuario = await _context.Usuario
+                .FirstOrDefaultAsync(u => u.IdUsuario == id.Value);
+
+            if (usuario == null)
+                return RedirectToAction("Entrar");
+
+            var vacinacoes = await _context.Vacinacao
+                .Include(v => v.Vacina)
+                .Where(v => v.IdUsuario == id.Value)
+                .ToListAsync();
+
+            var vm = new CarteirinhaViewModel
+            {
+                NomeUsuario = usuario.Nome,
+                Itens = vacinacoes
+                    .Select(v => new CarteirinhaItemViewModel
+                    {
+                        NomeVacina = v.Vacina.NomeVacina,
+                        Tomou = true,
+                        DataTomou = DateTime.MinValue
+                    })
+                    .ToList()
+            };
+
+            return View("Carteirinha", vm);
         }
 
         // ============================================================
