@@ -2,26 +2,79 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
+
+<div class="container-index">
+
     <h1 class="display-4">Bem Vindo !</h1>
-    <h2>Já está cansado da sua carteirinha de vacinação caindo aos pedaços?.</h2>
-    <br>
-    <br>
+
+    <h2 class="animado">Já está cansado da sua carteirinha de vacinação caindo aos pedaços?</h2>
+
+    <br><br>
+
     <h2>E que tal uma virtual?</h2>
-    <br>
-    <br>
-    <br>
-    <br>
-    <h1>Atualize já, e fique por dentro das suas proximas vacinações, cadastre já.</h1>
-    <h2>Um mundo com mais técnologia e um mundo com Mais Saude</h2>
+
+    <!-- IMAGEM -->
+    <img src="/images/sua-imagem.png" class="img-destaque" alt="Imagem destaque" />
+
+    <!-- CARROSSEL -->
+    <div class="carousel">
+        <div class="carousel-track">
+
+            <!-- Carregar suas imagens -->
+            <a class="btn-glass href="https://buscasaude.prefeitura.sp.gov.br/">
+                <h3>
+                    Encontre UBS
+                    <br />mais proxima!
+                </h3>
+              </a>
+            <a class="btn-glass href="https://buscasaude.prefeitura.sp.gov.br/">
+                <h3>
+                    Encontre UBS
+                    <br />mais proxima!
+                </h3>
+            </a>
+            <a class="btn-glass href="https://buscasaude.prefeitura.sp.gov.br/">
+                <h3>
+                    Encontre UBS
+                    <br />mais proxima!
+                </h3>
+            </a>
+            <a class="btn-glass href="https://buscasaude.prefeitura.sp.gov.br/">
+                <h3>
+                    Encontre UBS
+                    <br />mais proxima!
+                </h3>
+            </a>
+            <a class="btn-glass href="https://buscasaude.prefeitura.sp.gov.br/">
+                <h3>
+                    Encontre UBS
+                    <br />mais proxima!
+                </h3>
+            </a>
+
+            <!-- duplicação para criar scroll infinito -->
+            <a href="#"><img src="/images/foto1.jpg" /></a>
+            <a href="#"><img src="/images/foto2.jpg" /></a>
+            <a href="#"><img src="/images/foto3.jpg" /></a>
+            <a href="#"><img src="/images/foto4.jpg" /></a>
+            <a href="#"><img src="/images/foto5.jpg" /></a>
+        </div>
+    </div>
+
+    <br><br>
+
+    <h1>Atualize já, e fique por dentro das suas próximas vacinações, cadastre já.</h1>
+    <h2>Um mundo com mais tecnologia é um mundo com mais saúde.</h2>
+
+    <br><br>
+
+    <!-- IMAGENS FIXAS (SUS, UBS, GOV) -->
+    <div class="icones-fixos">
+        <img src="/images/sus.jfif" alt="SUS" />
+        <img src="/images/ubs.jpg" alt="UBS" />
+        <img src="/images/gov.jfif" alt="GOV" />
+    </div>
+
 </div>
 
-<div class="btn-wrapper">
-    <a class="btn-entrar" asp-controller="Usuarios" asp-action="Entrar">
-        Entrar
-    </a>
-    <a class="btn-cadastrar" asp-controller="Usuarios" asp-action="Create">
-        Cadastrar
-    </a>
-   
-</div>
+
