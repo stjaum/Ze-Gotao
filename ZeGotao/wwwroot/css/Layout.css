@@ -287,3 +287,262 @@ body:not(.dark-mode) {
     transform: none !important;
     perspective: none !important;
 }
+.container-index {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* IMAGE PRINCIPAL */
+.img-destaque {
+    max-width: 280px;
+    margin: 20px 0;
+    animation: aparecer 1.2s ease;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* CARROSSEL */
+.carousel {
+    width: 100%;
+    overflow: hidden;
+    margin: 40px 0;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 20px;
+    animation: scroll-horizontal 18s linear infinite;
+}
+
+    .carousel-track img {
+        width: 180px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 12px;
+        transition: transform .3s;
+        cursor: pointer;
+    }
+
+        /* Zoom on hover */
+        .carousel-track img:hover {
+            transform: scale(1.12);
+        }
+
+@keyframes scroll-horizontal {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* IMAGENS FIXAS */
+.icones-fixos {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+    .icones-fixos img {
+        width: 110px;
+        transition: transform .3s;
+        cursor: pointer;
+    }
+
+        /* zoom hover */
+        .icones-fixos img:hover {
+            transform: scale(1.12);
+        }
+.btn-glass {
+    display: inline-block;
+    padding: 12px 28px;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: 0.35s ease;
+    user-select: none;
+    /* Glass Effect */
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    /* Glow leve */
+    box-shadow: 0 4px 14px rgba(255, 255, 255, 0.1);
+    font-style: none;
+}
+
+    /* HOVER */
+    .btn-glass:hover {
+        transform: translateY(-4px) scale(1.04);
+        background: rgba(255, 255, 255, 0.20);
+        box-shadow: 0 6px 20px rgba(255, 255, 255, 0.25), 0 0 22px rgba(0, 150, 255, 0.45);
+        border-color: rgba(255, 255, 255, 0.45);
+    }
+
+    /* Active (quando clicar) */
+    .btn-glass:active {
+        transform: scale(0.97);
+        box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
+    }
+/* CONTAINER PRINCIPAL */
+.container-index {
+    text-align: center;
+    padding: 20px;
+    animation: @@fadeIn 1.5s ease;
+}
+
+@@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* TEXTO "JÁ ESTÁ CANSADO" COM ANIMAÇÃO */
+.animado {
+    display: inline-block;
+    font-size: 28px;
+    font-weight: bold;
+    animation: @@balanco 2.8s ease-in-out infinite;
+}
+
+@@keyframes balanco {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* IMAGEM PRINCIPAL */
+.img-destaque {
+    max-width: 280px;
+    margin: 20px 0;
+    animation: @@aparecer 1.2s ease;
+}
+
+@@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* CARROSSEL */
+.carousel {
+    width: 100%;
+    overflow: hidden;
+    margin: 40px 0;
+    position: relative;
+}
+
+/* Track: conteúdo em linha, duplicado no HTML para loop */
+.carousel-track {
+    display: flex;
+    gap: 20px;
+    /* garante que a largura seja natural do conteúdo */
+    width: max-content;
+    animation: @@scroll-horizontal 18s linear infinite;
+    will-change: transform;
+}
+
+/* pausa quando hover no carrossel */
+.carousel:hover .carousel-track {
+    animation-play-state: paused;
+}
+
+.carousel-track a {
+    display: block;
+    flex: 0 0 auto; /* evita que as imagens encolham */
+}
+
+.carousel-track img {
+    width: 180px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: transform .3s;
+    cursor: pointer;
+    display: block;
+}
+
+    .carousel-track img:hover {
+        transform: scale(1.12);
+    }
+
+/* animação deslocando metade da largura do track (funciona com duplicação do conteúdo) */
+@@keyframes scroll-horizontal {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* IMAGENS FIXAS */
+.icones-fixos {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+    .icones-fixos img {
+        width: 110px;
+        transition: transform .3s;
+        cursor: pointer;
+    }
+
+        .icones-fixos img:hover {
+            transform: scale(1.12);
+        }
+
+/* responsividade simples */
+@media (max-width: 600px) {
+    .animado {
+        font-size: 20px;
+    }
+
+    .carousel-track img {
+        width: 140px;
+        height: 95px;
+    }
+
+    .img-destaque {
+        max-width: 220px;
+    }
+}
