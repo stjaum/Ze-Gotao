@@ -3,20 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZeGotao.Core.Data;
 
 #nullable disable
 
-namespace ZeGotao.Migrations
+namespace ZeGotao.Core.Migrations
 {
     [DbContext(typeof(ZeGotaoContext))]
-    [Migration("20251119232640_seedDependenteUsuario")]
-    partial class seedDependenteUsuario
+    partial class ZeGotaoContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,7 +56,59 @@ namespace ZeGotao.Migrations
                     b.ToTable("DependenteUsuario");
                 });
 
-            modelBuilder.Entity("Unidade", b =>
+            modelBuilder.Entity("Vacinacao", b =>
+                {
+                    b.Property<int>("IdVacinacao")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdVacinacao"));
+
+                    b.Property<DateTime>("DataTomou")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdUnidade")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdUsuario")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdVacina")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("IdVacinacao");
+
+                    b.HasIndex("IdUnidade");
+
+                    b.HasIndex("IdUsuario");
+
+                    b.HasIndex("IdVacina");
+
+                    b.ToTable("Vacinacao");
+                });
+
+            modelBuilder.Entity("ZeGotao.Models.TipoUsuario", b =>
+                {
+                    b.Property<int>("IdTipoUsuario")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdTipoUsuario"));
+
+                    b.Property<string>("DescricaoTipoUsuario")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("IdTipoUsuario");
+
+                    b.ToTable("TipoUsuario");
+                });
+
+            modelBuilder.Entity("ZeGotao.Models.Unidade", b =>
                 {
                     b.Property<int>("IdUnidade")
                         .ValueGeneratedOnAdd()
@@ -85,85 +134,6 @@ namespace ZeGotao.Migrations
                     b.HasKey("IdUnidade");
 
                     b.ToTable("Unidade");
-                });
-
-            modelBuilder.Entity("Vacinacao", b =>
-                {
-                    b.Property<int>("IdVacinacao")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdVacinacao"));
-
-                    b.Property<int>("IdUnidade")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdUsuario")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdVacina")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.HasKey("IdVacinacao");
-
-                    b.HasIndex("IdUnidade");
-
-                    b.HasIndex("IdUsuario");
-
-                    b.HasIndex("IdVacina");
-
-                    b.ToTable("Vacinacao");
-                });
-
-            modelBuilder.Entity("Vacinas", b =>
-                {
-                    b.Property<int>("IdVacina")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdVacina"));
-
-                    b.Property<string>("DescricaoVacina")
-                        .IsRequired()
-                        .HasMaxLength(900)
-                        .HasColumnType("nvarchar(900)");
-
-                    b.Property<string>("FaixaEtaria")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("NomeVacina")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.HasKey("IdVacina");
-
-                    b.ToTable("Vacinas");
-                });
-
-            modelBuilder.Entity("ZeGotao.Models.TipoUsuario", b =>
-                {
-                    b.Property<int>("IdTipoUsuario")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdTipoUsuario"));
-
-                    b.Property<string>("DescricaoTipoUsuario")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.HasKey("IdTipoUsuario");
-
-                    b.ToTable("TipoUsuario");
                 });
 
             modelBuilder.Entity("ZeGotao.Models.Usuario", b =>
@@ -223,6 +193,34 @@ namespace ZeGotao.Migrations
                     b.ToTable("Usuario");
                 });
 
+            modelBuilder.Entity("ZeGotao.Models.Vacinas", b =>
+                {
+                    b.Property<int>("IdVacina")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdVacina"));
+
+                    b.Property<string>("DescricaoVacina")
+                        .IsRequired()
+                        .HasMaxLength(900)
+                        .HasColumnType("nvarchar(900)");
+
+                    b.Property<string>("FaixaEtaria")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("NomeVacina")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("IdVacina");
+
+                    b.ToTable("Vacinas");
+                });
+
             modelBuilder.Entity("DependenteUsuario", b =>
                 {
                     b.HasOne("ZeGotao.Models.Usuario", "Usuario")
@@ -236,7 +234,7 @@ namespace ZeGotao.Migrations
 
             modelBuilder.Entity("Vacinacao", b =>
                 {
-                    b.HasOne("Unidade", "Unidade")
+                    b.HasOne("ZeGotao.Models.Unidade", "Unidade")
                         .WithMany()
                         .HasForeignKey("IdUnidade")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -248,7 +246,7 @@ namespace ZeGotao.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Vacinas", "Vacina")
+                    b.HasOne("ZeGotao.Models.Vacinas", "Vacina")
                         .WithMany()
                         .HasForeignKey("IdVacina")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -9,11 +9,11 @@ using ZeGotao.Core.Data;
 
 #nullable disable
 
-namespace ZeGotao.Migrations
+namespace ZeGotao.Core.Migrations
 {
     [DbContext(typeof(ZeGotaoContext))]
-    [Migration("20251119234100_seedVacinas")]
-    partial class seedVacinas
+    [Migration("20251119002708_seedManual")]
+    partial class seedManual
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

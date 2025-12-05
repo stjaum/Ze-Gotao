@@ -46,8 +46,6 @@ namespace ZeGotao.Controllers
 
             HttpContext.Session.SetInt32("IdUsuario", user.IdUsuario);
             HttpContext.Session.SetString("NomeUsuario", user.Nome);
-            HttpContext.Session.SetString("EmailUsuario", user.Email);
-            HttpContext.Session.SetInt32("TipoUsuarioId", user.TipoUsuarioId);
 
             return RedirectToAction("PosLogin");
         }
@@ -94,7 +92,6 @@ namespace ZeGotao.Controllers
             await _context.SaveChangesAsync();
 
             TempData["CadastroOk"] = true;
-
             return RedirectToAction("Create");
         }
 
@@ -103,13 +100,12 @@ namespace ZeGotao.Controllers
         // ============================================================
         public async Task<IActionResult> Index()
         {
-            var usuarios = _context.Usuario
+            var usuarios = await _context.Usuario
                 .Include(u => u.TipoUsuario)
-                .ToList();
+                .ToListAsync();
 
             return View(usuarios);
         }
-
 
         // ============================================================
         // EDITAR
@@ -147,7 +143,7 @@ namespace ZeGotao.Controllers
                 _context.Update(usuario);
                 await _context.SaveChangesAsync();
 
-                TempData["UsuarioEditado"] = "true"; // dispara o modal
+                TempData["UsuarioEditado"] = "true";
 
                 return RedirectToAction(nameof(Index));
             }
@@ -156,44 +152,103 @@ namespace ZeGotao.Controllers
         }
 
 
-
-
         // ============================================================
-        // CARTEIRINHA DE VACINAÇÃO
+        // CARTEIRINHA — USA USUÁRIO LOGADO
         // ============================================================
         [HttpGet]
-        public async Task<IActionResult> Carteirinha()
+        public IActionResult Carteirinha()
         {
-            var id = HttpContext.Session.GetInt32("IdUsuario");
+            var idUsuario = HttpContext.Session.GetInt32("IdUsuario");
 
-            if (id == null)
+            if (idUsuario == null)
                 return RedirectToAction("Entrar");
 
-            var usuario = await _context.Usuario
-                .FirstOrDefaultAsync(u => u.IdUsuario == id.Value);
+            var usuario = _context.Usuario
+                .FirstOrDefault(u => u.IdUsuario == idUsuario.Value);
 
             if (usuario == null)
                 return RedirectToAction("Entrar");
 
-            var vacinacoes = await _context.Vacinacao
+            var vacinacoes = _context.Vacinacao
                 .Include(v => v.Vacina)
-                .Where(v => v.IdUsuario == id.Value)
-                .ToListAsync();
+                .Include(v => v.Unidade)
+                .Where(v => v.IdUsuario == idUsuario.Value)
+                .ToList();
 
-            var vm = new CarteirinhaViewModel
+            var itens = vacinacoes.Select(v => new CarteirinhaItemViewModel
             {
+                NomeVacina = v.Vacina?.NomeVacina,
+                Tomou = true,
+                DataTomou = v.DataTomou,
+                NomeUnidade = v.Unidade?.NomeUnidade,
+                EnderecoUnidade = v.Unidade?.Endereco
+            }).ToList();
+
+            var model = new CarteirinhaViewModel
+            {
+                IdUsuario = usuario.IdUsuario,
                 NomeUsuario = usuario.Nome,
-                Itens = vacinacoes
-                    .Select(v => new CarteirinhaItemViewModel
-                    {
-                        NomeVacina = v.Vacina.NomeVacina,
-                        Tomou = true,
-                        DataTomou = DateTime.MinValue
-                    })
-                    .ToList()
+                Itens = itens
             };
 
-            return View("Carteirinha", vm);
+            return View("Carteirinha", model);
+        }
+
+        // ============================================================
+        // ATUALIZAR CARTEIRINHA — GET
+        // ============================================================
+        [HttpGet]
+        public IActionResult AtualizarCarteirinha()
+        {
+            var idUsuario = HttpContext.Session.GetInt32("IdUsuario");
+
+            if (idUsuario == null)
+                return RedirectToAction("Entrar");
+
+            var model = new AtualizarCarteirinhaViewModel
+            {
+                IdUsuario = idUsuario.Value,
+
+                Vacinas = _context.Vacinas
+                    .Select(v => new SelectListItem
+                    {
+                        Value = v.IdVacina.ToString(),
+                        Text = v.NomeVacina
+                    }).ToList(),
+
+                Unidades = _context.Unidade
+                    .Select(u => new SelectListItem
+                    {
+                        Value = u.IdUnidade.ToString(),
+                        Text = u.NomeUnidade
+                    }).ToList()
+            };
+
+            return View("AtualizarCarteirinha", model);
+        }
+
+        // ============================================================
+        // ATUALIZAR CARTEIRINHA — POST
+        // ============================================================
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AtualizarCarteirinha(AtualizarCarteirinhaViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View("AtualizarCarteirinha", model);
+
+            var novo = new Vacinacao
+            {
+                IdUsuario = model.IdUsuario,
+                IdVacina = model.IdVacina,
+                IdUnidade = model.IdUnidade,
+                DataTomou = model.DataTomou
+            };
+
+            _context.Vacinacao.Add(novo);
+            _context.SaveChanges();
+
+            return RedirectToAction("Carteirinha");
         }
 
         // ============================================================

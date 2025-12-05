@@ -30,4 +30,7 @@ public class Vacinacao
 
     
     public bool Status { get; set; } // VACINADO // ATRASADO
+
+    [Required]
+    public DateTime DataTomou { get; set; }  
 }
