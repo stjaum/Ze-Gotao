@@ -9,7 +9,7 @@ using ZeGotao.Core.Data;
 
 #nullable disable
 
-namespace ZeGotao.Migrations
+namespace ZeGotao.Core.Migrations
 {
     [DbContext(typeof(ZeGotaoContext))]
     [Migration("20251119231340_seedUsuario")]

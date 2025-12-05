@@ -9,11 +9,11 @@ using ZeGotao.Core.Data;
 
 #nullable disable
 
-namespace ZeGotao.Migrations
+namespace ZeGotao.Core.Migrations
 {
     [DbContext(typeof(ZeGotaoContext))]
-    [Migration("20251119235837_addstatus")]
-    partial class addstatus
+    [Migration("20251119234341_seedVacinacao")]
+    partial class seedVacinacao
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -104,8 +104,10 @@ namespace ZeGotao.Migrations
                     b.Property<int>("IdVacina")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("IdVacinacao");
 

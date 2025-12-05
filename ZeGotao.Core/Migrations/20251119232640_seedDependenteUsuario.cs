@@ -4,7 +4,7 @@ using ZeGotao.Models;
 
 #nullable disable
 
-namespace ZeGotao.Migrations
+namespace ZeGotao.Core.Migrations
 {
     /// <inheritdoc />
     public partial class seedDependenteUsuario : Migration

@@ -3,8 +3,14 @@
 <div class="container mt-4">
     <h2 class="mb-4">Carteirinha de Vacinação</h2>
 
-    <div class="card p-3 mb-4">
-        <h4>@Model.NomeUsuario</h4>
+    <div class="card p-3 mb-4 d-flex justify-content-between align-items-center flex-row">
+        <h4 class="mb-0">@Model.NomeUsuario</h4>
+
+        <a asp-action="AtualizarCarteirinha"
+           asp-route-id="@Model.IdUsuario"
+           class="btn btn-primary">
+            Atualizar Carteirinha
+        </a>
     </div>
 
     <table class="table table-bordered">
@@ -13,6 +19,8 @@
                 <th>Vacina</th>
                 <th>Status</th>
                 <th>Data</th>
+                <th>Unidade</th>
+                <th>Endereço</th>
             </tr>
         </thead>
         <tbody>
@@ -20,6 +28,7 @@
             {
                 <tr>
                     <td>@item.NomeVacina</td>
+
                     <td>
                         @if (item.Tomou)
                         {
@@ -30,9 +39,12 @@
                             <span class="text-danger fw-bold">✘ Pendente</span>
                         }
                     </td>
-                    <td>
-                        @item.Tomou ? "✔" : "-"
-                    </td>
+
+                    <td>@(item.Tomou ? item.DataTomou.ToShortDateString() : "-")</td>
+
+                    <td>@item.NomeUnidade</td>
+
+                    <td>@item.EnderecoUnidade</td>
                 </tr>
             }
         </tbody>

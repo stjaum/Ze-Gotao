@@ -1,0 +1,35 @@
+﻿@model ZeGotao.ViewModels.AtualizarCarteirinhaViewModel
+
+<div class="container mt-4">
+    <h2 class="mb-4">Atualizar Carteirinha</h2>
+
+    <div class="card p-4">
+
+        <form asp-action="AtualizarCarteirinha" method="post">
+
+            <input type="hidden" asp-for="IdUsuario" />
+
+            <div class="mb-3">
+                <label asp-for="IdVacina" class="form-label">Vacina</label>
+                <select asp-for="IdVacina" class="form-select" asp-items="Model.Vacinas"></select>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="DataTomou" class="form-label">Data da Aplicação</label>
+                <input asp-for="DataTomou" type="date" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="IdUnidade" class="form-label">Unidade</label>
+                <select asp-for="IdUnidade" class="form-select" asp-items="Model.Unidades"></select>
+            </div>
+
+            <button type="submit" class="btn btn-success">Salvar</button>
+
+            <a asp-action="Carteirinha" asp-route-id="@Model.IdUsuario" class="btn btn-secondary ms-2">
+                Voltar
+            </a>
+
+        </form>
+    </div>
+</div>
