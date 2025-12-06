@@ -28,7 +28,12 @@ builder.Services.AddDbContext<ZeGotaoContext>(options =>
 // MVC
 // =========================================================
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddAuthentication("Cookies")
+    .AddCookie("Cookies", options =>
+    {
+        options.LoginPath = "/Usuarios/Entrar";
+        options.LogoutPath = "/Usuarios/Sair";
+    });
 var app = builder.Build();
 
 // =========================================================
@@ -36,6 +41,7 @@ var app = builder.Build();
 // =========================================================
 if (!app.Environment.IsDevelopment())
 {
+    app.UseAuthentication();
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }

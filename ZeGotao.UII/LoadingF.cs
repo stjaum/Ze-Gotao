@@ -53,7 +53,7 @@ namespace ZeGotao.UII
                 pen.StartCap = LineCap.Round;
                 pen.EndCap = LineCap.Triangle;
 
-                e.Graphics.DrawArc(pen, 35, 35, 110, 110, _angle,300);
+                e.Graphics.DrawArc(pen, 35, 35, 110, 110, _angle, 300);
             }
         }
 
@@ -92,6 +92,11 @@ namespace ZeGotao.UII
             {
                 // Falha silenciosa em sistemas sem suporte
             }
+        }
+
+        private void InitializeComponent()
+        {
+
         }
     }
 

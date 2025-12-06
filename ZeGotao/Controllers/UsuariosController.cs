@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using ZeGotao.Core.Data;
 using ZeGotao.Models;
 using ZeGotao.ViewModels;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
 
 namespace ZeGotao.Controllers
 {
@@ -17,7 +20,7 @@ namespace ZeGotao.Controllers
         }
 
         // ============================================================
-        // LOGIN
+        // LOGIN (GET)
         // ============================================================
         [HttpGet]
         public IActionResult Entrar()
@@ -25,6 +28,9 @@ namespace ZeGotao.Controllers
             return View("Entrar");
         }
 
+        // ============================================================
+        // LOGIN (POST)
+        // ============================================================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EntrarPost(string email, string senha)
@@ -44,30 +50,45 @@ namespace ZeGotao.Controllers
                 return View("Entrar");
             }
 
-            HttpContext.Session.SetInt32("IdUsuario", user.IdUsuario);
-            HttpContext.Session.SetString("NomeUsuario", user.Nome);
+            // ====== AUTENTICAÇÃO COOKIE (NÃO USA MAIS SESSION) ======
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user.Nome),
+                new Claim(ClaimTypes.NameIdentifier, user.IdUsuario.ToString()),
+                new Claim("Email", user.Email)
+            };
 
+            var identity = new ClaimsIdentity(claims, "Cookies");
+            var principal = new ClaimsPrincipal(identity);
+
+            await HttpContext.SignInAsync(
+                "Cookies",
+                principal,
+                new AuthenticationProperties
+                {
+                    IsPersistent = true,   // mantém login ao fechar navegador
+                    ExpiresUtc = DateTime.UtcNow.AddHours(12)
+                });
+
+            // ============================================================
             return RedirectToAction("PosLogin");
         }
 
         // ============================================================
-        // POS LOGIN
+        // PÓS LOGIN
         // ============================================================
         [HttpGet]
         public async Task<IActionResult> PosLogin()
         {
-            var id = HttpContext.Session.GetInt32("IdUsuario");
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            if (id == null)
+            if (userId == null)
                 return RedirectToAction("Entrar");
 
-            var user = await _context.Usuario.FindAsync(id.Value);
+            var user = await _context.Usuario.FindAsync(int.Parse(userId));
 
             if (user == null)
-            {
-                HttpContext.Session.Clear();
                 return RedirectToAction("Entrar");
-            }
 
             return View("PosLogin", user);
         }
@@ -108,7 +129,7 @@ namespace ZeGotao.Controllers
         }
 
         // ============================================================
-        // EDITAR
+        // EDITAR - GET
         // ============================================================
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
@@ -131,6 +152,9 @@ namespace ZeGotao.Controllers
             return View(user);
         }
 
+        // ============================================================
+        // EDITAR - POST
+        // ============================================================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Usuario usuario)
@@ -138,17 +162,14 @@ namespace ZeGotao.Controllers
             if (id != usuario.IdUsuario)
                 return NotFound();
 
-            if (ModelState.IsValid)
-            {
-                _context.Update(usuario);
-                await _context.SaveChangesAsync();
+            if (!ModelState.IsValid)
+                return View(usuario);
 
-                TempData["UsuarioEditado"] = "true";
+            _context.Update(usuario);
+            await _context.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
-            }
-
-            return View(usuario);
+            TempData["UsuarioEditado"] = "true";
+            return RedirectToAction(nameof(Index));
         }
 
 
@@ -158,13 +179,13 @@ namespace ZeGotao.Controllers
         [HttpGet]
         public IActionResult Carteirinha()
         {
-            var idUsuario = HttpContext.Session.GetInt32("IdUsuario");
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            if (idUsuario == null)
+            if (userId == null)
                 return RedirectToAction("Entrar");
 
             var usuario = _context.Usuario
-                .FirstOrDefault(u => u.IdUsuario == idUsuario.Value);
+                .FirstOrDefault(u => u.IdUsuario == int.Parse(userId));
 
             if (usuario == null)
                 return RedirectToAction("Entrar");
@@ -172,7 +193,7 @@ namespace ZeGotao.Controllers
             var vacinacoes = _context.Vacinacao
                 .Include(v => v.Vacina)
                 .Include(v => v.Unidade)
-                .Where(v => v.IdUsuario == idUsuario.Value)
+                .Where(v => v.IdUsuario == usuario.IdUsuario)
                 .ToList();
 
             var itens = vacinacoes.Select(v => new CarteirinhaItemViewModel
@@ -184,79 +205,23 @@ namespace ZeGotao.Controllers
                 EnderecoUnidade = v.Unidade?.Endereco
             }).ToList();
 
-            var model = new CarteirinhaViewModel
+            return View("Carteirinha", new CarteirinhaViewModel
             {
                 IdUsuario = usuario.IdUsuario,
                 NomeUsuario = usuario.Nome,
                 Itens = itens
-            };
-
-            return View("Carteirinha", model);
+            });
         }
 
+
         // ============================================================
-        // ATUALIZAR CARTEIRINHA — GET
+        // LOGOUT REAL (COOKIE + SESSION)
         // ============================================================
-        [HttpGet]
-        public IActionResult AtualizarCarteirinha()
+        public async Task<IActionResult> Logout()
         {
-            var idUsuario = HttpContext.Session.GetInt32("IdUsuario");
-
-            if (idUsuario == null)
-                return RedirectToAction("Entrar");
-
-            var model = new AtualizarCarteirinhaViewModel
-            {
-                IdUsuario = idUsuario.Value,
-
-                Vacinas = _context.Vacinas
-                    .Select(v => new SelectListItem
-                    {
-                        Value = v.IdVacina.ToString(),
-                        Text = v.NomeVacina
-                    }).ToList(),
-
-                Unidades = _context.Unidade
-                    .Select(u => new SelectListItem
-                    {
-                        Value = u.IdUnidade.ToString(),
-                        Text = u.NomeUnidade
-                    }).ToList()
-            };
-
-            return View("AtualizarCarteirinha", model);
-        }
-
-        // ============================================================
-        // ATUALIZAR CARTEIRINHA — POST
-        // ============================================================
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult AtualizarCarteirinha(AtualizarCarteirinhaViewModel model)
-        {
-            if (!ModelState.IsValid)
-                return View("AtualizarCarteirinha", model);
-
-            var novo = new Vacinacao
-            {
-                IdUsuario = model.IdUsuario,
-                IdVacina = model.IdVacina,
-                IdUnidade = model.IdUnidade,
-                DataTomou = model.DataTomou
-            };
-
-            _context.Vacinacao.Add(novo);
-            _context.SaveChanges();
-
-            return RedirectToAction("Carteirinha");
-        }
-
-        // ============================================================
-        // LOGOUT
-        // ============================================================
-        public IActionResult Logout()
-        {
+            await HttpContext.SignOutAsync("Cookies");
             HttpContext.Session.Clear();
+
             return RedirectToAction("Entrar");
         }
     }

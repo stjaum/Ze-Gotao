@@ -33,6 +33,9 @@ namespace ZeGotao.UII
         }
         private Process? server;
 
+        private Button btnClose;
+        private Button btnMaxRestore;
+        private Button btnMinimize;
         public Principal()
         {
             InitializeComponent();
@@ -93,6 +96,8 @@ namespace ZeGotao.UII
 
             // esconde o overlay
             loadingOverlay.Visible = false;
+
+            this.Padding = new Padding(1);
         }
 
 
@@ -104,6 +109,39 @@ namespace ZeGotao.UII
         private void webView2_Click(object sender, EventArgs e)
         {
 
+        }
+        // FECHAR COMPLETO (mata o .NET + app)
+        private void BtnClose_Click(object? sender, EventArgs e)
+        {
+            try
+            {
+                if (server != null && !server.HasExited)
+                    server.Kill(true);
+            }
+            catch { }
+
+            Application.Exit();
+        }
+
+        // MAXIMIZAR / RESTAURAR
+        private void BtnMaxRestore_Click(object? sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Normal)
+            {
+                WindowState = FormWindowState.Maximized;
+                btnMaxRestore.Text = "🗗"; // ícone de restaurar
+            }
+            else
+            {
+                WindowState = FormWindowState.Normal;
+                btnMaxRestore.Text = "⬜";
+            }
+        }
+
+        // MINIMIZAR
+        private void BtnMinimize_Click(object? sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
         }
     }
 }
