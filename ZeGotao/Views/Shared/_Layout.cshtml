@@ -18,42 +18,30 @@
 
     <!-- FIX FINAL DO MODAL (FUNCIONA 100%) -->
     <style>
-        /* Modal e backdrop sempre acima de tudo */
+        /* Faz apenas o backdrop ficar mais escuro, sem quebrar o modal */
         .modal-backdrop.show {
             opacity: .55 !important;
-            z-index: 4000 !important;
         }
 
-        .modal {
-            z-index: 5000 !important;
-        }
-
-        /* Removemos stacking context que quebrava o modal */
-        .page-wrapper {
-            position: static !important;
-            z-index: auto !important;
-        }
-
-        /* Vídeo sempre no fundo REAL */
-        #bg-video {
-            position: fixed !important;
-            top: 0;
-            left: 0;
+        /* Garante que o vídeo fica atrás sem criar stacking context errado */
+        #bg-video,
+        #video-overlay {
+            position: fixed;
+            inset: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: -3 !important;
+            pointer-events: none; /* ESSENCIAL */
+            z-index: 0 !important; /* NENHUM valor negativo */
         }
 
-        #video-overlay {
-            position: fixed !important;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,.45);
-            z-index: -2 !important;
+
+        /* Wrapper sem z-index! */
+        .page-wrapper {
+            position: relative;
+            z-index: 1;
         }
+
     </style>
 
 </head>
@@ -128,7 +116,7 @@
                                     <a asp-controller="Usuarios" asp-action="Entrar"
                                class="btn-entrar">Entrar</a>
 
-                                    <a asp-controller="Usuarios" asp-action="Cadastrar"
+                                    <a asp-controller="Usuarios" asp-action="Create"
                                class="btn-cadastrar ms-2">Cadastrar</a>
                         }
 

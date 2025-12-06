@@ -6,22 +6,30 @@
     <div class="card p-4">
 
         <form asp-action="AtualizarCarteirinha" method="post">
+            @Html.AntiForgeryToken()
 
             <input type="hidden" asp-for="IdUsuario" />
 
             <div class="mb-3">
-                <label asp-for="IdVacina" class="form-label">Vacina</label>
-                <select asp-for="IdVacina" class="form-select" asp-items="Model.Vacinas"></select>
+                <label asp-for="IdVacina" class="form-label"></label>
+                <select asp-for="IdVacina" class="form-select" asp-items="Model.Vacinas">
+                    <option value="">Selecione</option>
+                </select>
+                <span asp-validation-for="IdVacina" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label asp-for="DataTomou" class="form-label">Data da Aplicação</label>
+                <label asp-for="DataTomou" class="form-label"></label>
                 <input asp-for="DataTomou" type="date" class="form-control" />
+                <span asp-validation-for="DataTomou" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label asp-for="IdUnidade" class="form-label">Unidade</label>
-                <select asp-for="IdUnidade" class="form-select" asp-items="Model.Unidades"></select>
+                <label asp-for="IdUnidade" class="form-label"></label>
+                <select asp-for="IdUnidade" class="form-select" asp-items="Model.Unidades">
+                    <option value="">Selecione</option>
+                </select>
+                <span asp-validation-for="IdUnidade" class="text-danger"></span>
             </div>
 
             <button type="submit" class="btn btn-success">Salvar</button>
