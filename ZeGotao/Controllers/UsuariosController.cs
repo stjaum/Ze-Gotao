@@ -19,6 +19,55 @@ namespace ZeGotao.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var user = await _context.Usuario
+                .Include(u => u.TipoUsuario)
+                .FirstOrDefaultAsync(u => u.IdUsuario == id);
+
+            if (user == null)
+                return NotFound();
+
+            return View(user);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var user = await _context.Usuario
+                .Include(u => u.TipoUsuario)
+                .FirstOrDefaultAsync(u => u.IdUsuario == id);
+
+            if (user == null)
+                return NotFound();
+
+            return View(user);
+        }
+
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var user = await _context.Usuario.FindAsync(id);
+
+            if (user == null)
+                return NotFound();
+
+            _context.Usuario.Remove(user);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
         // ============================================================
         // LOGIN (GET)
         // ============================================================
@@ -211,6 +260,89 @@ namespace ZeGotao.Controllers
                 NomeUsuario = usuario.Nome,
                 Itens = itens
             });
+        }
+
+        // ============================================================
+        // ATUALIZAR CARTEIRINHA — GET (CORRIGIDO)
+        // ============================================================
+        [HttpGet]
+        public IActionResult AtualizarCarteirinha(int id)
+        {
+            // Garante que o usuário está logado
+            var idUsuarioSessao = HttpContext.Session.GetInt32("IdUsuario");
+
+            if (idUsuarioSessao == null || idUsuarioSessao != id)
+                return RedirectToAction("Entrar");
+
+            var model = new AtualizarCarteirinhaViewModel
+            {
+                IdUsuario = id,
+
+                Vacinas = _context.Vacinas
+                    .Select(v => new SelectListItem
+                    {
+                        Value = v.IdVacina.ToString(),
+                        Text = v.NomeVacina
+                    }).ToList(),
+
+                Unidades = _context.Unidade
+                    .Select(u => new SelectListItem
+                    {
+                        Value = u.IdUnidade.ToString(),
+                        Text = u.NomeUnidade
+                    }).ToList()
+            };
+
+            return View("AtualizarCarteirinha", model);
+        }
+
+
+        // ============================================================
+        // ATUALIZAR CARTEIRINHA — POST (CORRIGIDO)
+        // ============================================================
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AtualizarCarteirinha(AtualizarCarteirinhaViewModel model)
+        {
+            // Valida se o usuário está realmente logado
+            var idUsuarioSessao = HttpContext.Session.GetInt32("IdUsuario");
+
+            if (idUsuarioSessao == null || idUsuarioSessao != model.IdUsuario)
+                return RedirectToAction("Entrar");
+
+            // Se houver erro de validação, recarrega as listas antes de retornar a View
+            if (ModelState.IsValid)
+            {
+                model.Vacinas = _context.Vacinas
+                    .Select(v => new SelectListItem
+                    {
+                        Value = v.IdVacina.ToString(),
+                        Text = v.NomeVacina
+                    }).ToList();
+
+                model.Unidades = _context.Unidade
+                    .Select(u => new SelectListItem
+                    {
+                        Value = u.IdUnidade.ToString(),
+                        Text = u.NomeUnidade
+                    }).ToList();
+
+                return View("AtualizarCarteirinha", model);
+            }
+
+            // Cria o novo registro
+            var novo = new Vacinacao
+            {
+                IdUsuario = model.IdUsuario,
+                IdVacina = model.IdVacina,
+                IdUnidade = model.IdUnidade,
+                DataTomou = model.DataTomou
+            };
+
+            _context.Vacinacao.Add(novo);
+            _context.SaveChanges();
+
+            return RedirectToAction("Carteirinha");
         }
 
 
