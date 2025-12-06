@@ -101,26 +101,24 @@
                     <!-- ===========================
                          ÁREA DINÂMICA DO USUÁRIO
                          =========================== -->
-                    <li class="nav-item ms-3">
+                            <li class="nav-item ms-3">
 
-                        @if (User.Identity != null && User.Identity.IsAuthenticated)
-                        {
-                            <!-- Usuário autenticado — mostra o nome -->
-                            <span class="nav-link fw-bold">
-                                Olá, @User.Identity.Name 👋
-                            </span>
-                        }
-                        else
-                        {
-                            <!-- Usuário NÃO autenticado — mostra botões -->
-                                    <a asp-controller="Usuarios" asp-action="Entrar"
-                               class="btn-entrar">Entrar</a>
+                                @if (User.Identity != null && User.Identity.IsAuthenticated)
+                                {
+                                    <span class="nav-link fw-bold user-menu-trigger"
+                                          role="button"
+                                          data-bs-toggle="offcanvas"
+                                          data-bs-target="#userOffcanvas">
+                                        Olá, @User.Identity.Name 👋
+                                    </span>
+                                }
+                                else
+                                {
+                                    <a asp-controller="Usuarios" asp-action="Entrar" class="btn-entrar">Entrar</a>
+                                    <a asp-controller="Usuarios" asp-action="Cadastrar" class="btn-cadastrar ms-2">Cadastrar</a>
+                                }
 
-                                    <a asp-controller="Usuarios" asp-action="Create"
-                               class="btn-cadastrar ms-2">Cadastrar</a>
-                        }
-
-                    </li>
+                            </li>
 
                 </ul>
             </div>
@@ -192,5 +190,44 @@
 
     @RenderSection("Scripts", required: false)
 
+    <div class="offcanvas offcanvas-end user-drawer" tabindex="-1" id="userOffcanvas">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Minha Conta</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+
+        <div class="offcanvas-body">
+
+            <div class="user-info-box text-center">
+                <div class="user-avatar">
+                    <i class="fa-solid fa-circle-user"></i>
+                </div>
+
+                <h4 class="user-name">@User.Identity?.Name</h4>
+                <p class="user-sub">Bem-vindo(a) de volta!</p>
+            </div>
+
+            <hr />
+
+            <div class="list-group user-menu-list">
+
+                <a class="list-group-item list-group-item-action"
+                   asp-controller="Usuarios" asp-action="PosLogin">
+                    <i class="fa-solid fa-user"></i> Meu Perfil
+                </a>
+
+                <a class="list-group-item list-group-item-action"
+                   asp-controller="Usuarios" asp-action="Carteirinha">
+                    <i class="fa-solid fa-id-card"></i> Minha Carteirinha
+                </a>
+
+                <a class="list-group-item list-group-item-action"
+                   asp-controller="Usuarios" asp-action="Logout">
+                    <i class="fa-solid fa-right-from-bracket"></i> Sair
+                </a>
+
+            </div>
+        </div>
+    </div>
 </body>
 </html>
