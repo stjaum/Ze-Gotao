@@ -268,23 +268,21 @@ namespace ZeGotao.Controllers
         [HttpGet]
         public IActionResult AtualizarCarteirinha(int id)
         {
-            // Garante que o usuário está logado
-            var idUsuarioSessao = HttpContext.Session.GetInt32("IdUsuario");
+            // Obtém o Id do usuário autenticado via Claims
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            if (idUsuarioSessao == null || idUsuarioSessao != id)
+            if (userIdClaim == null || int.Parse(userIdClaim) != id)
                 return RedirectToAction("Entrar");
 
             var model = new AtualizarCarteirinhaViewModel
             {
                 IdUsuario = id,
-
                 Vacinas = _context.Vacinas
                     .Select(v => new SelectListItem
                     {
                         Value = v.IdVacina.ToString(),
                         Text = v.NomeVacina
                     }).ToList(),
-
                 Unidades = _context.Unidade
                     .Select(u => new SelectListItem
                     {
@@ -304,10 +302,10 @@ namespace ZeGotao.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult AtualizarCarteirinha(AtualizarCarteirinhaViewModel model)
         {
-            // Valida se o usuário está realmente logado
-            var idUsuarioSessao = HttpContext.Session.GetInt32("IdUsuario");
+            // Obtém o Id do usuário autenticado via Claims
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            if (idUsuarioSessao == null || idUsuarioSessao != model.IdUsuario)
+            if (userIdClaim == null || int.Parse(userIdClaim) != model.IdUsuario)
                 return RedirectToAction("Entrar");
 
             // Se houver erro de validação, recarrega as listas antes de retornar a View
@@ -336,7 +334,8 @@ namespace ZeGotao.Controllers
                 IdUsuario = model.IdUsuario,
                 IdVacina = model.IdVacina,
                 IdUnidade = model.IdUnidade,
-                DataTomou = model.DataTomou
+                DataTomou = model.DataTomou,
+                Status = true // ou conforme sua regra
             };
 
             _context.Vacinacao.Add(novo);
