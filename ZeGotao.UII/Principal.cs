@@ -141,7 +141,11 @@ namespace ZeGotao.UII
         // MINIMIZAR
         private void BtnMinimize_Click(object? sender, EventArgs e)
         {
-            WindowState = FormWindowState.Minimized;
+            System.Diagnostics.Process.Start(new ProcessStartInfo
+            {
+                FileName = "http://localhost:5029",
+                UseShellExecute = true
+            });
         }
     }
 }

@@ -110,14 +110,5 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var cadastroOk = '@TempData["CadastroOk"]';
-
-            if (cadastroOk === 'True') {
-                var modal = new bootstrap.Modal(document.getElementById('modalCadastroSucesso'));
-                modal.show();
-            }
-        });
-    </script>
+ 
 }

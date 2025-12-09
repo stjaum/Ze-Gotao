@@ -229,15 +229,15 @@ body.dark-mode .glass-title {
 /* ===========================================
    MODAL FIX
 =========================================== */
-.modal-backdrop {
-    z-index: 10000 !important;
-    background-color: rgba(0,0,0,0.65) !important;
-}
+
 
 .modal {
     z-index: 11000 !important;
 }
-
+.modal-backdrop {
+    z-index: 10000 !important;
+    background-color: rgba(0,0,0,0.65) !important;
+}
 /* ===========================================
    OFFCANVAS USER MENU
 =========================================== */
