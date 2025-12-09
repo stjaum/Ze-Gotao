@@ -1,604 +1,263 @@
-﻿html, body {
-    font-family: "Britannic Bold", "Britannic", sans-serif !important;
-}
-.navbar-amd {
-    background: rgba(0, 0, 0, 0.35);
-    backdrop-filter: blur(12px);
+﻿/* ===========================================
+   VARIÁVEIS DE TEMA
+=========================================== */
+:root {
+    --text: #ffffff;
+    --nav-text: #e8e8e8;
+    --link: #4da3ff;
+    --accent: #4fa3ff;
+    --text-glow: 0 0 8px rgba(255, 255, 255, 0.8);
 }
 
-    /* NAVBAR SCROLL */
+body.dark-mode {
+    --text: #f1f1f1;
+    --nav-text: #e8e8e8;
+    --link: #4da3ff;
+}
+
+/* ===========================================
+   GLOBAL
+=========================================== */
+html, body {
+    font-family: "Britannic Bold", "Britannic", sans-serif !important;
+    margin: 0;
+    padding: 0;
+    color: var(--text);
+}
+
+/* Fundo de vídeo */
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -3;
+}
+
+#video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.45);
+    z-index: -2;
+}
+
+body:not(.dark-mode) #bg-video {
+    filter: invert(1);
+}
+
+/* ===========================================
+   NAVBAR
+=========================================== */
+.navbar-amd {
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(12px);
+    transition: 0.3s ease;
+}
+
     .navbar-amd.scrolled {
-        background: rgba(0, 0, 0, 0.85);
+        background: rgba(0,0,0,0.85);
         padding: 0.45rem 1rem;
         backdrop-filter: blur(18px);
     }
 
-    /* LINKS E LOGO */
     .navbar-amd .navbar-brand,
     .navbar-amd .nav-link {
         color: var(--nav-text) !important;
         font-weight: 500;
         padding: 0.7rem 1rem;
-        transition: color .20s ease, transform .20s ease, opacity .20s ease;
+        transition: .2s ease;
     }
 
-        /* HOVER LINKS */
         .navbar-amd .nav-link:hover {
             color: var(--link) !important;
             transform: translateY(-2px);
         }
 
         .navbar-amd .navbar-brand:hover {
-            opacity: 0.85;
+            opacity: .85;
             transform: translateY(-1px);
         }
 
-/* ===================================================================
+/* ===========================================
    BOTÃO DARK MODE
-=================================================================== */
+=========================================== */
 .dark-toggle-btn {
     border: none;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255,255,255,0.08);
     color: var(--nav-text);
     font-size: 1.25rem;
     cursor: pointer;
     padding: 6px 14px;
     border-radius: 12px;
     backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    transition: background .25s ease, transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+    transition: .25s ease;
 }
 
-    /* HOVER */
     .dark-toggle-btn:hover {
-        background: rgba(255, 255, 255, 0.18);
+        background: rgba(255,255,255,0.18);
         transform: translateY(-2px);
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 4px 14px rgba(0,0,0,0.15);
     }
 
-    /* CLICK */
     .dark-toggle-btn:active {
         transform: scale(0.92);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
     }
-.content-card {
-    background: rgba(255, 255, 255, 0.10);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-radius: 22px;
-    padding: 2rem;
-    margin-top: 6rem;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, .25);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-}
-#bg-video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -3; /* vídeo no fundo */
+
+/* Dark Mode */
+body.dark-mode .dark-toggle-btn {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
 }
 
-#video-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,.45); /* escurece o vídeo */
-    z-index: -2;
-}
+/* ===========================================
+   BOTÕES GERAIS
+=========================================== */
 .btn-entrar,
 .btn-cadastrar {
-    display: inline-block;
     padding: 10px 26px;
     border-radius: 18px;
     font-weight: 600;
-    text-decoration: none !important;
-    cursor: pointer;
-    transition: .28s ease;
-    /* GLASS igual ao card */
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(255,255,255,0.12);
     backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1px solid rgba(255, 255, 255, 0.20);
-    /* TEXTO depende do modo */
+    border: 1px solid rgba(255,255,255,0.20);
     color: var(--nav-text) !important;
+    transition: .28s ease;
+    text-decoration: none !important;
 }
 
-/* Glow leve com a cor original */
 .btn-entrar {
     box-shadow: 0 0 10px rgba(10, 132, 255, 0.35);
 }
 
 .btn-cadastrar {
-    margin-left: 12px;
     box-shadow: 0 0 10px rgba(0, 200, 83, 0.35);
+    margin-left: 12px;
 }
 
-    /* HOVER GLASS */
     .btn-entrar:hover,
     .btn-cadastrar:hover {
+        background: rgba(255,255,255,0.18);
         transform: translateY(-3px);
-        background: rgba(255, 255, 255, 0.18);
-        border-color: rgba(255, 255, 255, 0.32);
-        filter: brightness(1.12);
     }
-.btn-wrapper {
-    text-align: center;
-    margin-top: 1.8rem;
-}
-body.dark-mode {
-    --nav-text: #e8e8e8;
-    --link: #4da3ff;
-    color: #f1f1f1;
-    background: #0b0e12;
+
+/* Dark Mode */
+body.dark-mode .btn-entrar {
+    background: #1a6eff;
 }
 
-    /* NAVBAR no modo escuro */
-    body.dark-mode .navbar-amd {
-        background: rgba(0, 0, 0, 0.60) !important;
-    }
-
-        body.dark-mode .navbar-amd.scrolled {
-            background: rgba(0, 0, 0, 0.90) !important;
-        }
-
-    /* BOTÃO DARK MODE */
-    body.dark-mode .dark-toggle-btn {
-        background: rgba(255,255,255,0.15);
-        color: #fff;
-    }
-
-    /* BOTÕES DE ENTRAR E CADASTRAR MODO DARK */
-    body.dark-mode .btn-entrar {
-        background: #1a6eff;
-    }
-
-    body.dark-mode .btn-cadastrar {
-        background: #00b64a;
-    }
-
-    /* CARD COM TEXTO TRANSPARENTE NO DARK */
-    body.dark-mode .content-card {
-        background: rgba(0, 0, 0, 0.40);
-        color: #f0f0f0;
-        border: 1px solid rgba(255, 255, 255, 0.20);
-    }
-body:not(.dark-mode) #bg-video {
-    filter: invert(1);
+body.dark-mode .btn-cadastrar {
+    background: #00b64a;
 }
-    body:not(.dark-mode) h1,
-    body:not(.dark-mode) h2,
-    body:not(.dark-mode) h3,
-    body:not(.dark-mode) h4,
-    body:not(.dark-mode) h5,
-    body:not(.dark-mode) h6,
-    body:not(.dark-mode) p,
-    body:not(.dark-mode) a,
-    body:not(.dark-mode) span,
-    body:not(.dark-mode) label,
-    body:not(.dark-mode) li {
-        text-shadow: var(--text-glow);
-    }
-body:not(.dark-mode) {
-    --text-glow: 0 0 8px rgba(255, 255, 255, 0.8);
+
+/* ===========================================
+   CARDS GLASS
+=========================================== */
+.content-card,
+.glass-card,
+.glass-box,
+.glass-title {
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 18px;
+    padding: 20px;
+    color: var(--text);
+    transition: .25s;
 }
+
+    .glass-card:hover {
+        transform: translateY(-6px);
+        background: rgba(255,255,255,0.20);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+
+/* Dark Mode */
+body.dark-mode .glass-card,
+body.dark-mode .glass-box,
+body.dark-mode .glass-title {
+    background: rgba(0,0,0,0.35);
+    border-color: rgba(255,255,255,0.10);
+}
+
+/* ===========================================
+   INPUTS GLASS
+=========================================== */
 .input-wrap {
     position: relative;
     width: 100%;
     margin-bottom: 1.6rem;
 }
 
-/* INPUT GLASS */
 .input-field {
     width: 100%;
     padding: 14px 16px;
     border-radius: 16px;
-    font-size: 1rem;
-    font-weight: 500;
-    background: rgba(255, 255, 255, 0.10);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.18);
     color: var(--nav-text);
-    outline: none;
-    transition: .25s ease;
+    font-weight: 500;
+    transition: .25s;
 }
 
-    /* HOVER */
-    .input-field:hover {
-        background: rgba(255, 255, 255, 0.16);
-        border-color: rgba(255, 255, 255, 0.30);
-    }
-
-    /* FOCUS */
     .input-field:focus {
-        background: rgba(255, 255, 255, 0.22);
-        border-color: rgba(255, 255, 255, 0.45);
-        box-shadow: 0 0 12px rgba(255, 255, 255, 0.22);
+        background: rgba(255,255,255,0.22);
+        border-color: rgba(255,255,255,0.45);
     }
 
-/* LABEL FLOAT */
+/* Float Label */
 .float-label label {
     position: absolute;
     top: 50%;
     left: 16px;
     transform: translateY(-50%);
-    font-size: 0.95rem;
-    color: var(--nav-text);
-    pointer-events: none;
-    opacity: 0.75;
+    opacity: .75;
     transition: .22s ease;
 }
 
-/* LABEL QUANDO DIGITA OU FOCADO */
 .float-label .input-field:focus + label,
 .float-label .input-field:not(:placeholder-shown) + label {
     top: 6px;
-    font-size: 0.75rem;
-    opacity: 0.95;
-}
-/* ============================================================
-   FIX PARA MODAL - GARANTE QUE ELE FICA ACIMA DO VÍDEO E OVERLAY
-   ============================================================ */
-
-/* Layering correto */
-#bg-video {
-    z-index: -3 !important;
+    font-size: .75rem;
+    opacity: .95;
 }
 
-#video-overlay {
-    z-index: -2 !important;
-}
-
-/* Garante que o conteúdo normal fique acima */
-.page-wrapper {
-    position: relative;
-    z-index: 1 !important;
-}
-
-/* Força o modal e seu fundo a ficarem no topo máximo */
-.modal-backdrop {
-    z-index: 1050 !important;
-    background-color: rgba(0,0,0,0.65) !important; /* fundo escuro correto */
-}
-
-.modal {
-    z-index: 1060 !important;
-}
-
-/* Caso Glass/Blur esteja interferindo em TODOS os elementos */
-.modal-backdrop,
-.modal-content {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-}
-/* Força o modal a ficar acima de QUALQUER elemento que use vídeo, blur ou overlay */
+/* ===========================================
+   MODAL FIX
+=========================================== */
 .modal-backdrop {
     z-index: 10000 !important;
+    background-color: rgba(0,0,0,0.65) !important;
 }
 
 .modal {
     z-index: 11000 !important;
 }
 
-/* Remove stacking context causado por blur/filtros */
-* {
-    transform: none !important;
-    perspective: none !important;
-}
-.container-index {
-    text-align: center;
-    margin-top: 30px;
-}
-
-/* IMAGE PRINCIPAL */
-.img-destaque {
-    max-width: 280px;
-    margin: 20px 0;
-    animation: aparecer 1.2s ease;
-}
-
-@keyframes aparecer {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* CARROSSEL */
-.carousel {
-    width: 100%;
-    overflow: hidden;
-    margin: 40px 0;
-}
-
-.carousel-track {
-    display: flex;
-    gap: 20px;
-    animation: scroll-horizontal 18s linear infinite;
-}
-
-    .carousel-track img {
-        width: 180px;
-        height: 120px;
-        object-fit: cover;
-        border-radius: 12px;
-        transition: transform .3s;
-        cursor: pointer;
-    }
-
-        /* Zoom on hover */
-        .carousel-track img:hover {
-            transform: scale(1.12);
-        }
-
-@keyframes scroll-horizontal {
-    from {
-        transform: translateX(0);
-    }
-
-    to {
-        transform: translateX(-50%);
-    }
-}
-
-/* IMAGENS FIXAS */
-.icones-fixos {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-top: 30px;
-}
-
-    .icones-fixos img {
-        width: 110px;
-        transition: transform .3s;
-        cursor: pointer;
-    }
-
-        /* zoom hover */
-        .icones-fixos img:hover {
-            transform: scale(1.12);
-        }
-.btn-glass {
-    display: inline-block;
-    padding: 12px 28px;
-    font-size: 20px;
-    font-weight: 600;
-    border-radius: 14px;
-    cursor: pointer;
-    transition: 0.35s ease;
-    user-select: none;
-    /* Glass Effect */
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    color: #ffffff;
-    /* Glow leve */
-    box-shadow: 0 4px 14px rgba(255, 255, 255, 0.1);
-    text-decoration: none !important;
-}
-
-    /* HOVER */
-    .btn-glass:hover {
-        transform: translateY(-4px) scale(1.04);
-        background: rgba(255, 255, 255, 0.20);
-        box-shadow: 0 6px 20px rgba(255, 255, 255, 0.25), 0 0 22px rgba(0, 150, 255, 0.45);
-        border-color: rgba(255, 255, 255, 0.45);
-    }
-
-    /* Active (quando clicar) */
-    .btn-glass:active {
-        transform: scale(0.97);
-        box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
-    }
-/* CONTAINER PRINCIPAL */
-.container-index {
-    text-align: center;
-    padding: 20px;
-    animation: fadeIn 1.5s ease;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* TEXTO "JÁ ESTÁ CANSADO" COM ANIMAÇÃO */
-.animado {
-    display: inline-block;
-    font-size: 28px;
-    font-weight: bold;
-    animation: balanco 2.8s ease-in-out infinite;
-}
-
-@keyframes balanco {
-    0% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-10px);
-    }
-
-    100% {
-        transform: translateY(0);
-    }
-}
-
-/* IMAGEM PRINCIPAL */
-.img-destaque {
-    max-width: 280px;
-    margin: 20px 0;
-    animation: aparecer 1.2s ease;
-}
-
-@keyframes aparecer {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* CARROSSEL */
-.carousel {
-    width: 100%;
-    overflow: hidden;
-    margin: 40px 0;
-    position: relative;
-}
-
-/* Track: conteúdo em linha, duplicado no HTML para loop */
-.carousel-track {
-    display: flex;
-    gap: 20px;
-    /* garante que a largura seja natural do conteúdo */
-    width: max-content;
-    animation: scroll-horizontal 18s linear infinite;
-    will-change: transform;
-}
-
-/* pausa quando hover no carrossel */
-.carousel:hover .carousel-track {
-    animation-play-state: paused;
-}
-
-.carousel-track a {
-    display: block;
-    flex: 0 0 auto; /* evita que as imagens encolham */
-}
-
-.carousel-track img {
-    width: 180px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 12px;
-    transition: transform .3s;
-    cursor: pointer;
-    display: block;
-}
-
-    .carousel-track img:hover {
-        transform: scale(1.12);
-    }
-
-/* animação deslocando metade da largura do track (funciona com duplicação do conteúdo) */
-@keyframes scroll-horizontal {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(-50%);
-    }
-}
-
-/* IMAGENS FIXAS */
-.icones-fixos {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-top: 30px;
-    flex-wrap: wrap;
-}
-
-    .icones-fixos img {
-        width: 110px;
-        transition: transform .3s;
-        cursor: pointer;
-    }
-
-        .icones-fixos img:hover {
-            transform: scale(1.12);
-        }
-
-/* responsividade simples */
-@media (max-width: 600px) {
-    .animado {
-        font-size: 20px;
-    }
-
-    .carousel-track img {
-        width: 140px;
-        height: 95px;
-    }
-
-    .img-destaque {
-        max-width: 220px;
-    }
-}
+/* ===========================================
+   OFFCANVAS USER MENU
+=========================================== */
 .user-drawer {
     background: rgba(255,255,255,0.15);
     backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
     border-left: 1px solid rgba(255,255,255,0.15);
-    padding-top: 20px;
-    color: var(--text);
+    padding: 20px;
 }
 
-/* Dark Mode */
 body.dark-mode .user-drawer {
     background: rgba(0,0,0,0.35);
-    border-left: 1px solid rgba(255,255,255,0.08);
 }
 
-.user-drawer .offcanvas-header {
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-/* Avatar */
-.user-avatar {
-    font-size: 70px;
-    color: var(--accent, #4fa3ff);
-    margin-bottom: 10px;
-}
-
-/* Nome */
-.user-name {
-    font-weight: bold;
-    margin: 0;
-    color: var(--text);
-}
-
-/* Subtítulo */
-.user-sub {
-    font-size: 0.9rem;
-    opacity: 0.8;
-}
-
-/* Lista */
 .user-menu-list .list-group-item {
     background: transparent;
     border: none;
     padding: 14px 10px;
     color: var(--text);
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: 0.2s;
+    transition: .2s;
 }
 
     .user-menu-list .list-group-item:hover {
@@ -609,4 +268,23 @@ body.dark-mode .user-drawer {
 /* Dark Mode */
 body.dark-mode .user-menu-list .list-group-item:hover {
     background: rgba(255,255,255,0.05);
+}
+
+/* ===========================================
+   ANIMAÇÕES
+=========================================== */
+@keyframes fade {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fade .8s ease;
 }

@@ -3,35 +3,45 @@
     ViewData["Title"] = "Vacinas";
 }
 
+<link rel="stylesheet" href="~/css/site.css" />
+
 <div class="container mt-4 cadastrar-wrapper">
 
-    <h2 class="text-center mb-4">Vacinas Cadastradas</h2>
+    <h2 class="glass-title text-center mb-4">Vacinas Cadastradas</h2>
 
     <div class="text-end mb-3">
         <a class="btn-cadastrar" asp-action="Create">Cadastrar Nova Vacina</a>
     </div>
 
-    <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Faixa Etária</th>
-                <th class="text-center">Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    <div class="table-responsive vacinas-table-wrapper">
+        <table class="vacinas-table">
+            <thead>
                 <tr>
-                    <td>@item.NomeVacina</td>
-                    <td>@item.FaixaEtaria</td>
-                    <td class="text-center">
-                        <a asp-action="Details" asp-route-id="@item.IdVacina">Detalhes</a> |
-                        <a asp-action="Edit" asp-route-id="@item.IdVacina">Editar</a> |
-                        <a asp-action="Delete" asp-route-id="@item.IdVacina">Excluir</a>
-                    </td>
+                    <th>Nome</th>
+                    <th>Faixa Etária</th>
+                    <th class="text-center">Ações</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.NomeVacina</td>
+                        <td>@item.FaixaEtaria</td>
+                        <td class="text-center">
+                            <a asp-action="Details" asp-route-id="@item.IdVacina"
+                               class="btn-glass btn-infox">Detalhes</a>
+
+                            <a asp-action="Edit" asp-route-id="@item.IdVacina"
+                               class="btn-glass btn-edit ms-2">Editar</a>
+
+                            <a asp-action="Delete" asp-route-id="@item.IdVacina"
+                               class="btn-glass btn-del ms-2">Excluir</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>

@@ -3,12 +3,12 @@
 @{
     ViewData["Title"] = "Unidades";
 }
-
 <div class="container mt-4 cadastrar-wrapper">
-    <h2 class="text-center mb-4">Unidades Cadastradas</h2>
+
+    <h2 class="glass-title text-center mb-4">Unidades Cadastradas</h2>
 
     <div class="text-end mb-3">
-        <a asp-action="Create" class="btn btn-primary">Nova Unidade</a>
+        <a asp-action="Create" class="btn-cadastrar">Nova Unidade</a>
     </div>
 
     @if (!Model.Any())
@@ -17,30 +17,214 @@
     }
     else
     {
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Endereço</th>
-                    <th>Telefone</th>
-                    <th style="width:150px;"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
+        <div class="table-responsive unidades-table-wrapper">
+            <table class="unidades-table">
+                <thead>
                     <tr>
-                        <td>@item.NomeUnidade</td>
-                        <td>@item.Endereco</td>
-                        <td>@item.Telefone</td>
-                        <td class="text-center">
-                            <a asp-action="Details" asp-route-id="@item.IdUnidade" class="btn btn-sm btn-info">Detalhes</a>
-                            <a asp-action="Edit" asp-route-id="@item.IdUnidade" class="btn btn-sm btn-warning">Editar</a>
-                            <a asp-action="Delete" asp-route-id="@item.IdUnidade" class="btn btn-sm btn-danger">Excluir</a>
-                        </td>
+                        <th>Nome</th>
+                        <th>Endereço</th>
+                        <th>Telefone</th>
+                        <th class="text-center">Ações</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.NomeUnidade</td>
+                            <td>@item.Endereco</td>
+                            <td>@item.Telefone</td>
+                            <td class="text-center action-buttons">
+                                <a asp-action="Details" asp-route-id="@item.IdUnidade"
+                                   class="btn-glass btn-infox">Detalhes</a>
+
+                                <a asp-action="Edit" asp-route-id="@item.IdUnidade"
+                                   class="btn-glass btn-edit">Editar</a>
+
+                                <a asp-action="Delete" asp-route-id="@item.IdUnidade"
+                                   class="btn-glass btn-del">Excluir</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     }
 </div>
+<style>
+    /* Container fade */
+    .cadastrar-wrapper {
+        animation: fadeIn .7s ease;
+    }
+
+    /* Título da página */
+    .glass-title {
+        backdrop-filter: blur(14px);
+        background: rgba(255,255,255,0.15);
+        border-radius: 18px;
+        padding: 18px 30px;
+        border: 1px solid rgba(255,255,255,0.18);
+        color: var(--text);
+        font-weight: 700;
+        animation: float 5s ease-in-out infinite;
+    }
+
+    body.dark-mode .glass-title {
+        background: rgba(0,0,0,0.35);
+    }
+
+    /* Botão cadastrar */
+    .btn-cadastrar {
+        padding: 10px 22px;
+        background: rgba(0,123,255,0.25);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.25);
+        border-radius: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        color: var(--nav-text);
+        transition: .25s ease;
+    }
+
+        .btn-cadastrar:hover {
+            background: rgba(0,123,255,0.45);
+            transform: translateY(-2px);
+            border-color: rgba(255,255,255,0.45);
+        }
+
+    /* ===============================================
+       TABELA GLASS — UNIDADES
+       =============================================== */
+
+    .unidades-table-wrapper {
+        margin-top: 15px;
+    }
+
+    .unidades-table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 16px;
+        overflow: hidden;
+        background: rgba(255,255,255,0.10);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    body.dark-mode .unidades-table {
+        background: rgba(0,0,0,0.35);
+    }
+
+    /* Cabeçalho */
+    .unidades-table thead th {
+        padding: 14px;
+        background: rgba(0,0,0,0.45);
+        color: var(--nav-text);
+        font-weight: 600;
+        text-shadow: 0 0 6px rgba(0,0,0,0.4);
+    }
+
+    body.dark-mode .unidades-table thead th {
+        background: rgba(255,255,255,0.06);
+    }
+
+    /* Linhas */
+    .unidades-table tbody tr {
+        transition: .25s ease;
+        background: rgba(255,255,255,0.04);
+    }
+
+    body.dark-mode .unidades-table tbody tr {
+        background: rgba(255,255,255,0.03);
+    }
+
+    /* Hover */
+    .unidades-table tbody tr:hover {
+        background: rgba(255,255,255,0.16);
+        transform: scale(1.01);
+    }
+
+    body.dark-mode .unidades-table tbody tr:hover {
+        background: rgba(0,0,0,0.55);
+    }
+
+    /* Células */
+    .unidades-table td {
+        padding: 14px;
+        color: var(--nav-text);
+        font-size: .95rem;
+    }
+
+    /* Botões organizados */
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    /* ===============================================================
+       BOTÕES GLASS
+       =============================================================== */
+
+    .btn-glass {
+        padding: 8px 16px;
+        border-radius: 12px;
+        font-weight: 600;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.25);
+        color: var(--nav-text) !important;
+        text-decoration: none;
+        backdrop-filter: blur(12px);
+        transition: .25s ease;
+    }
+
+        .btn-glass:hover {
+            transform: translateY(-2px);
+            background: rgba(255,255,255,0.18);
+        }
+
+    /* Cores personalizadas */
+    .btn-infox {
+        box-shadow: 0 0 10px rgba(13, 202, 240, 0.35);
+    }
+
+    .btn-edit {
+        box-shadow: 0 0 10px rgba(255, 193, 7, 0.35);
+    }
+
+    .btn-del {
+        box-shadow: 0 0 10px rgba(220, 53, 69, 0.45);
+    }
+
+    /* ===============================================================
+       ANIMAÇÕES
+       =============================================================== */
+
+    @@keyframes fadeIn {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+
+    @@keyframes float {
+        0%,100%
+
+    {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+
+    }
+</style>

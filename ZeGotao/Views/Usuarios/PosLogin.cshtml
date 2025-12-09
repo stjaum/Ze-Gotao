@@ -1,93 +1,189 @@
 ﻿@model ZeGotao.Models.Usuario
 @{
-    ViewData["Title"] = "Perfil";
+    ViewData["Title"] = "Área do Usuário";
 }
 
-<div class="container mt-4">
-    <h2>Bem-vindo, @Model.Nome</h2>
+<div class="poslogin-wrapper">
 
-    <p>Você está logado com o e-mail: <strong>@Model.Email</strong></p>
-
-    <button class="drawer-btn" onclick="toggleDrawer()">Abrir Perfil</button>
-
-    <div id="drawer" class="drawer" aria-hidden="true">
-        <div class="drawer-content">
-            <button class="drawer-close" onclick="toggleDrawer()">Fechar ✖</button>
-            <h3>Dados do Usuário</h3>
-
-            <p><b>Nome:</b> @Model.Nome</p>
-            <p><b>Email:</b> @Model.Email</p>
-            <p><b>CPF:</b> @Model.Cpf</p>
-            <p><b>Telefone:</b> @Model.Telefone</p>
-            <p><b>Endereço:</b> @Model.Endereco</p>
-            <p><b>Data Nasc.:</b> @Model.DataNascimento.ToString("yyyy-MM-dd")</p>
-
-            <p>
-                <b>Tipo de Usuário:</b>
-                @(Model.TipoUsuarioId == 1 ? "Administrador" : "Usuário")
-            </p>
-
-            <a class="btn-cadastrar mt-2 w-100" asp-controller="Usuarios" asp-action="Logout">Sair</a>
-        </div>
+    <!-- TÍTULO PRINCIPAL -->
+    <div class="glass-title fade-in">
+        <h1>👋 Olá, @Model.Nome!</h1>
+        <p>É ótimo ver você por aqui. Vamos deixar sua saúde sempre em dia?</p>
     </div>
+
+    <!-- CARDS PRINCIPAIS -->
+    <div class="glass-grid fade-in">
+
+        <!-- CARTEIRINHA -->
+        <a class="glass-card" asp-controller="Usuarios" asp-action="Carteirinha">
+            <i class="fa-solid fa-id-card"></i>
+            <h3>Minha Carteirinha</h3>
+            <p>Veja todas as vacinas que você já tomou e suas datas.</p>
+        </a>
+
+        <!-- ATUALIZAR VACINAS -->
+        <a class="glass-card" asp-controller="Usuarios" asp-action="AtualizarCarteirinha">
+            <i class="fa-solid fa-syringe"></i>
+            <h3>Registrar Nova Vacina</h3>
+            <p>Adicione uma vacinação recente realizada em uma unidade de saúde.</p>
+        </a>
+
+        <!-- UNIDADES PRÓXIMAS -->
+        <a class="glass-card" asp-controller="Unidades" asp-action="Index">
+            <i class="fa-solid fa-hospital"></i>
+            <h3>Unidades de Saúde</h3>
+            <p>Consulte as unidades credenciadas mais próximas de você.</p>
+        </a>
+
+        <!-- VACINAS DISPONÍVEIS -->
+        <a class="glass-card" asp-controller="Vacinas" asp-action="Index">
+            <i class="fa-solid fa-shield-virus"></i>
+            <h3>Catálogo de Vacinas</h3>
+            <p>Veja quais vacinas estão disponíveis e quem deve tomar.</p>
+        </a>
+
+    </div>
+
+    <!-- INFORMACOES DO USER (GLASS BOX) -->
+    <div class="glass-box fade-in">
+
+        <h2>📄 Seus Dados</h2>
+        <p><b>Nome:</b> @Model.Nome</p>
+        <p><b>Email:</b> @Model.Email</p>
+        <p><b>CPF:</b> @Model.Cpf</p>
+        <p><b>Telefone:</b> @Model.Telefone</p>
+        <p><b>Endereço:</b> @Model.Endereco</p>
+        <p><b>Nascimento:</b> @Model.DataNascimento.ToString("dd/MM/yyyy")</p>
+        <p><b>Tipo:</b> @(Model.TipoUsuarioId == 1 ? "Administrador" : "Usuário")</p>
+
+        <a asp-controller="Usuarios" asp-action="Logout" class="btn-cadastrar mt-3">Sair</a>
+
+    </div>
+
+    <!-- RECOMENDAÇÕES DE VACINAS -->
+    <div class="glass-box fade-in">
+        <h2>🎯 Recomendações para Você</h2>
+        <ul class="tips-list">
+            <li>✔ Mantenha sua carteira atualizada regularmente.</li>
+            <li>✔ Sempre verifique novas campanhas de vacinação.</li>
+            <li>✔ Em caso de dúvida, procure uma unidade de saúde.</li>
+            <li>✔ Notifique quando tomar uma vacina fora do app.</li>
+        </ul>
+    </div>
+    <style>
+        /* =============================
+           WRAPPER GERAL
+        ============================= */
+        .poslogin-wrapper {
+            padding: 40px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        /* =============================
+           TÍTULO
+        ============================= */
+        .glass-title {
+            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.18);
+            border-radius: 18px;
+            padding: 22px 28px;
+            margin-bottom: 25px;
+            color: var(--text);
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+        }
+
+        /* =============================
+           GRID DE CARDS
+        ============================= */
+        .glass-grid {
+            display: grid;
+            gap: 22px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            margin-bottom: 35px;
+        }
+
+        .glass-card {
+            padding: 26px;
+            text-align: center;
+            border-radius: 18px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            background: rgba(255,255,255,0.16);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.22);
+            transition: transform .22s ease, background .22s ease;
+        }
+
+            .glass-card i {
+                font-size: 42px;
+                margin-bottom: 12px;
+                color: var(--accent, #4da3ff);
+            }
+
+            .glass-card:hover {
+                transform: translateY(-4px);
+                background: rgba(255,255,255,0.25);
+            }
+
+        /* =============================
+           BOXES (INFORMAÇÕES)
+        ============================= */
+        .glass-box {
+            padding: 26px;
+            margin-bottom: 25px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.14);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.22);
+            color: var(--text);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+            font-size: 1.08rem;
+        }
+
+        /* LISTA */
+        .tips-list li {
+            margin-bottom: 10px;
+        }
+
+        /* =============================
+           ANIMAÇÃO LEVE
+        ============================= */
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @@keyframes fadeIn {
+            from
+
+        {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        }
+
+        /* =============================
+           DARK MODE REFINADO
+        ============================= */
+        body.dark-mode .glass-card,
+        body.dark-mode .glass-box,
+        body.dark-mode .glass-title {
+            background: rgba(0,0,0,0.45);
+            border-color: rgba(255,255,255,0.15);
+        }
+
+            body.dark-mode .glass-card:hover {
+                background: rgba(0,0,0,0.65);
+            }
+    </style>
 </div>
-
-<style>
-    .drawer {
-        position: fixed;
-        right: 0;
-        top: 0;
-        height: 100%;
-        width: 0;
-        background: var(--card-bg, #fff);
-        overflow-x: hidden;
-        transition: width .35s ease;
-        box-shadow: -6px 0 20px rgba(0,0,0,0.12);
-        z-index: 1050;
-        color: var(--text-color, #000);
-    }
-
-        .drawer.open {
-            width: 320px;
-        }
-
-    .drawer-content {
-        padding: 22px;
-        height: 100%;
-    }
-
-    .drawer-btn {
-        background: var(--accent, #091C6D);
-        color: #fff;
-        padding: 12px 18px;
-        border-radius: 10px;
-        border: none;
-        transition: .2s;
-    }
-
-        .drawer-btn:hover {
-            filter: brightness(0.9);
-            transform: scale(1.02);
-        }
-
-    .drawer-close {
-        background: transparent;
-        border: none;
-        float: right;
-        font-size: 1.2rem;
-        color: var(--text-color, #000);
-        cursor: pointer;
-    }
-
-    .drawer p, .drawer h3 {
-        color: var(--text-color, #000);
-    }
-</style>
-
-<script>
-    function toggleDrawer() {
-        const d = document.getElementById('drawer');
-        d.classList.toggle('open');
-        d.setAttribute('aria-hidden', !d.classList.contains('open'));
-    }
-</script>

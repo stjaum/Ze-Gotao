@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<Vacinacao>
-
+<link rel="stylesheet" href="~/css/Layout.css" />
 @{
     ViewData["Title"] = "Index";
     int tipoUsuario = Context.Session.GetInt32("TipoUsuarioId") ?? 0;

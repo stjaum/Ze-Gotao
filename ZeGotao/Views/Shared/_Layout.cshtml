@@ -1,233 +1,234 @@
 ﻿<!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>@ViewData["Title"] - Mais Saúde</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>@ViewData["Title"] - Mais Saúde</title>
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+	<!-- FontAwesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="~/css/Layout.css" />
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="~/css/Layout.css" />
 
-    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+	<link rel="icon" type="image/x-icon" href="~/favicon.ico" />
 
-    <!-- FIX FINAL DO MODAL (FUNCIONA 100%) -->
-    <style>
-        /* Faz apenas o backdrop ficar mais escuro, sem quebrar o modal */
- /*        .modal-backdrop.show {
-            opacity: .55 !important;
-        }
- */
-        /* Garante que o vídeo fica atrás sem criar stacking context errado */
-        #bg-video,
-        #video-overlay {
-            position: fixed;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            pointer-events: none; /* ESSENCIAL */
-            z-index: 0 !important; /* NENHUM valor negativo */
-        }
+	<!-- FIX FINAL DO MODAL (FUNCIONA 100%) -->
+	<style>
+		/* Faz apenas o backdrop ficar mais escuro, sem quebrar o modal */
+		/*        .modal-backdrop.show {
+							opacity: .55 !important;
+						}
+				 */
+		/* Garante que o vídeo fica atrás sem criar stacking context errado */
+		#bg-video,
+		#video-overlay {
+			position: fixed;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			pointer-events: none; /* ESSENCIAL */
+			z-index: 0 !important; /* NENHUM valor negativo */
+		}
 
 
-        /* Wrapper sem z-index! */
-        .page-wrapper {
-            position: relative;
-            z-index: 1;
-        }
+		/* Wrapper sem z-index! */
+		.page-wrapper {
+			position: relative;
+			z-index: 1;
+		}
 
-    </style>
+	</style>
 
 </head>
 <body>
 
-    <!-- VIDEO -->
-    <video autoplay muted loop id="bg-video">
-        <source src="~/videos/Back.mp4" type="video/mp4" />
-    </video>
+	<!-- VIDEO -->
+	<video autoplay muted loop id="bg-video">
+		<source src="~/videos/Back.mp4" type="video/mp4" />
+	</video>
 
-    <!-- OVERLAY -->
-    <div id="video-overlay"></div>
+	<!-- OVERLAY -->
+	<div id="video-overlay"></div>
 
-    <div class="page-wrapper">
+	<div class="page-wrapper">
 
-        <!-- NAVBAR -->
-       <header>
-    <nav class="navbar navbar-expand-lg navbar-amd fixed-top">
-        <div class="container-fluid">
+		<!-- NAVBAR -->
+		<header>
+			<nav class="navbar navbar-expand-lg navbar-amd fixed-top">
+				<div class="container-fluid">
 
-            <a class="navbar-brand" asp-controller="Home" asp-action="Index">
-                <img src="~/images/mascote.png"
-                     alt="Logo"
-                     style="height:50px; width:auto; object-fit:contain;" />
-                Mais Saúde
-            </a>
+					<a class="navbar-brand" asp-controller="Home" asp-action="Index">
+						<img src="~/images/mascote.png"
+							 alt="Logo"
+							 style="height:50px; width:auto; object-fit:contain;" />
+						Mais Saúde
+					</a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+							data-bs-target="#navbarNav">
+						<span class="navbar-toggler-icon"></span>
+					</button>
 
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+					<div class="collapse navbar-collapse" id="navbarNav">
+						<ul class="navbar-nav ms-auto">
 
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Usuarios" asp-action="Carteirinha">Carteirinha</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Unidades" asp-action="Index">Unidades</a>
-                            </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Vacinas" asp-action="Index">Vacinas</a>
-                    </li>
+							<!-- ===========================
+								 ÁREA DINÂMICA DO USUÁRIO
+								 =========================== -->
+							@if (User.Identity != null && User.Identity.IsAuthenticated)
+							{
+								<li class="nav-item ms-3">
+									<span class="nav-link fw-bold user-menu-trigger"
+										  role="button"
+										  data-bs-toggle="offcanvas"
+										  data-bs-target="#userOffcanvas">
+										Olá, @User.Identity.Name 👋
+									</span>
 
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Usuarios" asp-action="Index">Usuários</a>
-                    </li>
 
-                    <li class="nav-item">
-                        <button id="darkModeToggle" class="dark-toggle-btn">
-                            <i class="fa-solid fa-moon"></i>
-                        </button>
-                    </li>
+								<li class="nav-item">
+									<a class="nav-link" asp-controller="Usuarios" asp-action="Carteirinha">Carteirinha</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" asp-controller="Unidades" asp-action="Index">Unidades</a>
+								</li>
 
-                    <!-- ===========================
-                         ÁREA DINÂMICA DO USUÁRIO
-                         =========================== -->
-                            <li class="nav-item ms-3">
+								<li class="nav-item">
+									<a class="nav-link" asp-controller="Vacinas" asp-action="Index">Vacinas</a>
+								</li>
 
-                                @if (User.Identity != null && User.Identity.IsAuthenticated)
-                                {
-                                    <span class="nav-link fw-bold user-menu-trigger"
-                                          role="button"
-                                          data-bs-toggle="offcanvas"
-                                          data-bs-target="#userOffcanvas">
-                                        Olá, @User.Identity.Name 👋
-                                    </span>
-                                }
-                                else
-                                {
-                                    <a asp-controller="Usuarios" asp-action="Entrar" class="btn-entrar">Entrar</a>
-                                    <a asp-controller="Usuarios" asp-action="Cadastrar" class="btn-cadastrar ms-2">Cadastrar</a>
-                                }
+								<li class="nav-item">
+									<a class="nav-link" asp-controller="Usuarios" asp-action="Index">Usuários</a>
+								</li>
 
-                            </li>
+								</li>
+							}
+							else
+							{
+								<a asp-controller="Usuarios" asp-action="Entrar" class="btn-entrar">Entrar</a>
+								<a asp-controller="Usuarios" asp-action="Create" class="btn-cadastrar ms-2">Cadastrar</a>
+							}
+								<li class="nav-item">
+									<button id="darkModeToggle" class="dark-toggle-btn">
+										<i class="fa-solid fa-moon"></i>
+									</button>
+								</li>
 
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
 
-        <!-- CONTEÚDO -->
-        <main role="main" class="container mt-5 fade-in" id="main-content">
-            <div class="content-card">
-                @RenderBody()
-            </div>
-        </main>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
 
-        <!-- FOOTER -->
-        <footer class="footer-amd text-center py-3">
-            <p class="mb-0">© @DateTime.Now.Year - Mais Saúde | Todos os direitos reservados</p>
-        </footer>
+		<!-- CONTEÚDO -->
+		<main role="main" class="container mt-5 fade-in" id="main-content">
+			<div class="content-card">
+				@RenderBody()
+			</div>
+		</main>
 
-    </div>
+		<!-- FOOTER -->
+		<footer class="footer-amd text-center py-3">
+			<p class="mb-0">© @DateTime.Now.Year - Mais Saúde | Todos os direitos reservados</p>
+		</footer>
 
-    <!-- Bootstrap JS -->
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	</div>
 
-    <!-- DARK MODE LOGIC -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const toggle = document.getElementById('darkModeToggle');
-            const themeIcon = document.getElementById('themeIcon');
-            const root = document.documentElement;
-            const body = document.body;
+	<!-- Bootstrap JS -->
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-            const saved = localStorage.getItem('theme');
-            const systemPref = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            const initial = saved || systemPref || 'light';
+	<!-- DARK MODE LOGIC -->
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			const toggle = document.getElementById('darkModeToggle');
+			const themeIcon = document.getElementById('themeIcon');
+			const root = document.documentElement;
+			const body = document.body;
 
-            function applyTheme(theme) {
-                if (theme === 'dark') {
-                    body.classList.add('dark-mode');
-                    root.setAttribute('data-theme', 'dark');
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    body.classList.remove('dark-mode');
-                    root.removeAttribute('data-theme');
-                    localStorage.setItem('theme', 'light');
-                }
-            }
+			const saved = localStorage.getItem('theme');
+			const systemPref = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+			const initial = saved || systemPref || 'light';
 
-            applyTheme(initial);
+			function applyTheme(theme) {
+				if (theme === 'dark') {
+					body.classList.add('dark-mode');
+					root.setAttribute('data-theme', 'dark');
+					localStorage.setItem('theme', 'dark');
+				} else {
+					body.classList.remove('dark-mode');
+					root.removeAttribute('data-theme');
+					localStorage.setItem('theme', 'light');
+				}
+			}
 
-            if (toggle) {
-                toggle.addEventListener('click', function () {
-                    const isDark = body.classList.contains('dark-mode');
-                    applyTheme(isDark ? 'light' : 'dark');
-                });
-            }
+			applyTheme(initial);
 
-            window.addEventListener('scroll', function () {
-                const nav = document.querySelector('.navbar-amd');
-                if (!nav) return;
-                if (window.scrollY > 80) {
-                    nav.classList.add('scrolled');
-                } else {
-                    nav.classList.remove('scrolled');
-                }
-            });
-        });
-    </script>
+			if (toggle) {
+				toggle.addEventListener('click', function () {
+					const isDark = body.classList.contains('dark-mode');
+					applyTheme(isDark ? 'light' : 'dark');
+				});
+			}
 
-    @RenderSection("Scripts", required: false)
+			window.addEventListener('scroll', function () {
+				const nav = document.querySelector('.navbar-amd');
+				if (!nav) return;
+				if (window.scrollY > 80) {
+					nav.classList.add('scrolled');
+				} else {
+					nav.classList.remove('scrolled');
+				}
+			});
+		});
+	</script>
 
-    <div class="offcanvas offcanvas-end user-drawer" tabindex="-1" id="userOffcanvas">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title">Minha Conta</h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
-        </div>
+	@RenderSection("Scripts", required: false)
 
-        <div class="offcanvas-body">
+	<div class="offcanvas offcanvas-end user-drawer" tabindex="-1" id="userOffcanvas">
+		<div class="offcanvas-header">
+			<h5 class="offcanvas-title">Minha Conta</h5>
+			<button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+		</div>
 
-            <div class="user-info-box text-center">
-                <div class="user-avatar">
-                    <i class="fa-solid fa-circle-user"></i>
-                </div>
+		<div class="offcanvas-body">
 
-                <h4 class="user-name">@User.Identity?.Name</h4>
-                <p class="user-sub">Bem-vindo(a) de volta!</p>
-            </div>
+			<div class="user-info-box text-center">
+				<div class="user-avatar">
+					<i class="fa-solid fa-circle-user"></i>
+				</div>
 
-            <hr />
+				<h4 class="user-name">@User.Identity?.Name</h4>
+				<p class="user-sub">Bem-vindo(a) de volta!</p>
+			</div>
 
-            <div class="list-group user-menu-list">
+			<hr />
 
-                <a class="list-group-item list-group-item-action"
-                   asp-controller="Usuarios" asp-action="PosLogin">
-                    <i class="fa-solid fa-user"></i> Meu Perfil
-                </a>
+			<div class="list-group user-menu-list">
 
-                <a class="list-group-item list-group-item-action"
-                   asp-controller="Usuarios" asp-action="Carteirinha">
-                    <i class="fa-solid fa-id-card"></i> Minha Carteirinha
-                </a>
+				<a class="list-group-item list-group-item-action"
+				   asp-controller="Usuarios" asp-action="PosLogin">
+					<i class="fa-solid fa-user"></i> Meu Perfil
+				</a>
 
-                <a class="list-group-item list-group-item-action"
-                   asp-controller="Usuarios" asp-action="Logout">
-                    <i class="fa-solid fa-right-from-bracket"></i> Sair
-                </a>
+				<a class="list-group-item list-group-item-action"
+				   asp-controller="Usuarios" asp-action="Carteirinha">
+					<i class="fa-solid fa-id-card"></i> Minha Carteirinha
+				</a>
 
-            </div>
-        </div>
-    </div>
+				<a class="list-group-item list-group-item-action"
+				   asp-controller="Usuarios" asp-action="Logout">
+					<i class="fa-solid fa-right-from-bracket"></i> Sair
+				</a>
+
+			</div>
+		</div>
+	</div>
 </body>
 </html>

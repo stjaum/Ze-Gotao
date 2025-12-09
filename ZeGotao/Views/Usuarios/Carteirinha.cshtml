@@ -1,52 +1,231 @@
 ﻿@model ZeGotao.ViewModels.CarteirinhaViewModel
 
-<div class="container mt-4">
-    <h2 class="mb-4">Carteirinha de Vacinação</h2>
+<div class="carteirinha-wrapper container mt-4">
 
-    <div class="card p-3 mb-4 d-flex justify-content-between align-items-center flex-row">
-        <h4 class="mb-0">@Model.NomeUsuario</h4>
+    <h2 class="glass-title text-center mb-4">Carteirinha de Vacinação</h2>
+
+    <div class="user-card glass-box d-flex justify-content-between align-items-center">
+        <h4 class="user-name">@Model.NomeUsuario</h4>
 
         <a asp-action="AtualizarCarteirinha"
            asp-route-id="@Model.IdUsuario"
-           class="btn btn-primary">
+           class="btn-cadastrar">
             Atualizar Carteirinha
         </a>
     </div>
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Vacina</th>
-                <th>Status</th>
-                <th>Data</th>
-                <th>Unidade</th>
-                <th>Endereço</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Itens)
-            {
+    <div class="table-responsive table-carteirinha-wrapper">
+        <table class="table-carteirinha">
+            <thead>
                 <tr>
-                    <td>@item.NomeVacina</td>
-
-                    <td>
-                        @if (item.Tomou)
-                        {
-                            <span class="text-success fw-bold">✔ Tomada</span>
-                        }
-                        else
-                        {
-                            <span class="text-danger fw-bold">✘ Pendente</span>
-                        }
-                    </td>
-
-                    <td>@(item.Tomou ? item.DataTomou.ToShortDateString() : "-")</td>
-
-                    <td>@item.NomeUnidade</td>
-
-                    <td>@item.EnderecoUnidade</td>
+                    <th>Vacina</th>
+                    <th>Status</th>
+                    <th>Data</th>
+                    <th>Unidade</th>
+                    <th>Endereço</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Itens)
+                {
+                    <tr>
+                        <td>@item.NomeVacina</td>
+
+                        <td>
+                            @if (item.Tomou)
+                            {
+                                <span class="status tomada">✔ Tomada</span>
+                            }
+                            else
+                            {
+                                <span class="status pendente">✘ Pendente</span>
+                            }
+                        </td>
+
+                        <td>@(item.Tomou ? item.DataTomou.ToShortDateString() : "-")</td>
+
+                        <td>@item.NomeUnidade</td>
+
+                        <td>@item.EnderecoUnidade</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
+<style>
+    /* ============================================================
+       WRAPPER / ANIMAÇÃO DE ENTRADA
+       ============================================================ */
+
+    .carteirinha-wrapper {
+        animation: fadeIn .7s ease;
+        max-width: 1100px;
+    }
+
+    @@keyframes fadeIn {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+
+    /* ============================================================
+       TÍTULO PRINCIPAL
+       ============================================================ */
+
+    .glass-title {
+        backdrop-filter: blur(14px);
+        background: rgba(255,255,255,0.15);
+        border-radius: 18px;
+        padding: 20px;
+        border: 1px solid rgba(255,255,255,0.18);
+        color: var(--text);
+        animation: float 6s ease-in-out infinite;
+    }
+
+    body.dark-mode .glass-title {
+        background: rgba(0,0,0,0.40);
+    }
+
+    @@keyframes float {
+        0%,100%
+
+    {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+
+    }
+
+    /* ============================================================
+       CARD DO USUÁRIO
+       ============================================================ */
+
+    .user-card {
+        padding: 20px;
+        border-radius: 18px;
+        background: rgba(255,255,255,0.12);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255,255,255,0.20);
+        margin-bottom: 25px;
+    }
+
+    body.dark-mode .user-card {
+        background: rgba(0,0,0,0.40);
+    }
+
+    .user-name {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--text);
+    }
+
+    /* Botão atualizar */
+    .btn-cadastrar {
+        padding: 10px 20px;
+        border-radius: 14px;
+        background: rgba(0,123,255,0.28);
+        border: 1px solid rgba(255,255,255,0.32);
+        font-weight: 600;
+        text-decoration: none;
+        transition: .25s ease;
+        color: var(--text) !important;
+        backdrop-filter: blur(10px);
+    }
+
+        .btn-cadastrar:hover {
+            transform: translateY(-2px);
+            background: rgba(0,123,255,0.45);
+        }
+
+    /* ============================================================
+       TABELA GLASS
+       ============================================================ */
+
+    .table-carteirinha {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 18px;
+        overflow: hidden;
+        background: rgba(255,255,255,0.10);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    body.dark-mode .table-carteirinha {
+        background: rgba(0,0,0,0.40);
+    }
+
+    /* Cabeçalho */
+    .table-carteirinha thead th {
+        padding: 14px;
+        background: rgba(0,0,0,0.45);
+        color: var(--text);
+        font-weight: 700;
+        text-shadow: 0 0 6px rgba(0,0,0,0.4);
+    }
+
+    body.dark-mode .table-carteirinha thead th {
+        background: rgba(255,255,255,0.06);
+    }
+
+    /* Linhas */
+    .table-carteirinha tbody tr {
+        transition: .25s ease;
+        background: rgba(255,255,255,0.05);
+    }
+
+    body.dark-mode .table-carteirinha tbody tr {
+        background: rgba(255,255,255,0.04);
+    }
+
+    /* Hover */
+    .table-carteirinha tbody tr:hover {
+        background: rgba(255,255,255,0.15);
+        transform: scale(1.01);
+    }
+
+    body.dark-mode .table-carteirinha tbody tr:hover {
+        background: rgba(0,0,0,0.55);
+    }
+
+    /* Células */
+    .table-carteirinha td {
+        padding: 14px;
+        font-size: 1rem;
+        color: var(--text);
+    }
+
+    /* ============================================================
+       STATUS (Tomada / Pendente)
+       ============================================================ */
+
+    .status {
+        padding: 6px 14px;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: .9rem;
+    }
+
+        .status.tomada {
+            background: rgba(0,200,83,.28);
+            color: #00c853;
+        }
+
+        .status.pendente {
+            background: rgba(255,30,30,.28);
+            color: #ff4444;
+        }
+</style>

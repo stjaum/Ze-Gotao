@@ -1,22 +1,221 @@
-html {
-  font-size: 14px;
+/* ============================================
+   CONFIGURAÇÕES GERAIS
+============================================ */
+/* Fonte padrão global */
+.vacinas-wrapper,
+.vacina-card,
+.vacinas-title,
+.vacina-desc,
+.vacina-nome,
+.vacina-status,
+.vacinas-table,
+.vacinas-table * {
+    font-family: "Segoe UI", "Britannic Bold", sans-serif !important;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+/* Light Mode */
+:root {
+    --text: #1a1a1a;
+    --text-strong: #000;
+    --glass-light: rgba(255,255,255,0.12);
+    --glass-light-hover: rgba(255,255,255,0.20);
+    --border-light: rgba(255,255,255,0.25);
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+/* Dark Mode */
+body.dark-mode {
+    --text: #f0f0f0;
+    --text-strong: #ffffff;
+    --glass-light: rgba(0,0,0,0.40);
+    --glass-light-hover: rgba(0,0,0,0.60);
+    --border-light: rgba(255,255,255,0.15);
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+/* Wrapper geral */
+.vacinas-wrapper {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+    animation: fadeIn .7s ease;
+    color: var(--text);
 }
 
-body {
-  margin-bottom: 60px;
+/* ============================================
+   TÍTULO
+============================================ */
+.vacinas-title {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-strong);
+    margin-bottom: 35px;
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    background: var(--glass-light);
+    border-radius: 16px;
+    border: 1px solid var(--border-light);
+    animation: floatTitle 5s ease-in-out infinite;
+}
+
+/* Animação leve do título */
+@keyframes floatTitle {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+/* ============================================
+   GRID DE VACINAS
+============================================ */
+.vacinas-grid {
+    display: grid;
+    gap: 26px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+/* ============================================
+   CARD INDIVIDUAL
+============================================ */
+.vacina-card {
+    background: var(--glass-light);
+    border-radius: 18px;
+    border: 1px solid var(--border-light);
+    padding: 22px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.15);
+    transition: .28s ease;
+    cursor: pointer;
+    animation: slideUp .45s ease backwards;
+}
+
+    .vacina-card:hover {
+        transform: translateY(-6px) scale(1.03);
+        background: var(--glass-light-hover);
+        border-color: rgba(255,255,255,0.35);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    }
+
+/* ============================================
+   TEXTOS DO CARD
+============================================ */
+.vacina-nome {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-strong);
+}
+
+.vacina-desc {
+    font-size: 1rem;
+    opacity: .85;
+    margin-bottom: 15px;
+    color: var(--text);
+}
+
+/* Status */
+.vacina-status {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: .9rem;
+}
+
+    /* Tomada */
+    .vacina-status.tomada {
+        background: rgba(0, 200, 83, .22);
+        color: #00e676;
+        border: 1px solid rgba(0, 200, 83, .35);
+    }
+
+    /* Pendente */
+    .vacina-status.pendente {
+        background: rgba(255, 30, 30, .22);
+        color: #ff5252;
+        border: 1px solid rgba(255, 30, 30, .35);
+    }
+
+/* ============================================
+   LISTAS ESTILIZADAS (caso use listas)
+============================================ */
+.vacina-list ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.vacina-list li {
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    background: var(--glass-light);
+    border: 1px solid var(--border-light);
+    color: var(--text);
+    position: relative;
+    font-size: 1.05rem;
+    padding-left: 38px;
+}
+
+    /* Marcador custom */
+    .vacina-list li::before {
+        content: "•";
+        font-size: 1.8rem;
+        color: var(--text-strong);
+        position: absolute;
+        left: 12px;
+        top: 4px;
+    }
+
+/* ============================================
+   TABELA GLASS (caso use tabela)
+============================================ */
+.vacinas-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    backdrop-filter: blur(10px);
+    background: var(--glass-light);
+    border-radius: 18px;
+    overflow: hidden;
+    color: var(--text);
+    border: 1px solid var(--border-light);
+}
+
+    .vacinas-table th,
+    .vacinas-table td {
+        padding: 14px;
+        border-bottom: 1px solid rgba(255,255,255,0.18);
+        color: var(--text);
+    }
+
+    .vacinas-table tr:hover {
+        background: var(--glass-light-hover);
+    }
+
+/* ============================================
+   ANIMAÇÕES
+============================================ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
