@@ -1,0 +1,197 @@
+﻿.fade-in {
+    animation: fade .8s ease-out;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* =========================================================
+   WRAPPER GERAL
+========================================================= */
+.home-wrapper {
+    max-width: 1200px;
+    margin: 100px auto 40px auto; /* CORRIGIDO: espaço para navbar */
+    padding: 20px;
+    position: relative;
+    z-index: 5;
+}
+
+/* =========================================================
+   HERO SECTION (Topo)
+========================================================= */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(14px);
+    border-radius: 22px; /* Bordas superiores corrigidas */
+    padding: 30px;
+    border: 1px solid rgba(255,255,255,0.20);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.22);
+}
+
+/* ===== TEXTOS ===== */
+.hero-text {
+    flex: 1;
+    min-width: 320px;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text);
+    text-shadow: 0 0 8px rgba(255,255,255,0.6);
+    margin-bottom: 10px;
+}
+
+.hero-sub {
+    font-size: 1.3rem;
+    opacity: .85;
+    color: var(--text);
+    margin-bottom: 15px;
+}
+
+.hero-desc {
+    font-size: 1.05rem;
+    opacity: .85;
+    color: var(--text);
+    line-height: 1.5rem;
+    max-width: 480px;
+}
+
+/* ===== BOTÕES ===== */
+.hero-buttons {
+    margin-top: 20px;
+}
+
+.hero-btn, .hero-btn-sec {
+    display: inline-block;
+    padding: 12px 26px;
+    border-radius: 16px;
+    font-size: 1rem;
+    text-decoration: none;
+    margin-right: 10px;
+    transition: .3s ease;
+}
+
+.btn-glass {
+    background: rgba(255,255,255,0.16);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: var(--text);
+    transition: .25s ease;
+}
+
+.hero-btn:hover {
+    background: rgba(255,255,255,0.25);
+    transform: translateY(-3px);
+}
+
+/* =========================================================
+   IMAGEM DE DESTAQUE
+========================================================= */
+.hero-image-wrapper {
+    flex: 1;
+    min-width: 320px;
+    text-align: center;
+    position: relative;
+    z-index: 5; /* CORRIGIDO – garante que a imagem aparece */
+}
+
+.hero-image {
+    width: 340px;
+    animation: float 6s ease-in-out infinite;
+    filter: drop-shadow(0 6px 16px rgba(0,0,0,0.35));
+    transition: .3s;
+    position: relative;
+    z-index: 6; /* CORRIGIDO */
+}
+
+    .hero-image:hover {
+        transform: scale(1.05);
+    }
+
+/* =========================================================
+   GRID DE RECURSOS
+========================================================= */
+.home-cards-grid {
+    margin-top: 60px;
+    display: grid;
+    gap: 22px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.home-card {
+    background: rgba(255,255,255,0.12);
+    padding: 26px;
+    border-radius: 22px; /* Fechamento das bordas */
+    border: 1px solid rgba(255,255,255,0.20);
+    color: var(--text);
+    text-align: center;
+    text-decoration: none;
+    backdrop-filter: blur(12px);
+    transition: .25s ease;
+}
+
+    .home-card i {
+        font-size: 38px;
+        margin-bottom: 12px;
+        color: var(--accent);
+    }
+
+    .home-card:hover {
+        background: rgba(255,255,255,0.22);
+        transform: translateY(-6px) scale(1.03);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+body.dark-mode .hero-title,
+body.dark-mode .hero-sub,
+body.dark-mode .hero-desc,
+body.dark-mode .home-card,
+body.dark-mode .btn-glass {
+    color: #fff;
+}
+
+body.dark-mode .home-card {
+    background: rgba(0,0,0,0.45);
+    border-color: rgba(255,255,255,0.12);
+}
+
+    body.dark-mode .home-card:hover {
+        background: rgba(0,0,0,0.65);
+    }
+
+body.dark-mode .hero-section {
+    background: rgba(0,0,0,0.40);
+    border-color: rgba(255,255,255,0.12);
+}
+
+body.dark-mode .hero-btn {
+    background: rgba(0,0,0,0.35);
+}

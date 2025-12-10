@@ -1,80 +1,50 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Início";
 }
-<link rel="stylesheet" href="~/css/Layout.css" />
 
-<div class="container-index">
+<link rel="stylesheet" href="~/css/Layout2.css" />
 
-    <h1 class="display-4">Bem Vindo !</h1>
+<div class="home-wrapper fade-in">
 
-    <h2 class="animado">Já está cansado da sua carteirinha de vacinação caindo aos pedaços?</h2>
+    <div class="hero-section">
+        <div class="hero-text">
+            <h1 class="hero-title">Bem-vindo ao Zé Gotão+</h1>
+            <h3 class="hero-sub">Sua carteirinha digital de vacinação sempre à mão</h3>
 
-    <br><br>
+            <p class="hero-desc">
+                Organize suas vacinas, acompanhe datas, veja recomendações e mantenha sua saúde em dia
+                com um sistema moderno, rápido e inteligente.
+            </p>
 
-    <h2>E que tal uma virtual?</h2>
+            <div class="hero-buttons">
+                <a asp-controller="Usuarios" asp-action="Entrar" class="btn-glass hero-btn">Entrar</a>
+                <a asp-controller="Usuarios" asp-action="Create" class="btn-glass hero-btn-sec">Cadastrar</a>
+            </div>
+        </div>
 
-    <!-- IMAGEM -->
-    <img src="/images/sua-imagem.png" class="img-destaque" alt="Imagem destaque" />
-
-    <!-- CARROSSEL -->
-    <div class="carousel">
-        <div class="carousel-track">
-
-            <!-- Carregar suas imagens -->
-            <a class=btn-glass href="https://instagram.com.br/">
-                <h3>
-                    Fique por dentro
-                   </h3>
-              </a>
-            <a class=btn-glass href="https://buscasaude.prefeitura.sp.gov.br/">
-                <h3>
-                    Encontre UBS
-                    <br />mais proxima!
-                </h3>
-            </a>
-            <a class=btn-glass href="https://buscasaude.prefeitura.sp.gov.br/">
-                <h3>
-                   Conheça os Colaboradores
-                    <br />
-                </h3>
-            </a>
-            <a class=btn-glass href="https://buscasaude.prefeitura.sp.gov.br/">
-                <h3>
-                    Encontre UBS
-                    <br />mais proxima!
-                </h3>
-            </a>
-            <a class=btn-glass href="https://buscasaude.prefeitura.sp.gov.br/">
-                <h3>
-                    Encontre UBS
-                    <br />mais proxima!
-                </h3>
-            </a>
+        <div class="hero-image-wrapper">
+            <img src="~/images/destaque.png" class="hero-image" alt="Imagem destaque" />
         </div>
     </div>
 
-    <br><br>
-
-    <h1>Atualize já, e fique por dentro das suas próximas vacinações, cadastre já.</h1>
-    <h2>Um mundo com mais tecnologia é um mundo com mais saúde.</h2>
-
-    <br><br>
-
-    <!-- IMAGENS FIXAS (SUS, UBS, GOV) -->
-    <div class="icones-fixos">
-
-        <a href="https://www.gov.br/saude/pt-br/sus" target="_blank">
-            <img src="/images/sus.jfif" alt="SUS" />
+    <div class="home-cards-grid">
+        <a asp-controller="Vacinas" asp-action="Index" class="home-card">
+            <i class="fa-solid fa-syringe"></i>
+            <h4>Minhas Vacinas</h4>
+            <p>Veja tudo o que já tomou e o que ainda precisa tomar.</p>
         </a>
 
-        <a href="https://www.gov.br/saude/pt-br/assuntos/novo-pac-saude/unidades-basicas-de-saude" target="_blank">
-            <img src="/images/ubs.jpg" alt="UBS" />
+        <a asp-controller="Usuarios" asp-action="Carteirinha" class="home-card">
+            <i class="fa-solid fa-id-card"></i>
+            <h4>Carteirinha Digital</h4>
+            <p>Acompanhe sua carteirinha digital completa.</p>
         </a>
 
-        <a href="https://www.gov.br/pt-br" target="_blank">
-            <img src="/images/gov.jfif" alt="GOV" />
+        <a href="https://buscasaude.prefeitura.sp.gov.br/" class="home-card">
+            <i class="fa-solid fa-hospital"></i>
+            <h4>Locais de Vacinação</h4>
+            <p>Unidades, endereços e informações úteis.</p>
         </a>
-
     </div>
 
-
+</div>

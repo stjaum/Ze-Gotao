@@ -45,8 +45,6 @@
 	</style>
 
 </head>
-<body>
-
 	<!-- VIDEO -->
 	<video autoplay muted loop id="bg-video">
 		<source src="~/videos/Back.mp4" type="video/mp4" />
@@ -141,11 +139,11 @@
 
 	</div>
 
-	<!-- Bootstrap JS -->
-	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	@* <!-- Bootstrap JS -->
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
 
 	<!-- DARK MODE LOGIC -->
-	<script>
+ 	<script>
 		document.addEventListener('DOMContentLoaded', function () {
 			const toggle = document.getElementById('darkModeToggle');
 			const themeIcon = document.getElementById('themeIcon');
@@ -187,9 +185,17 @@
 				}
 			});
 		});
-	</script>
+ document.addEventListener("DOMContentLoaded", function () {
 
-	@RenderSection("Scripts", required: false)
+	// Remove qualquer backdrop presa
+ 	document.querySelectorAll(".modal-backdrop").forEach(b => b.remove());
+
+// Garante que o body não fique travado
+document.body.classList.remove("modal-open");
+	document.body.style.overflow = "";
+ });
+</script>
+@RenderSection("Scripts", required: false)
 
 	<div class="offcanvas offcanvas-end user-drawer" tabindex="-1" id="userOffcanvas">
 		<div class="offcanvas-header">
@@ -230,5 +236,4 @@
 			</div>
 		</div>
 	</div>
-</body>
-</html>
+

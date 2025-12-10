@@ -1,7 +1,4 @@
-﻿/* ===========================================
-   VARIÁVEIS DE TEMA
-=========================================== */
-:root {
+﻿:root {
     --text: #ffffff;
     --nav-text: #e8e8e8;
     --link: #4da3ff;
@@ -155,7 +152,7 @@ body.dark-mode .btn-cadastrar {
 }
 
 /* ===========================================
-   CARDS GLASS
+   CARDS GLASS (globais, usados em várias telas)
 =========================================== */
 .content-card,
 .glass-card,
@@ -227,17 +224,17 @@ body.dark-mode .glass-title {
 }
 
 /* ===========================================
-   MODAL FIX
+   MODAL FIXES
 =========================================== */
-
-
 .modal {
     z-index: 11000 !important;
 }
+
 .modal-backdrop {
     z-index: 10000 !important;
     background-color: rgba(0,0,0,0.65) !important;
 }
+
 /* ===========================================
    OFFCANVAS USER MENU
 =========================================== */
@@ -265,13 +262,12 @@ body.dark-mode .user-drawer {
         border-radius: 10px;
     }
 
-/* Dark Mode */
 body.dark-mode .user-menu-list .list-group-item:hover {
     background: rgba(255,255,255,0.05);
 }
 
 /* ===========================================
-   ANIMAÇÕES
+   ANIMAÇÃO GLOBAL
 =========================================== */
 @keyframes fade {
     from {
